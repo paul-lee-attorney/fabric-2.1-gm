@@ -19,8 +19,8 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/hyperledger/fabric/bccsp"
-	"github.com/hyperledger/fabric/bccsp/utils"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
 )
 
 // NewFileBasedKeyStore instantiated a file-based key store at a given position.
@@ -79,7 +79,7 @@ func (ks *fileBasedKeyStore) Init(pwd []byte, path string, readOnly bool) error 
 	ks.path = path
 
 	clone := make([]byte, len(pwd))
-	copy(ks.pwd, pwd)
+	copy(clone, pwd) // revised ks.pwd into clone, wich might be a typo
 	ks.pwd = clone
 	ks.readOnly = readOnly
 
@@ -133,6 +133,14 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 		}
 
 		return &aesPrivateKey{key, false}, nil
+	case "sm4key":
+		// Load the key of SM4
+		key, err := ks.loadKey(hex.EncodeToString(ski))
+		if err != nil {
+			return nil, fmt.Errorf("failed loading key [%x] [%s]", ski, err)
+		}
+
+		return &sm4PrivateKey{key, false}, nil
 	case "sk":
 		// Load the private key
 		key, err := ks.loadPrivateKey(hex.EncodeToString(ski))

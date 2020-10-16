@@ -8,7 +8,7 @@ package handlers
 import (
 	"crypto/ecdsa"
 
-	"github.com/hyperledger/fabric/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 )
 
 // IssuerPublicKey is the issuer public key

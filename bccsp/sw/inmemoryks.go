@@ -10,7 +10,7 @@ import (
 	"encoding/hex"
 	"sync"
 
-	"github.com/hyperledger/fabric/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/pkg/errors"
 )
 

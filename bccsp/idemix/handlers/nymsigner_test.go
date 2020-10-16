@@ -8,11 +8,11 @@ package handlers_test
 import (
 	"errors"
 
-	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/bccsp/idemix/handlers"
 	"github.com/hyperledger/fabric/bccsp/idemix/handlers/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 )
 
 var _ = Describe("Nym Signature", func() {

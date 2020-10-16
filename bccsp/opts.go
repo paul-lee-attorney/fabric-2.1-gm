@@ -22,11 +22,6 @@ const (
 	// ECDSAReRand ECDSA key re-randomization
 	ECDSAReRand = "ECDSA_RERAND"
 
-	// SM2 国密商密第2号, 中国官方采用的一种“椭圆曲线加密算法”。
-	// SM2 No.2 National Encryption Algorithm for Commercial Purpose of China ,
-	// which is a special ECDSA adopted by Chinese authority.
-	SM2 = "SM2"
-
 	// AES Advanced Encryption Standard at the default security level.
 	// Each BCCSP may or may not support default security level. If not supported than
 	// an error will be returned.
@@ -38,9 +33,19 @@ const (
 	// AES Advanced Encryption Standard at 256 bit security level
 	AES256 = "AES256"
 
-	// SM2 国密商密第4号, 中国官方采用的一种对称加密算法。
+	// SM2 国密商密第2号, 中国官方采用的一种“椭圆曲线加密算法”。
+	// SM2 No.2 National Cryptographic Algorithm for Commercial Purpose of China,
+	// which is a special ECC adopted by Chinese authority.
+	SM2 = "SM2"
+
+	// SM3 国密商密第3号, 中国官方采用的一种杂凑加密算法。
+	// SM3 No.3 National Cryptographic Algorithm for commercial purpose of China,
+	// which is a special hash algorithm adopted by Chinese government.
+	SM3 = "SM3"
+
+	// SM4 国密商密第4号, 中国官方采用的一种对称加密算法。
 	// SM4 No.4 National Encryption Algorithm for Commercial Purpose of China,
-	// which is a symmetrical encryption algorithm adopted by Chinese government.
+	// which is a block cipher algorithm adopted by Chinese government.
 	SM4 = "SM4"
 
 	// HMAC keyed-hash message authentication code
@@ -66,11 +71,6 @@ const (
 	SHA3_256 = "SHA3_256"
 	// SHA3_384
 	SHA3_384 = "SHA3_384"
-
-	// SM3 国密商密第3号, 中国官方采用的一种杂凑加密算法。
-	// SM3 No.3 National Encryption Algorithm for commercial purpose of China,
-	// which is a special hash algorithm adopted by Chinese government.
-	SM3 = "SM3"
 
 	// X509Certificate Label for X509 certificate related operation
 	X509Certificate = "X509Certificate"

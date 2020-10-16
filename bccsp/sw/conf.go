@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"hash"
 
+	"github.com/paul-lee-attorney/gm/sm3"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -70,18 +71,10 @@ func (conf *config) setSecurityLevelSHA3(level int) (err error) {
 
 // SM3 security level setting
 func (conf *config) setSecurityLevelSM3(level int) (err error) {
-	switch level {
-	case 256:
+	if level == 256 {
 		conf.ellipticCurve = elliptic.P256()
 		conf.hashFunction = sm3.New
-		// conf.rsaBitLength = 2048
-		conf.aesBitLength = 32
-	case 384:
-		conf.ellipticCurve = elliptic.P384()
-		conf.hashFunction = sm3.New
-		// conf.rsaBitLength = 3072
-		conf.aesBitLength = 32
-	default:
+	} else {
 		err = fmt.Errorf("Security level not supported [%d]", level)
 	}
 	return

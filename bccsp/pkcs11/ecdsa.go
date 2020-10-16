@@ -10,8 +10,8 @@ import (
 	"crypto/ecdsa"
 	"fmt"
 
-	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/bccsp/utils"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 )
 
 func (csp *impl) signECDSA(k ecdsaPrivateKey, digest []byte, opts bccsp.SignerOpts) ([]byte, error) {
