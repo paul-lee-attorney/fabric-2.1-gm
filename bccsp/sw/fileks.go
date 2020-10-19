@@ -21,6 +21,7 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
+	"github.com/paul-lee-attorney/gm/sm2"
 )
 
 // NewFileBasedKeyStore instantiated a file-based key store at a given position.
@@ -115,6 +116,7 @@ func (ks *fileBasedKeyStore) ReadOnly() bool {
 	return ks.readOnly
 }
 
+// ********* 需要校验SM4秘钥交换和PEM存储的格式细节 ********
 // GetKey returns a key object whose SKI is the one passed.
 func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 	// Validate arguments
@@ -132,15 +134,14 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 			return nil, fmt.Errorf("failed loading key [%x] [%s]", ski, err)
 		}
 
-		return &aesPrivateKey{key, false}, nil
-	case "sm4key":
-		// Load the key of SM4
-		key, err := ks.loadKey(hex.EncodeToString(ski))
-		if err != nil {
-			return nil, fmt.Errorf("failed loading key [%x] [%s]", ski, err)
+		switch k := key.(type) {
+		case *aesPrivateKey:
+			return &aesPrivateKey{k}, nil
+		case *sm4PrivateKey: // private key of sm4
+			return &sm4PrivateKey{k}, nil
+		default:
+			return nil, errors.New("secret key type not recognized")
 		}
-
-		return &sm4PrivateKey{key, false}, nil
 	case "sk":
 		// Load the private key
 		key, err := ks.loadPrivateKey(hex.EncodeToString(ski))
@@ -151,6 +152,8 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 		switch k := key.(type) {
 		case *ecdsa.PrivateKey:
 			return &ecdsaPrivateKey{k}, nil
+		case *sm2.PrivateKey: // private key of sm2
+			return &sm2PrivateKey{k}, nil
 		default:
 			return nil, errors.New("secret key type not recognized")
 		}
@@ -164,6 +167,8 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 		switch k := key.(type) {
 		case *ecdsa.PublicKey:
 			return &ecdsaPublicKey{k}, nil
+		case *sm2.PublicKey: // public key of sm2
+			return &sm2PublicKey{k}, nil
 		default:
 			return nil, errors.New("public key type not recognized")
 		}
@@ -188,6 +193,11 @@ func (ks *fileBasedKeyStore) StoreKey(k bccsp.Key) (err error) {
 		if err != nil {
 			return fmt.Errorf("failed storing ECDSA private key [%s]", err)
 		}
+	case *sm2PrivateKey:
+		err = ks.storePrivateKey(hex.EncodeToString(k.SKI()), kk.privKey)
+		if err != nil {
+			return fmt.Errorf("failed storing SM2 private key [%s]", err)
+		}
 
 	case *ecdsaPublicKey:
 		err = ks.storePublicKey(hex.EncodeToString(k.SKI()), kk.pubKey)
@@ -195,10 +205,22 @@ func (ks *fileBasedKeyStore) StoreKey(k bccsp.Key) (err error) {
 			return fmt.Errorf("failed storing ECDSA public key [%s]", err)
 		}
 
+	case *sm2PublicKey:
+		err = ks.storePublicKey(hex.EncodeToString(k.SKI()), kk.pubKey)
+		if err != nil {
+			return fmt.Errorf("failed storing SM2 public key [%s]", err)
+		}
+
 	case *aesPrivateKey:
 		err = ks.storeKey(hex.EncodeToString(k.SKI()), kk.privKey)
 		if err != nil {
 			return fmt.Errorf("failed storing AES key [%s]", err)
+		}
+
+	case *sm4PrivateKey:
+		err = ks.storeKey(hex.EncodeToString(k.SKI()), kk.privKey)
+		if err != nil {
+			return fmt.Errorf("failed storing SM4 key [%s]", err)
 		}
 
 	default:
@@ -233,6 +255,8 @@ func (ks *fileBasedKeyStore) searchKeystoreForSKI(ski []byte) (k bccsp.Key, err 
 		switch kk := key.(type) {
 		case *ecdsa.PrivateKey:
 			k = &ecdsaPrivateKey{kk}
+		case *sm2.PrivateKey: // SM2 private key
+			k = &sm2PrivateKey{kk}
 		default:
 			continue
 		}
@@ -272,7 +296,7 @@ func (ks *fileBasedKeyStore) storePrivateKey(alias string, privateKey interface{
 		return err
 	}
 
-	err = ioutil.WriteFile(ks.getPathForAlias(alias, "sk"), rawKey, 0600)
+	err = ioutil.WriteFile(ks.getPathForAlias(alias, "sk"), rawKey, 0600) //user has read and write authority
 	if err != nil {
 		logger.Errorf("Failed storing private key [%s]: [%s]", alias, err)
 		return err
@@ -313,6 +337,8 @@ func (ks *fileBasedKeyStore) storeKey(alias string, key []byte) error {
 	return nil
 }
 
+// *****************************************
+// 需要校验 SM2秘钥的PEM格式以及兼容性
 func (ks *fileBasedKeyStore) loadPrivateKey(alias string) (interface{}, error) {
 	path := ks.getPathForAlias(alias, "sk")
 	logger.Debugf("Loading private key [%s] at [%s]...", alias, path)
@@ -334,6 +360,8 @@ func (ks *fileBasedKeyStore) loadPrivateKey(alias string) (interface{}, error) {
 	return privateKey, nil
 }
 
+// ***************************************
+// 需要校验 SM2秘钥的PEM格式以及兼容性
 func (ks *fileBasedKeyStore) loadPublicKey(alias string) (interface{}, error) {
 	path := ks.getPathForAlias(alias, "pk")
 	logger.Debugf("Loading public key [%s] at [%s]...", alias, path)
@@ -355,7 +383,9 @@ func (ks *fileBasedKeyStore) loadPublicKey(alias string) (interface{}, error) {
 	return privateKey, nil
 }
 
-func (ks *fileBasedKeyStore) loadKey(alias string) ([]byte, error) {
+// **************************************
+// 需要校验 SM4秘钥的PEM格式以及兼容性
+func (ks *fileBasedKeyStore) loadKey(alias string) (interface{}, error) {
 	path := ks.getPathForAlias(alias, "key")
 	logger.Debugf("Loading key [%s] at [%s]...", alias, path)
 
@@ -366,6 +396,8 @@ func (ks *fileBasedKeyStore) loadKey(alias string) ([]byte, error) {
 		return nil, err
 	}
 
+	// **********************
+	// 需要校验SM4秘钥的PEM格式、位数长，是否兼容。
 	key, err := utils.PEMtoAES(pem, ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed parsing key [%s]: [%s]", alias, err)

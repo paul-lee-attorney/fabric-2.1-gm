@@ -230,7 +230,7 @@ func PEMtoAES(raw []byte, pwd []byte) ([]byte, error) {
 
 	if x509.IsEncryptedPEMBlock(block) {
 		if len(pwd) == 0 {
-			return nil, errors.New("Encrypted Key. Password must be different fom nil")
+			return nil, errors.New("Encrypted Key. Password must be different from nil")
 		}
 
 		decrypted, err := x509.DecryptPEMBlock(block, pwd)
@@ -249,6 +249,7 @@ func AEStoPEM(raw []byte) []byte {
 }
 
 // AEStoEncryptedPEM encapsulates an AES key in the encrypted PEM format
+// ********需要后续对 x509 国密改造 ********
 func AEStoEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
 	if len(raw) == 0 {
 		return nil, errors.New("Invalid aes key. It must be different from nil")
