@@ -17,44 +17,31 @@ limitations under the License.
 package sw
 
 import (
-	"crypto/rand"
 	"errors"
-	"fmt"
 
-	"github.com/tjfoc/gmsm/sm4"
-	"github.com/tjfoc/hyperledger-fabric-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/gm/sm4"
 )
-
-// GetRandomBytes returns len random looking bytes
-func GetRandomBytes(len int) ([]byte, error) {
-	if len < 0 {
-		return nil, errors.New("Len must be larger than 0")
-	}
-
-	buffer := make([]byte, len)
-
-	n, err := rand.Read(buffer)
-	if err != nil {
-		return nil, err
-	}
-	if n != len {
-		return nil, fmt.Errorf("Buffer not filled. Requested [%d], got [%d]", len, n)
-	}
-
-	return buffer, nil
-}
 
 // SM4Encrypt encrypt the srouce message into cypher message of the same length
 func SM4Encrypt(key, src []byte) ([]byte, error) {
 	dst := make([]byte, len(src))
-	sm4.EncryptBlock(key, dst, src)
+	c, err := sm4.NewCipher(key)
+	if err != nil {
+		return nil, errors.New("Error incurred upon new cipher stage")
+	}
+	c.Encrypt(dst, src)
 	return dst, nil
 }
 
 // SM4Decrypt decrypt the cypher message into plain text with the private key
 func SM4Decrypt(key, src []byte) ([]byte, error) {
 	dst := make([]byte, len(src))
-	sm4.DecryptBlock(key, dst, src)
+	c, err := sm4.NewCipher(key)
+	if err != nil {
+		return nil, errors.New("Error incurred upon new cipher stage")
+	}
+	c.Decrypt(dst, src)
 	return dst, nil
 }
 

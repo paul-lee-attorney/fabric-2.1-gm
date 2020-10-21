@@ -35,7 +35,7 @@ const (
 
 	// SM2 国密商密第2号, 中国官方采用的一种“椭圆曲线加密算法”。
 	// SM2 No.2 National Cryptographic Algorithm for Commercial Purpose of China,
-	// which is a special ECC adopted by Chinese authority.
+	// which is a special ECDSA adopted by Chinese authority.
 	SM2 = "SM2"
 
 	// SM3 国密商密第3号, 中国官方采用的一种杂凑加密算法。
@@ -43,7 +43,7 @@ const (
 	// which is a special hash algorithm adopted by Chinese government.
 	SM3 = "SM3"
 
-	// SM4 国密商密第4号, 中国官方采用的一种对称加密算法。
+	// SM4 国密商密第4号, 中国官方采用的一种分组密码算法。
 	// SM4 No.4 National Encryption Algorithm for Commercial Purpose of China,
 	// which is a block cipher algorithm adopted by Chinese government.
 	SM4 = "SM4"

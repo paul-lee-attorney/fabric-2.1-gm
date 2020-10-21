@@ -13,16 +13,18 @@ import (
 	"fmt"
 	"hash"
 
+	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/paul-lee-attorney/gm/sm3"
 	"golang.org/x/crypto/sha3"
 )
 
 type config struct {
-	ellipticCurve elliptic.Curve
-	hashFunction  func() hash.Hash
-	aesBitLength  int
+	ellipticCurve elliptic.Curve   // 椭圆曲线配置
+	hashFunction  func() hash.Hash // 哈希函数配置
+	aesBitLength  int              // AES随机秘钥的字节长度， SM4直接在new.go中赋值(16字节)
 }
 
+// setSecurityLevel 为设置安全等级的方法。
 func (conf *config) setSecurityLevel(securityLevel int, hashFamily string) (err error) {
 	switch hashFamily {
 	case "SHA2":
@@ -72,8 +74,9 @@ func (conf *config) setSecurityLevelSHA3(level int) (err error) {
 // SM3 security level setting
 func (conf *config) setSecurityLevelSM3(level int) (err error) {
 	if level == 256 {
-		conf.ellipticCurve = elliptic.P256()
-		conf.hashFunction = sm3.New
+		conf.ellipticCurve = sm2.GetSm2P256V1() //将SM2推荐椭圆曲线实例赋值给配置
+		conf.hashFunction = sm3.New             // 将SM3哈希摘要实例初始化函数赋值给配置
+		conf.aesBitLength = 16                  // SM4为128位秘钥，即16字节
 	} else {
 		err = fmt.Errorf("Security level not supported [%d]", level)
 	}

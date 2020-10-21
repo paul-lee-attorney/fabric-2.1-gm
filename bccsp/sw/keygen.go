@@ -23,6 +23,7 @@ import (
 	"fmt"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/gm/sm2"
 )
 
 type ecdsaKeyGenerator struct {
@@ -38,6 +39,17 @@ func (kg *ecdsaKeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
 	return &ecdsaPrivateKey{privKey}, nil
 }
 
+type sm2KeyGenerator struct{}
+
+func (kg *sm2KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
+	privKey, _, err := sm2.GenerateKey(rand.Reader)
+	if err != nil {
+		return nil, fmt.Errorf("Failed generating SM2 key for [%v]: [%s]", kg.curve, err)
+	}
+
+	return &sm2PrivateKey{privKey}, nil
+}
+
 type aesKeyGenerator struct {
 	length int
 }
@@ -49,4 +61,17 @@ func (kg *aesKeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
 	}
 
 	return &aesPrivateKey{lowLevelKey, false}, nil
+}
+
+type sm4KeyGenerator struct {
+	length int
+}
+
+func (kg *sm4KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
+	lowLevelKey, err := GetRandomBytes(int(kg.length))
+	if err != nil {
+		return nil, fmt.Errorf("Failed generating AES %d key [%s]", kg.length, err)
+	}
+
+	return &sm4PrivateKey{lowLevelKey, false}, nil
 }

@@ -16,10 +16,10 @@ limitations under the License.
 package sw
 
 import (
-	"crypto/sha256"
 	"errors"
 
-	"github.com/tjfoc/hyperledger-fabric-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/gm/sm3"
 )
 
 // the symmetric key defined under SM4
@@ -40,9 +40,7 @@ func (k *sm4PrivateKey) Bytes() (raw []byte, err error) {
 
 // SKI returns the subject key identifier of this key.
 func (k *sm4PrivateKey) SKI() (ski []byte) {
-	hash := sha256.New()
-	//hash := NewSM3()
-	hash.Write([]byte{0x01})
+	hash := sm3.New()
 	hash.Write(k.privKey)
 	return hash.Sum(nil)
 }
