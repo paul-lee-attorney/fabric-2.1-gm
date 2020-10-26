@@ -124,11 +124,13 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 		return nil, errors.New("invalid SKI. Cannot be of zero length")
 	}
 
+	// 将SKI编码转换为ASCII编码并获取尾缀
 	suffix := ks.getSuffix(hex.EncodeToString(ski))
 
 	switch suffix {
-	case "key":
+	case "key": // 对称密码算法的秘钥
 		// Load the key
+		// 载入对称密码算法的秘钥，就PEM消息加密解密算法进行SM4改造
 		key, err := ks.loadKey(hex.EncodeToString(ski))
 		if err != nil {
 			return nil, fmt.Errorf("failed loading key [%x] [%s]", ski, err)
@@ -144,6 +146,7 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 		}
 	case "sk":
 		// Load the private key
+		// 载入不对称算法的私钥
 		key, err := ks.loadPrivateKey(hex.EncodeToString(ski))
 		if err != nil {
 			return nil, fmt.Errorf("failed loading secret key [%x] [%s]", ski, err)
@@ -159,6 +162,7 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 		}
 	case "pk":
 		// Load the public key
+		// 载入不对称算法的公钥
 		key, err := ks.loadPublicKey(hex.EncodeToString(ski))
 		if err != nil {
 			return nil, fmt.Errorf("failed loading public key [%x] [%s]", ski, err)
@@ -218,7 +222,7 @@ func (ks *fileBasedKeyStore) StoreKey(k bccsp.Key) (err error) {
 		}
 
 	case *sm4PrivateKey:
-		err = ks.storeKey(hex.EncodeToString(k.SKI()), kk.privKey)
+		err = ks.storeSm4Key(hex.EncodeToString(k.SKI()), kk.privKey)
 		if err != nil {
 			return fmt.Errorf("failed storing SM4 key [%s]", err)
 		}
@@ -337,6 +341,24 @@ func (ks *fileBasedKeyStore) storeKey(alias string, key []byte) error {
 	return nil
 }
 
+func (ks *fileBasedKeyStore) storeSm4Key(alias string, key []byte) error {
+
+	pem, err := utils.SM4toEncryptedPEM(key, ks.pwd)
+
+	if err != nil {
+		logger.Errorf("Failed converting key to PEM [%s]: [%s]", alias, err)
+		return err
+	}
+
+	err = ioutil.WriteFile(ks.getPathForAlias(alias, "key"), pem, 0600)
+	if err != nil {
+		logger.Errorf("Failed storing key [%s]: [%s]", alias, err)
+		return err
+	}
+
+	return nil
+}
+
 // *****************************************
 // 需要校验 SM2秘钥的PEM格式以及兼容性
 func (ks *fileBasedKeyStore) loadPrivateKey(alias string) (interface{}, error) {
@@ -392,19 +414,14 @@ func (ks *fileBasedKeyStore) loadKey(alias string) (interface{}, error) {
 	pem, err := ioutil.ReadFile(path)
 	if err != nil {
 		logger.Errorf("Failed loading key [%s]: [%s].", alias, err.Error())
-
 		return nil, err
 	}
 
-	// **********************
-	// 需要校验SM4秘钥的PEM格式、位数长，是否兼容。
 	key, err := utils.PEMtoAES(pem, ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed parsing key [%s]: [%s]", alias, err)
-
 		return nil, err
 	}
-
 	return key, nil
 }
 

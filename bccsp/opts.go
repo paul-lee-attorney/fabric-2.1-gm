@@ -92,22 +92,6 @@ func (opts *ECDSAKeyGenOpts) Ephemeral() bool {
 	return opts.Temporary
 }
 
-// SM2KeyGenOpts contains options for SM2 key generation.
-type SM2KeyGenOpts struct {
-	Temporary bool
-}
-
-// Algorithm returns the key generation algorithm identifier (to be used).
-func (opts *SM2KeyGenOpts) Algorithm() string {
-	return SM2
-}
-
-// Ephemeral returns true if the key to generate has to be ephemeral,
-// false otherwise.
-func (opts *SM2KeyGenOpts) Ephemeral() bool {
-	return opts.Temporary
-}
-
 // ECDSAPKIXPublicKeyImportOpts contains options for ECDSA public key importation in PKIX format
 type ECDSAPKIXPublicKeyImportOpts struct {
 	Temporary bool
@@ -227,22 +211,6 @@ func (opts *AESKeyGenOpts) Ephemeral() bool {
 	return opts.Temporary
 }
 
-// SM4KeyGenOpts contains options for SM4 key generation at default security level
-type SM4KeyGenOpts struct {
-	Temporary bool
-}
-
-// Algorithm returns the key generation algorithm identifier (to be used).
-func (opts *SM4KeyGenOpts) Algorithm() string {
-	return SM4
-}
-
-// Ephemeral returns true if the key to generate has to be ephemeral,
-// false otherwise.
-func (opts *SM4KeyGenOpts) Ephemeral() bool {
-	return opts.Temporary
-}
-
 // HMACTruncated256AESDeriveKeyOpts contains options for HMAC truncated
 // at 256 bits key derivation.
 type HMACTruncated256AESDeriveKeyOpts struct {
@@ -342,14 +310,6 @@ type SHAOpts struct{}
 // Algorithm returns the hash algorithm identifier (to be used).
 func (opts *SHAOpts) Algorithm() string {
 	return SHA
-}
-
-// SM3Opts contains options for computing SM3.
-type SM3Opts struct{}
-
-// Algorithm returns the hash algorithm identifier (to be used).
-func (opts *SM3Opts) Algorithm() string {
-	return SM3
 }
 
 // X509PublicKeyImportOpts contains options for importing public keys from an x509 certificate

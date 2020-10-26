@@ -235,6 +235,7 @@ func (csp *CSP) Sign(k bccsp.Key, digest []byte, opts bccsp.SignerOpts) (signatu
 		return nil, errors.Errorf("Unsupported 'SignKey' provided [%s]", keyType)
 	}
 
+	// SM2签名算法直接针对原始数据，不需要事先取哈希值
 	signature, err = signer.Sign(k, digest, opts)
 	if err != nil {
 		return nil, errors.Wrapf(err, "Failed signing with opts [%v]", opts)

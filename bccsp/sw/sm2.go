@@ -17,7 +17,7 @@ package sw
 
 import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/sm2"
+	"github.com/paul-lee-attorney/gm/sm2"
 )
 
 // signSM2 为基于SM2私钥生成数字签名的函数。其中:
@@ -47,7 +47,8 @@ func (s *sm2Signer) Sign(k bccsp.Key, digest []byte, opts bccsp.SignerOpts) (sig
 type sm2PrivateKeyVerifier struct{}
 
 func (v *sm2PrivateKeyVerifier) Verify(k bccsp.Key, signature, digest []byte, opts bccsp.SignerOpts) (valid bool, err error) {
-	return verifySM2(&(k.(*sm2PrivateKey).privKey.PublicKey), signature, digest, opts)
+	pub := sm2.CalculatePubKey(k.(*sm2PrivateKey).privKey)
+	return verifySM2(pub, signature, digest, opts)
 }
 
 type sm2PublicKeyKeyVerifier struct{}

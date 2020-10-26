@@ -39,9 +39,12 @@ func (kg *ecdsaKeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
 	return &ecdsaPrivateKey{privKey}, nil
 }
 
-type sm2KeyGenerator struct{}
+type sm2KeyGenerator struct {
+	curve elliptic.Curve
+}
 
 func (kg *sm2KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
+	sm2.GetSm2P256V1()
 	privKey, _, err := sm2.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, fmt.Errorf("Failed generating SM2 key for [%v]: [%s]", kg.curve, err)

@@ -27,10 +27,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/bccsp/signer"
-	"github.com/hyperledger/fabric/bccsp/utils"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/signer"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/crypto/sha3"
 )
@@ -65,6 +65,7 @@ func TestMain(m *testing.M) {
 		{256, "SHA3"},
 		{384, "SHA2"},
 		{384, "SHA3"},
+		{256, "SM3"}, // 加入SM3，256参数
 	}
 
 	var err error

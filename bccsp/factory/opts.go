@@ -22,7 +22,6 @@ func GetDefaultOpts() *FactoryOpts {
 	return &FactoryOpts{
 		ProviderName: "SW",
 		SwOpts: &SwOpts{
-			// HashFamily: "SHA2",
 			HashFamily: "SM3", // revise the default setting of Hash Family into SM3
 			SecLevel:   256,   // security level remains the same
 			Ephemeral:  true,

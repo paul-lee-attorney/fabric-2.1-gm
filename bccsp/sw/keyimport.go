@@ -13,8 +13,8 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/hyperledger/fabric/bccsp/utils"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
 )
 
 type aes256ImportKeyOptsKeyImporter struct{}
