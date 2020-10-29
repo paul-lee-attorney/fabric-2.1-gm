@@ -21,7 +21,7 @@ serial_packages=(
 
 # packages which need to be tested with build tag pkcs11
 pkcs11_packages=(
-    "github.com/hyperledger/fabric/bccsp/..."
+    "github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/..."
 )
 
 # packages that are only tested when they (or their deps) change

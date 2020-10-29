@@ -5,10 +5,10 @@ go 1.14
 require (
 	code.cloudfoundry.org/clock v1.0.0
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible
-	github.com/Shopify/sarama v1.27.1
+	github.com/Shopify/sarama v1.27.2
 	github.com/VictoriaMetrics/fastcache v1.5.7
 	github.com/davecgh/go-spew v1.1.1
-	github.com/fsouza/go-dockerclient v1.6.5
+	github.com/fsouza/go-dockerclient v1.6.6
 	github.com/go-kit/kit v0.10.0
 	github.com/golang/protobuf v1.4.3
 	github.com/gorilla/handlers v1.5.1
@@ -19,12 +19,13 @@ require (
 	github.com/hyperledger/fabric-amcl v0.0.0-20200424173818-327c9e2cf77a
 	github.com/hyperledger/fabric-chaincode-go v0.0.0-20200728190242-9b3ae92d8664
 	github.com/hyperledger/fabric-lib-go v1.0.0
-	github.com/hyperledger/fabric-protos-go v0.0.0-20200923192742-3897341ac036
+	github.com/hyperledger/fabric-protos-go v0.0.0-20201028172056-a3136dde2354
 	github.com/kr/pretty v0.2.1
-	github.com/miekg/pkcs11 v1.0.3 // indirect
+	github.com/miekg/pkcs11 v1.0.3
 	github.com/mitchellh/mapstructure v1.3.3
 	github.com/onsi/ginkgo v1.14.2
 	github.com/onsi/gomega v1.10.3
+	github.com/paul-lee-attorney/gm v0.0.0-20201026042109-5010f328d765
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.8.0
 	github.com/rcrowley/go-metrics v0.0.0-20200313005456-10cdbea86bc0
@@ -38,7 +39,8 @@ require (
 	github.com/willf/bitset v1.1.11
 	go.etcd.io/etcd v3.3.25+incompatible
 	go.uber.org/zap v1.16.0
-	golang.org/x/tools v0.0.0-20200207183749-b753a1ba74fa
+	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897
+	golang.org/x/tools v0.0.0-20201028224754-2c115999a7f0
 	google.golang.org/grpc v1.33.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/cheggaaa/pb.v1 v1.0.28

@@ -17,7 +17,7 @@ import (
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/pkg/errors"
 
-	"github.com/etcd-io/etcd/etcdserver/api/snap"
+	"github.com/etcd-io/etcd/server/etcdserver/api/snap"
 	"go.etcd.io/etcd/pkg/fileutil"
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"

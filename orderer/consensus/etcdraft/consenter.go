@@ -17,7 +17,6 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/common/metrics"
 	"github.com/hyperledger/fabric/internal/pkg/comm"
@@ -27,6 +26,7 @@ import (
 	"github.com/hyperledger/fabric/orderer/consensus"
 	"github.com/hyperledger/fabric/orderer/consensus/inactive"
 	"github.com/mitchellh/mapstructure"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/pkg/errors"
 	"go.etcd.io/etcd/raft"
 )

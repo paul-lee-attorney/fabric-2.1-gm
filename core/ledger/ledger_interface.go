@@ -15,10 +15,10 @@ import (
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/bccsp"
 	commonledger "github.com/hyperledger/fabric/common/ledger"
 	"github.com/hyperledger/fabric/common/metrics"
 	"github.com/hyperledger/fabric/core/ledger/util/couchdb"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 )
 
 // Initializer encapsulates dependencies for PeerLedgerProvider
