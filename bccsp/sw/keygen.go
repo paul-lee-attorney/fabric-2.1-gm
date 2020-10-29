@@ -45,7 +45,7 @@ type sm2KeyGenerator struct {
 
 func (kg *sm2KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
 	sm2.GetSm2P256V1()
-	privKey, _, err := sm2.GenerateKey(rand.Reader)
+	privKey, err := sm2.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, fmt.Errorf("Failed generating SM2 key for [%v]: [%s]", kg.curve, err)
 	}

@@ -17,6 +17,7 @@ package gm
 
 import (
 	"crypto/elliptic"
+	"errors"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/gm/sm2"
@@ -30,8 +31,8 @@ type sm2PrivateKey struct {
 // Bytes converts this key to its byte representation,
 // if this operation is allowed.
 func (k *sm2PrivateKey) Bytes() (raw []byte, err error) {
-	raw = k.privKey.GetRawBytes()
-	return
+	// raw = k.privKey.GetRawBytes()
+	return nil, errors.New("Not supported.")
 }
 
 // SKI returns the subject key identifier of this key.
@@ -40,10 +41,8 @@ func (k *sm2PrivateKey) SKI() (ski []byte) {
 		return nil
 	}
 
-	pub := sm2.CalculatePubKey(k.privKey)
-
 	//Marshall the public key
-	raw := elliptic.Marshal(pub.Curve, pub.X, pub.Y)
+	raw := elliptic.Marshal(k.privKey.Curve, k.privKey.X, k.privKey.Y)
 
 	// Hash it
 	hash := sm3.New()
@@ -66,8 +65,7 @@ func (k *sm2PrivateKey) Private() bool {
 // PublicKey returns the corresponding public key part of an asymmetric public/private key pair.
 // This method returns an error in symmetric key schemes.
 func (k *sm2PrivateKey) PublicKey() (bccsp.Key, error) {
-	pub := sm2.CalculatePubKey(k.privKey)
-	return &sm2PublicKey{pub}, nil
+	return &sm2PublicKey{&k.privKey.PublicKey}, nil
 }
 
 type sm2PublicKey struct {

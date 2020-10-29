@@ -343,7 +343,9 @@ func (ks *fileBasedKeyStore) storeKey(alias string, key []byte) error {
 
 func (ks *fileBasedKeyStore) storeSm4Key(alias string, key []byte) error {
 
-	pem, err := utils.SM4toEncryptedPEM(key, ks.pwd)
+	blockType := "SM4 PRIVATE KEY"
+
+	pem, err := utils.SM4EncryptPEMBlock(blockType, key, ks.pwd)
 
 	if err != nil {
 		logger.Errorf("Failed converting key to PEM [%s]: [%s]", alias, err)
@@ -382,8 +384,6 @@ func (ks *fileBasedKeyStore) loadPrivateKey(alias string) (interface{}, error) {
 	return privateKey, nil
 }
 
-// ***************************************
-// 需要校验 SM2秘钥的PEM格式以及兼容性
 func (ks *fileBasedKeyStore) loadPublicKey(alias string) (interface{}, error) {
 	path := ks.getPathForAlias(alias, "pk")
 	logger.Debugf("Loading public key [%s] at [%s]...", alias, path)
@@ -405,8 +405,6 @@ func (ks *fileBasedKeyStore) loadPublicKey(alias string) (interface{}, error) {
 	return privateKey, nil
 }
 
-// **************************************
-// 需要校验 SM4秘钥的PEM格式以及兼容性
 func (ks *fileBasedKeyStore) loadKey(alias string) (interface{}, error) {
 	path := ks.getPathForAlias(alias, "key")
 	logger.Debugf("Loading key [%s] at [%s]...", alias, path)

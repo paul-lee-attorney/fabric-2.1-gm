@@ -44,8 +44,3 @@ require (
 	gopkg.in/cheggaaa/pb.v1 v1.0.28
 	gopkg.in/yaml.v2 v2.3.0
 )
-
-replace (
-	github.com/paul-lee-attorney/fabric-2.1-gm => ./
-	github.com/paul-lee-attorney/gm => ./../gm
-)
