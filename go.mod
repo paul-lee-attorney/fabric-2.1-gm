@@ -2,6 +2,10 @@ module github.com/paul-lee-attorney/fabric-2.1-gm
 
 go 1.14
 
+replace github.com/paul-lee-attorney/fabric-2.1-gm => ./
+
+replace github.com/paul-lee-attorney/gm => ./../gm
+
 require (
 	code.cloudfoundry.org/clock v1.0.0
 	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible
@@ -21,11 +25,10 @@ require (
 	github.com/hyperledger/fabric-lib-go v1.0.0
 	github.com/hyperledger/fabric-protos-go v0.0.0-20201028172056-a3136dde2354
 	github.com/kr/pretty v0.2.1
-	github.com/miekg/pkcs11 v1.0.3
 	github.com/mitchellh/mapstructure v1.3.3
 	github.com/onsi/ginkgo v1.14.2
 	github.com/onsi/gomega v1.10.3
-	github.com/paul-lee-attorney/gm v0.0.0-20201026042109-5010f328d765
+	github.com/paul-lee-attorney/fabric-2.1-gm/bccsp v0.0.0-20201029021235-ed7e7e225c83
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.8.0
 	github.com/rcrowley/go-metrics v0.0.0-20200313005456-10cdbea86bc0
@@ -39,7 +42,6 @@ require (
 	github.com/willf/bitset v1.1.11
 	go.etcd.io/etcd v3.3.25+incompatible
 	go.uber.org/zap v1.16.0
-	golang.org/x/crypto v0.0.0-20201016220609-9e8e0b390897
 	golang.org/x/tools v0.0.0-20201028224754-2c115999a7f0
 	google.golang.org/grpc v1.33.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6

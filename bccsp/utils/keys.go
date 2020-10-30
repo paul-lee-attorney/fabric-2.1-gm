@@ -222,7 +222,7 @@ func DERToPrivateKey(der []byte) (key interface{}, err error) {
 }
 
 // MarshalSM2PrivateKey converts a SM2 private key to SEC 1, ASN.1 DER form.
-func MarshalSM2PrivateKey(key *ecdsa.PrivateKey) ([]byte, error) {
+func MarshalSM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
 	privateKeyBytes := key.D.Bytes()
 	paddedPrivateKey := make([]byte, sm2.KeyBytes)
 	copy(paddedPrivateKey[len(paddedPrivateKey)-len(privateKeyBytes):], privateKeyBytes)
@@ -666,7 +666,7 @@ func UmarshalPKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 
 	var pki publicKeyInfo
 
-	if rest, err := asn1.Unmarshal(der, &pki); len(rest) != nil || err != nil {
+	if rest, err := asn1.Unmarshal(der, &pki); len(rest) != 0 || err != nil {
 		return nil, errors.New("failed to parse SM2 public key")
 	}
 
@@ -682,7 +682,7 @@ func UmarshalPKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 	}
 
 	// 校验基础曲线是否为SM2推荐曲线
-	if !namedCurveOID.Euqal(oidSM2P256V1) {
+	if !namedCurveOID.Equal(oidSM2P256V1) {
 		return nil, errors.New("the adopted curve is not the one SM2 recommened")
 	}
 

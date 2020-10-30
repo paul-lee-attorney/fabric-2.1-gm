@@ -47,7 +47,7 @@ func (s *sm2Signer) Sign(k bccsp.Key, digest []byte, opts bccsp.SignerOpts) (sig
 type sm2PrivateKeyVerifier struct{}
 
 func (v *sm2PrivateKeyVerifier) Verify(k bccsp.Key, signature, digest []byte, opts bccsp.SignerOpts) (valid bool, err error) {
-	return verifySM2(k.(*sm2PrivateKey).PublicKey, signature, digest, opts)
+	return verifySM2(&(k.(*sm2PrivateKey).privKey.PublicKey), signature, digest, opts)
 }
 
 type sm2PublicKeyKeyVerifier struct{}

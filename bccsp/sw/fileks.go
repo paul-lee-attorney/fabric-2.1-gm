@@ -138,9 +138,9 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 
 		switch k := key.(type) {
 		case *aesPrivateKey:
-			return &aesPrivateKey{k}, nil
+			return &aesPrivateKey{k.privKey, k.exportable}, nil
 		case *sm4PrivateKey: // private key of sm4
-			return &sm4PrivateKey{k}, nil
+			return &sm4PrivateKey{k.privKey, k.exportable}, nil
 		default:
 			return nil, errors.New("secret key type not recognized")
 		}

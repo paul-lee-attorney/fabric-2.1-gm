@@ -15,6 +15,7 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
+	"github.com/paul-lee-attorney/gm/sm2"
 )
 
 type aes256ImportKeyOptsKeyImporter struct{}
@@ -34,6 +35,25 @@ func (*aes256ImportKeyOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.Key
 	}
 
 	return &aesPrivateKey{aesRaw, false}, nil
+}
+
+type sm4ImportKeyOptsKeyImporter struct{}
+
+func (*sm4ImportKeyOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
+	sm4Raw, ok := raw.([]byte)
+	if !ok {
+		return nil, errors.New("invalid raw material, expected byte array")
+	}
+
+	if sm4Raw == nil {
+		return nil, errors.New("invalid raw material, it must not be nil")
+	}
+
+	if len(sm4Raw) != 16 {
+		return nil, fmt.Errorf("invalid Key Length [%d], must be 16 bytes", len(sm4Raw))
+	}
+
+	return &sm4PrivateKey{sm4Raw, false}, nil
 }
 
 type hmacImportKeyOptsKeyImporter struct{}
@@ -76,6 +96,31 @@ func (*ecdsaPKIXPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts 
 	return &ecdsaPublicKey{ecdsaPK}, nil
 }
 
+type sm2PKIXPublicKeyImportOptsKeyImporter struct{}
+
+func (*sm2PKIXPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
+	der, ok := raw.([]byte)
+	if !ok {
+		return nil, errors.New("Invalid raw material. Expected byte array.")
+	}
+
+	if len(der) == 0 {
+		return nil, errors.New("Invalid raw. It must not be nil.")
+	}
+
+	lowLevelKey, err := utils.UmarshalPKIXSM2PublicKey(der)
+	if err != nil {
+		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
+	}
+
+	sm2PK, ok := lowLevelKey.(*sm2.PublicKey)
+	if !ok {
+		return nil, errors.New("failed casting to SM2 public key")
+	}
+
+	return &sm2PublicKey{sm2PK}, nil
+}
+
 type ecdsaPrivateKeyImportOptsKeyImporter struct{}
 
 func (*ecdsaPrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
@@ -101,6 +146,31 @@ func (*ecdsaPrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bcc
 	return &ecdsaPrivateKey{ecdsaSK}, nil
 }
 
+type sm2PrivateKeyImportOptsKeyImporter struct{}
+
+func (*sm2PrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
+	der, ok := raw.([]byte)
+	if !ok {
+		return nil, errors.New("Invalid raw material for SM2 private key import,expected byte array")
+	}
+
+	if len(der) == 0 {
+		return nil, errors.New("invalid raw, it must not be nil")
+	}
+
+	lowLevelKey, err := utils.ParsePKCS8SM2PrivateKey(der)
+	if err != nil {
+		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
+	}
+
+	sm2SK, ok := lowLevelKey.(*sm2.PrivateKey)
+	if !ok {
+		return nil, errors.New("failed casting to SM2 private key, invalid raw material")
+	}
+
+	return &sm2PrivateKey{sm2SK}, nil
+}
+
 type ecdsaGoPublicKeyImportOptsKeyImporter struct{}
 
 func (*ecdsaGoPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
@@ -110,6 +180,17 @@ func (*ecdsaGoPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 	}
 
 	return &ecdsaPublicKey{lowLevelKey}, nil
+}
+
+type sm2GoPublicKeyImportOptsKeyImporter struct{}
+
+func (*sm2GoPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
+	lowLevelKey, ok := raw.(*sm2.PublicKey)
+	if !ok {
+		return nil, errors.New("invalid raw material. Expected *ecdsa.PublicKey")
+	}
+
+	return &sm2PublicKey{lowLevelKey}, nil
 }
 
 type x509PublicKeyImportOptsKeyImporter struct {

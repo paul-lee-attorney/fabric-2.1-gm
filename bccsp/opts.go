@@ -157,19 +157,19 @@ func (opts *ECDSAGoPublicKeyImportOpts) Ephemeral() bool {
 	return opts.Temporary
 }
 
-// SM2PublicKeyImportOpts contains options for SM2 key importation from SM2.PublicKey
-type SM2PublicKeyImportOpts struct {
+// SM2GoPublicKeyImportOpts contains options for SM2 key importation from SM2.PublicKey
+type SM2GoPublicKeyImportOpts struct {
 	Temporary bool
 }
 
 // Algorithm returns the key importation algorithm identifier (to be used).
-func (opts *SM2PublicKeyImportOpts) Algorithm() string {
+func (opts *SM2GoPublicKeyImportOpts) Algorithm() string {
 	return SM2
 }
 
 // Ephemeral returns true if the key to generate has to be ephemeral,
 // false otherwise.
-func (opts *SM2PublicKeyImportOpts) Ephemeral() bool {
+func (opts *SM2GoPublicKeyImportOpts) Ephemeral() bool {
 	return opts.Temporary
 }
 
