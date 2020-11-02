@@ -108,7 +108,7 @@ func (*sm2PKIXPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
-	lowLevelKey, err := utils.UmarshalPKIXSM2PublicKey(der)
+	lowLevelKey, err := utils.UnmarshalPKIXSM2PublicKey(der)
 	if err != nil {
 		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
 	}
@@ -200,7 +200,7 @@ type x509PublicKeyImportOptsKeyImporter struct {
 func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
 	x509Cert, ok := raw.(*x509.Certificate)
 	if !ok {
-		return nil, errors.New("Invalid raw material. Expected *x509.Certificate.")
+		return nil, errors.New("Invalid raw material. Expected *x509.Certificate")
 	}
 
 	pk := x509Cert.PublicKey
@@ -210,6 +210,10 @@ func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		return ki.bccsp.KeyImporters[reflect.TypeOf(&bccsp.ECDSAGoPublicKeyImportOpts{})].KeyImport(
 			pk,
 			&bccsp.ECDSAGoPublicKeyImportOpts{Temporary: opts.Ephemeral()})
+	case *sm2.PublicKey:
+		return ki.bccsp.KeyImporters[reflect.TypeOf(&bccsp.SM2GoPublicKeyImportOpts{})].KeyImport(
+			pk,
+			&bccsp.SM2GoPublicKeyImportOpts{Temporary: opts.Ephemeral()})
 	default:
 		return nil, errors.New("Certificate's public key type not recognized. Supported keys: [ECDSA]")
 	}

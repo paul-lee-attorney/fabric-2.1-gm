@@ -66,22 +66,6 @@ func (opts *AES256KeyGenOpts) Ephemeral() bool {
 	return opts.Temporary
 }
 
-// SM4KeyGenOpts contains options for SM4 key generation at default security level
-type SM4KeyGenOpts struct {
-	Temporary bool
-}
-
-// Algorithm returns the key generation algorithm identifier (to be used).
-func (opts *SM4KeyGenOpts) Algorithm() string {
-	return SM4
-}
-
-// Ephemeral returns true if the key to generate has to be ephemeral,
-// false otherwise.
-func (opts *SM4KeyGenOpts) Ephemeral() bool {
-	return opts.Temporary
-}
-
 // AESCBCPKCS7ModeOpts contains options for AES encryption in CBC mode
 // with PKCS7 padding.
 // Notice that both IV and PRNG can be nil. In that case, the BCCSP implementation

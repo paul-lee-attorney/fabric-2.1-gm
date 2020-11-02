@@ -76,7 +76,7 @@ type HashOpts interface {
 
 // SignerOpts contains options for signing with a CSP.
 type SignerOpts interface {
-	crypto.SignerOpts
+	crypto.SignerOpts // 待签名的消息摘要的哈希算法
 }
 
 // EncrypterOpts contains options for encrypting with a CSP.

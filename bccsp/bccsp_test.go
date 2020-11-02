@@ -46,6 +46,14 @@ func TestAESOpts(t *testing.T) {
 	assert.False(t, opts.Ephemeral())
 }
 
+func TestSM4Opts(t *testing.T) {
+	opts := &SM4KeyGenOpts{true}
+	assert.Equal(t, "SM4", opts.Algorithm())
+	assert.True(t, opts.Ephemeral())
+	opts.Temporary = false
+	assert.False(t, opts.Ephemeral())
+}
+
 func TestECDSAOpts(t *testing.T) {
 	test := func(ephemeral bool) {
 		for _, opts := range []KeyGenOpts{
@@ -82,8 +90,44 @@ func TestECDSAOpts(t *testing.T) {
 	assert.Empty(t, opts.ExpansionValue())
 }
 
+func TestSM2Opts(t *testing.T) {
+	opts := &SM2KeyGenOpts{Temporary: true}
+	expectedAlgorithm := reflect.TypeOf(opts).String()[7:10]
+	assert.Equal(t, expectedAlgorithm, opts.Algorithm())
+	assert.Equal(t, true, opts.Ephemeral())
+	opts.Temporary = false
+	assert.False(t, opts.Ephemeral())
+
+	test := func(ephemeral bool) {
+		for _, opts := range []KeyGenOpts{
+			&SM2KeyGenOpts{ephemeral},
+			&SM2PKIXPublicKeyImportOpts{ephemeral},
+			&SM2PrivateKeyImportOpts{ephemeral},
+			&SM2GoPublicKeyImportOpts{ephemeral},
+		} {
+			assert.Equal(t, "SM2", opts.Algorithm())
+			assert.Equal(t, ephemeral, opts.Ephemeral())
+		}
+	}
+	test(true)
+	test(false)
+
+	opts2 := &SM2ReRandKeyOpts{Temporary: true}
+	assert.True(t, opts2.Ephemeral())
+	opts2.Temporary = false
+	assert.False(t, opts2.Ephemeral())
+	assert.Equal(t, "SM2_RERAND", opts2.Algorithm())
+	assert.Empty(t, opts2.ExpansionValue())
+}
+
 func TestHashOpts(t *testing.T) {
-	for _, ho := range []HashOpts{&SHA256Opts{}, &SHA384Opts{}, &SHA3_256Opts{}, &SHA3_384Opts{}} {
+	for _, ho := range []HashOpts{
+		&SHA256Opts{},
+		&SHA384Opts{},
+		&SHA3_256Opts{},
+		&SHA3_384Opts{},
+		&SM3Opts{}, // SM3加入哈希算法家族的测试
+	} {
 		s := strings.Replace(reflect.TypeOf(ho).String(), "*bccsp.", "", -1)
 		algorithm := strings.Replace(s, "Opts", "", -1)
 		assert.Equal(t, algorithm, ho.Algorithm())

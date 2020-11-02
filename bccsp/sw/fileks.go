@@ -361,8 +361,6 @@ func (ks *fileBasedKeyStore) storeSm4Key(alias string, key []byte) error {
 	return nil
 }
 
-// *****************************************
-// 需要校验 SM2秘钥的PEM格式以及兼容性
 func (ks *fileBasedKeyStore) loadPrivateKey(alias string) (interface{}, error) {
 	path := ks.getPathForAlias(alias, "sk")
 	logger.Debugf("Loading private key [%s] at [%s]...", alias, path)

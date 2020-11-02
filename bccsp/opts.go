@@ -33,21 +33,6 @@ const (
 	// AES Advanced Encryption Standard at 256 bit security level
 	AES256 = "AES256"
 
-	// SM2 国密商密第2号, 中国官方采用的一种“椭圆曲线加密算法”。
-	// SM2 No.2 National Cryptographic Algorithm for Commercial Purpose of China,
-	// which is a special ECDSA adopted by Chinese authority.
-	SM2 = "SM2"
-
-	// SM3 国密商密第3号, 中国官方采用的一种杂凑加密算法。
-	// SM3 No.3 National Cryptographic Algorithm for commercial purpose of China,
-	// which is a special hash algorithm adopted by Chinese government.
-	SM3 = "SM3"
-
-	// SM4 国密商密第4号, 中国官方采用的一种分组密码算法。
-	// SM4 No.4 National Encryption Algorithm for Commercial Purpose of China,
-	// which is a block cipher algorithm adopted by Chinese government.
-	SM4 = "SM4"
-
 	// HMAC keyed-hash message authentication code
 	HMAC = "HMAC"
 	// HMACTruncated256 HMAC truncated at 256 bits.
@@ -125,22 +110,6 @@ func (opts *ECDSAPrivateKeyImportOpts) Ephemeral() bool {
 	return opts.Temporary
 }
 
-// SM2PrivateKeyImportOpts contains options for SM2 secret key importation.
-type SM2PrivateKeyImportOpts struct {
-	Temporary bool
-}
-
-// Algorithm returns the key importation algorithm identifier (to be used).
-func (opts *SM2PrivateKeyImportOpts) Algorithm() string {
-	return SM2
-}
-
-// Ephemeral returns true if the key to generate has to be ephemeral,
-// false otherwise.
-func (opts *SM2PrivateKeyImportOpts) Ephemeral() bool {
-	return opts.Temporary
-}
-
 // ECDSAGoPublicKeyImportOpts contains options for ECDSA key importation from ecdsa.PublicKey
 type ECDSAGoPublicKeyImportOpts struct {
 	Temporary bool
@@ -154,22 +123,6 @@ func (opts *ECDSAGoPublicKeyImportOpts) Algorithm() string {
 // Ephemeral returns true if the key to generate has to be ephemeral,
 // false otherwise.
 func (opts *ECDSAGoPublicKeyImportOpts) Ephemeral() bool {
-	return opts.Temporary
-}
-
-// SM2GoPublicKeyImportOpts contains options for SM2 key importation from SM2.PublicKey
-type SM2GoPublicKeyImportOpts struct {
-	Temporary bool
-}
-
-// Algorithm returns the key importation algorithm identifier (to be used).
-func (opts *SM2GoPublicKeyImportOpts) Algorithm() string {
-	return SM2
-}
-
-// Ephemeral returns true if the key to generate has to be ephemeral,
-// false otherwise.
-func (opts *SM2GoPublicKeyImportOpts) Ephemeral() bool {
 	return opts.Temporary
 }
 
@@ -269,22 +222,6 @@ func (opts *AES256ImportKeyOpts) Algorithm() string {
 // Ephemeral returns true if the key generated has to be ephemeral,
 // false otherwise.
 func (opts *AES256ImportKeyOpts) Ephemeral() bool {
-	return opts.Temporary
-}
-
-// SM4ImportKeyOpts contains options for importing SM4 keys.
-type SM4ImportKeyOpts struct {
-	Temporary bool
-}
-
-// Algorithm returns the key importation algorithm identifier (to be used).
-func (opts *SM4ImportKeyOpts) Algorithm() string {
-	return SM4
-}
-
-// Ephemeral returns true if the key generated has to be ephemeral,
-// false otherwise.
-func (opts *SM4ImportKeyOpts) Ephemeral() bool {
 	return opts.Temporary
 }
 

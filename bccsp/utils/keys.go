@@ -170,16 +170,7 @@ func PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, error
 			return nil, errors.New("Invalid ecdsa private key. It must be different from nil")
 		}
 
-		privateKeyBytes := k.D.Bytes()
-		paddedPrivateKey := make([]byte, sm2.KeyBytes)
-		copy(paddedPrivateKey[len(paddedPrivateKey)-len(privateKeyBytes):], privateKeyBytes)
-
-		raw, err := asn1.Marshal(ecPrivateKey{
-			Version:       1,
-			PrivateKey:    paddedPrivateKey,
-			NamedCurveOID: oidSM2P256V1,
-			PublicKey:     asn1.BitString{Bytes: elliptic.Marshal(k.Curve, k.X, k.Y)},
-		})
+		raw, err := MarshalSM2PrivateKey(k)
 		if err != nil {
 			return nil, err
 		}
@@ -381,7 +372,7 @@ func PEMtoPrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 	}
 
 	if block.Type == "SM2 PRIVATE KEY" {
-		cert, err := DERToPrivateKey(block.Bytes)
+		cert, err := ParsePKCS8SM2PrivateKey(block.Bytes)
 		if err != nil {
 			return nil, err
 		}
@@ -434,7 +425,6 @@ func AEStoPEM(raw []byte) []byte {
 }
 
 // AEStoEncryptedPEM encapsulates an AES key in the encrypted PEM format
-// ********需要后续对 x509 国密改造 ********
 func AEStoEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
 	if len(raw) == 0 {
 		return nil, errors.New("Invalid aes key. It must be different from nil")
@@ -660,9 +650,9 @@ type publicKeyInfo struct {
 	PublicKey asn1.BitString
 }
 
-// UmarshalPKIXSM2PublicKey parse a DER-encoded ASN.1 data into SM2 public key object.
+// UnmarshalPKIXSM2PublicKey parse a DER-encoded ASN.1 data into SM2 public key object.
 // 将符合PKIX, ASN.1 DER编码规则的SM2公钥反序列化为对象.
-func UmarshalPKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
+func UnmarshalPKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 
 	var pki publicKeyInfo
 
@@ -677,13 +667,16 @@ func UmarshalPKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 
 	paramsData := pki.Algorithm.Parameters.FullBytes
 	namedCurveOID := new(asn1.ObjectIdentifier)
-	if rest, err := asn1.Unmarshal(paramsData, namedCurveOID); err != nil || len(rest) != 0 {
-		return nil, errors.New("failed to parse ECDSA parameters as named curve")
+	rest, err := asn1.Unmarshal(paramsData, namedCurveOID)
+	if err != nil {
+		return nil, err
 	}
-
+	if len(rest) != 0 {
+		return nil, errors.New("x509: trailing data after SM2 parameters")
+	}
 	// 校验基础曲线是否为SM2推荐曲线
 	if !namedCurveOID.Equal(oidSM2P256V1) {
-		return nil, errors.New("the adopted curve is not the one SM2 recommened")
+		return nil, errors.New("x509: CurveOID is not the OID of SM2P256")
 	}
 
 	// 初始化并获得SM2曲线
@@ -804,7 +797,7 @@ func PEMtoPublicKey(raw []byte, pwd []byte) (interface{}, error) {
 			if err != nil {
 				return nil, fmt.Errorf("Failed PEM decryption. [%s]", err)
 			}
-			key, err := UmarshalPKIXSM2PublicKey(decrypted)
+			key, err := UnmarshalPKIXSM2PublicKey(decrypted)
 			if err != nil {
 				return nil, err
 			}
@@ -823,7 +816,7 @@ func PEMtoPublicKey(raw []byte, pwd []byte) (interface{}, error) {
 	}
 
 	if block.Type == "SM2 PUBLIC KEY" {
-		cert, err := UmarshalPKIXSM2PublicKey(block.Bytes)
+		cert, err := UnmarshalPKIXSM2PublicKey(block.Bytes)
 		if err != nil {
 			return nil, err
 		}
