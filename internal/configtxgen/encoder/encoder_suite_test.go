@@ -9,9 +9,9 @@ package encoder_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp/factory"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
 )
 
 func TestEncoder(t *testing.T) {

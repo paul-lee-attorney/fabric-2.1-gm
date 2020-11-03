@@ -40,6 +40,10 @@ func (k *sm4PrivateKey) Bytes() (raw []byte, err error) {
 
 // SKI returns the subject key identifier of this key.
 func (k *sm4PrivateKey) SKI() (ski []byte) {
+	if k.privKey == nil {
+		return nil
+	}
+
 	hash := sm3.New()
 	hash.Write(k.privKey)
 	return hash.Sum(nil)

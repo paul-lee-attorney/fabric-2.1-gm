@@ -13,7 +13,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp/factory"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 )

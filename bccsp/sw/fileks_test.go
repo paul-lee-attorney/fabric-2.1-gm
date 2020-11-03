@@ -42,7 +42,17 @@ func TestInvalidStoreKey(t *testing.T) {
 		t.Fatal("Error should be different from nil in this case")
 	}
 
+	err = ks.StoreKey(&sm2PrivateKey{nil})
+	if err == nil {
+		t.Fatal("Error should be different from nil in this case")
+	}
+
 	err = ks.StoreKey(&ecdsaPublicKey{nil})
+	if err == nil {
+		t.Fatal("Error should be different from nil in this case")
+	}
+
+	err = ks.StoreKey(&sm2PublicKey{nil})
 	if err == nil {
 		t.Fatal("Error should be different from nil in this case")
 	}
@@ -52,10 +62,11 @@ func TestInvalidStoreKey(t *testing.T) {
 		t.Fatal("Error should be different from nil in this case")
 	}
 
-	err = ks.StoreKey(&aesPrivateKey{nil, true})
+	err = ks.StoreKey(&sm4PrivateKey{nil, false})
 	if err == nil {
 		t.Fatal("Error should be different from nil in this case")
 	}
+
 }
 
 func TestBigKeyFile(t *testing.T) {

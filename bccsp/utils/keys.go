@@ -447,14 +447,14 @@ func AEStoEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
 	return pem.EncodeToMemory(block), nil
 }
 
-// SM4EncryptPEMBlock encrypt raw message into PEM format via SM4.
+// SM4EncryptPEMBlock encrypt raw message into PEM format via SM4. refer: x509.EncryptPEMBlock()
 // 将输入消息用SM4加密并转化为PEM格式的函数。
-func SM4EncryptPEMBlock(blockType string, raw, pwd []byte) ([]byte, error) {
+func SM4EncryptPEMBlock(blockType string, raw []byte, pwd []byte) ([]byte, error) {
 
-	if len(raw) == 0 {
+	if len(raw) == 0 || raw == nil {
 		return nil, errors.New("Invalid SM4 key. It must be different from nil")
 	}
-	if len(pwd) == 0 {
+	if len(pwd) == 0 || pwd == nil {
 		return pem.EncodeToMemory(&pem.Block{Type: blockType, Bytes: raw}), nil
 	}
 

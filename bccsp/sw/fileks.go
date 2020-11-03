@@ -116,7 +116,6 @@ func (ks *fileBasedKeyStore) ReadOnly() bool {
 	return ks.readOnly
 }
 
-// ********* 需要校验SM4秘钥交换和PEM存储的格式细节 ********
 // GetKey returns a key object whose SKI is the one passed.
 func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 	// Validate arguments
@@ -135,15 +134,13 @@ func (ks *fileBasedKeyStore) GetKey(ski []byte) (bccsp.Key, error) {
 		if err != nil {
 			return nil, fmt.Errorf("failed loading key [%x] [%s]", ski, err)
 		}
-
-		switch k := key.(type) {
-		case *aesPrivateKey:
-			return &aesPrivateKey{k.privKey, k.exportable}, nil
-		case *sm4PrivateKey: // private key of sm4
-			return &sm4PrivateKey{k.privKey, k.exportable}, nil
-		default:
-			return nil, errors.New("secret key type not recognized")
+		return &aesPrivateKey{key, false}, nil
+	case "sm4key":
+		key, err := ks.loadSM4Key(hex.EncodeToString(ski))
+		if err != nil {
+			return nil, fmt.Errorf("failed loading sm4key [%x] [%s]", ski, err)
 		}
+		return &sm4PrivateKey{key, false}, nil
 	case "sk":
 		// Load the private key
 		// 载入不对称算法的私钥
@@ -352,7 +349,7 @@ func (ks *fileBasedKeyStore) storeSm4Key(alias string, key []byte) error {
 		return err
 	}
 
-	err = ioutil.WriteFile(ks.getPathForAlias(alias, "key"), pem, 0600)
+	err = ioutil.WriteFile(ks.getPathForAlias(alias, "sm4key"), pem, 0600)
 	if err != nil {
 		logger.Errorf("Failed storing key [%s]: [%s]", alias, err)
 		return err
@@ -403,8 +400,26 @@ func (ks *fileBasedKeyStore) loadPublicKey(alias string) (interface{}, error) {
 	return privateKey, nil
 }
 
-func (ks *fileBasedKeyStore) loadKey(alias string) (interface{}, error) {
+func (ks *fileBasedKeyStore) loadKey(alias string) ([]byte, error) {
 	path := ks.getPathForAlias(alias, "key")
+	logger.Debugf("Loading key [%s] at [%s]...", alias, path)
+
+	pem, err := ioutil.ReadFile(path)
+	if err != nil {
+		logger.Errorf("Failed loading key [%s]: [%s].", alias, err.Error())
+		return nil, err
+	}
+
+	key, err := utils.PEMtoAES(pem, ks.pwd)
+	if err != nil {
+		logger.Errorf("Failed parsing key [%s]: [%s]", alias, err)
+		return nil, err
+	}
+	return key, nil
+}
+
+func (ks *fileBasedKeyStore) loadSM4Key(alias string) ([]byte, error) {
+	path := ks.getPathForAlias(alias, "sm4key")
 	logger.Debugf("Loading key [%s] at [%s]...", alias, path)
 
 	pem, err := ioutil.ReadFile(path)
