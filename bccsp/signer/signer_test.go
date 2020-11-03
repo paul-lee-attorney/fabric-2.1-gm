@@ -24,6 +24,7 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/mocks"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
+	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -64,6 +65,23 @@ func TestInit(t *testing.T) {
 	assert.NoError(t, err)
 
 	assert.True(t, ecdsa.Verify(signer.Public().(*ecdsa.PublicKey), []byte{0, 1, 2, 3}, R, S))
+
+	// Test sm2 algo
+	sm2.GetSm2P256V1()
+	sm2PrivKey, err := sm2.GenerateKey(rand.Reader)
+	assert.NoError(t, err)
+	sm2PubKeyRaw, err := utils.MarshalPKIXSM2PublicKey(&sm2PrivKey.PublicKey)
+	assert.NoError(t, err)
+
+	signer, err = New(&mocks.MockBCCSP{}, &mocks.MockKey{PK: &mocks.MockKey{BytesValue: sm2PubKeyRaw}})
+	assert.NoError(t, err)
+	assert.NotNil(t, signer)
+
+	// Test sm2 public key
+	R, S, err = sm2.SignToRS(sm2PrivKey, nil, []byte{0, 1, 2, 3})
+	assert.NoError(t, err)
+
+	assert.True(t, sm2.VerifyByRS(signer.Public().(*sm2.PublicKey), nil, []byte{0, 1, 2, 3}, R, S))
 }
 
 func TestPublic(t *testing.T) {

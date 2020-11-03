@@ -13,7 +13,6 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
 	"github.com/pkg/errors"
-	"github.com/tjfoc/gmsm/sm2"
 )
 
 // bccspCryptoSigner is the BCCSP-based implementation of a crypto.Signer
@@ -46,16 +45,6 @@ func New(csp bccsp.BCCSP, key bccsp.Key) (crypto.Signer, error) {
 	raw, err := pub.Bytes()
 	if err != nil {
 		return nil, errors.Wrap(err, "failed marshalling public key")
-	}
-
-	// SM2 public key unmarshal
-	if pub.(type) == *sm2.PublicKey {
-		pk, err := utils.UnmarshalPKIXSM2PublicKey(raw)
-		if err != nil {
-			return nil, errors.Wrap(err, "failed marshalling der to SM2 public key")
-		}
-
-		return &bccspCryptoSigner{csp, key, pk}, nil
 	}
 
 	pk, err := utils.DERToPublicKey(raw)

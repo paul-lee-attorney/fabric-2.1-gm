@@ -108,14 +108,9 @@ func (*sm2PKIXPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
-	lowLevelKey, err := utils.UnmarshalPKIXSM2PublicKey(der)
+	sm2PK, err := utils.UnmarshalPKIXSM2PublicKey(der)
 	if err != nil {
 		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
-	}
-
-	sm2PK, ok := lowLevelKey.(*sm2.PublicKey)
-	if !ok {
-		return nil, errors.New("failed casting to SM2 public key")
 	}
 
 	return &sm2PublicKey{sm2PK}, nil
@@ -158,17 +153,12 @@ func (*sm2PrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp
 		return nil, errors.New("invalid raw, it must not be nil")
 	}
 
-	lowLevelKey, err := utils.ParsePKCS8SM2PrivateKey(der)
+	sm2Priv, err := utils.ParsePKCS8SM2PrivateKey(der)
 	if err != nil {
 		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
 	}
 
-	sm2SK, ok := lowLevelKey.(*sm2.PrivateKey)
-	if !ok {
-		return nil, errors.New("failed casting to SM2 private key, invalid raw material")
-	}
-
-	return &sm2PrivateKey{sm2SK}, nil
+	return &sm2PrivateKey{sm2Priv}, nil
 }
 
 type ecdsaGoPublicKeyImportOptsKeyImporter struct{}

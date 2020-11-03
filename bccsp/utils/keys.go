@@ -683,7 +683,7 @@ func UnmarshalPKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 	namedCurve := sm2.GetSm2P256V1()
 
 	// 编码时没有对BitString移位，所以不必右对齐进行调整
-	publicKeyBytes := pki.PublicKey.Bytes
+	publicKeyBytes := pki.PublicKey.RightAlign()
 
 	// 反序列化SM2曲线和公钥
 	x, y := elliptic.Unmarshal(namedCurve, publicKeyBytes)
@@ -836,7 +836,21 @@ func DERToPublicKey(raw []byte) (pub interface{}, err error) {
 		return nil, errors.New("Invalid DER. It must be different from nil.")
 	}
 
-	key, err := x509.ParsePKIXPublicKey(raw)
+	if key, err := x509.ParsePKIXPublicKey(raw); err == nil {
+		switch key.(type) {
+		case *ecdsa.PublicKey:
+			return key, nil
+		default:
+			return nil, errors.New("Found unknown public key type in PKIX wrapping")
+		}
+		return key, nil
+	}
 
-	return key, err
+	// adding SM2 public key parse function herein
+	if key, err := UnmarshalPKIXSM2PublicKey(raw); err == nil {
+		return key, nil
+	}
+
+	return nil, errors.New("Invalid key type. The DER must contain an ecdsa.PublicKey or sm2.PublicKey")
+
 }
