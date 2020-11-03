@@ -34,6 +34,16 @@ type pkcs8Info struct {
 	PrivateKey          []byte
 }
 
+// pkcs8 reflects an ASN.1, PKCS#8 PrivateKey. See
+// ftp://ftp.rsasecurity.com/pub/pkcs/pkcs-8/pkcs-8v1_2.asn
+// and RFC 5208.
+type pkcs8 struct {
+	Version    int
+	Algo       pkix.AlgorithmIdentifier
+	PrivateKey []byte
+	// optional attributes omitted.
+}
+
 type ecPrivateKey struct {
 	Version       int
 	PrivateKey    []byte
@@ -42,36 +52,9 @@ type ecPrivateKey struct {
 }
 
 var (
-	oidNamedCurveP224 = asn1.ObjectIdentifier{1, 3, 132, 0, 33}
-	oidNamedCurveP256 = asn1.ObjectIdentifier{1, 2, 840, 10045, 3, 1, 7}
-	oidNamedCurveP384 = asn1.ObjectIdentifier{1, 3, 132, 0, 34}
-	oidNamedCurveP521 = asn1.ObjectIdentifier{1, 3, 132, 0, 35}
+	// 加入SM2推荐曲线的oid
+	oidSM2P256V1 = asn1.ObjectIdentifier{1, 2, 156, 10197, 1, 301}
 )
-
-var oidPublicKeyECDSA = asn1.ObjectIdentifier{1, 2, 840, 10045, 2, 1}
-
-func oidFromNamedCurve(curve elliptic.Curve) (asn1.ObjectIdentifier, bool) {
-	switch curve {
-	case elliptic.P224():
-		return oidNamedCurveP224, true
-	case elliptic.P256():
-		return oidNamedCurveP256, true
-	case elliptic.P384():
-		return oidNamedCurveP384, true
-	case elliptic.P521():
-		return oidNamedCurveP521, true
-	}
-	return nil, false
-}
-
-// PrivateKeyToDER marshals a private key to der
-func PrivateKeyToDER(privateKey *ecdsa.PrivateKey) ([]byte, error) {
-	if privateKey == nil {
-		return nil, errors.New("Invalid ecdsa private key. It must be different from nil.")
-	}
-
-	return x509.MarshalECPrivateKey(privateKey)
-}
 
 // PrivateKeyToPEM converts the private key to PEM format.
 // EC private keys are converted to PKCS#8 format.
@@ -173,29 +156,6 @@ func PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, error
 	default:
 		return nil, errors.New("Invalid key type. It must be *ecdsa.PrivateKey")
 	}
-}
-
-// DERToPrivateKey unmarshals a der to private key
-func DERToPrivateKey(der []byte) (key interface{}, err error) {
-
-	if key, err = x509.ParsePKCS1PrivateKey(der); err == nil {
-		return key, nil
-	}
-
-	if key, err = x509.ParsePKCS8PrivateKey(der); err == nil {
-		switch key.(type) {
-		case *ecdsa.PrivateKey:
-			return
-		default:
-			return nil, errors.New("Found unknown private key type in PKCS#8 wrapping")
-		}
-	}
-
-	if key, err = x509.ParseECPrivateKey(der); err == nil {
-		return
-	}
-
-	return nil, errors.New("Invalid key type. The DER must contain an ecdsa.PrivateKey")
 }
 
 // MarshalSM2PrivateKey converts a SM2 private key to SEC 1, ASN.1 DER form.
@@ -403,34 +363,6 @@ func PEMtoAES(raw []byte, pwd []byte) ([]byte, error) {
 	}
 
 	return block.Bytes, nil
-}
-
-// AEStoPEM encapsulates an AES key in the PEM format
-func AEStoPEM(raw []byte) []byte {
-	return pem.EncodeToMemory(&pem.Block{Type: "AES PRIVATE KEY", Bytes: raw})
-}
-
-// AEStoEncryptedPEM encapsulates an AES key in the encrypted PEM format
-func AEStoEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
-	if len(raw) == 0 {
-		return nil, errors.New("Invalid aes key. It must be different from nil")
-	}
-	if len(pwd) == 0 {
-		return AEStoPEM(raw), nil
-	}
-
-	block, err := x509.EncryptPEMBlock(
-		rand.Reader,
-		"AES PRIVATE KEY",
-		raw,
-		pwd,
-		x509.PEMCipherAES256)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return pem.EncodeToMemory(block), nil
 }
 
 // SM4EncryptPEMBlock encrypt raw message into PEM format via SM4. refer: x509.EncryptPEMBlock()
@@ -682,29 +614,6 @@ func ParsePKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 		Y:     y,
 	}
 	return pub, nil
-}
-
-// PublicKeyToDER marshals a public key to the der format
-func PublicKeyToDER(publicKey interface{}) ([]byte, error) {
-	if publicKey == nil {
-		return nil, errors.New("Invalid public key. It must be different from nil.")
-	}
-
-	switch k := publicKey.(type) {
-	case *ecdsa.PublicKey:
-		if k == nil {
-			return nil, errors.New("Invalid ecdsa public key. It must be different from nil.")
-		}
-		PubASN1, err := x509.MarshalPKIXPublicKey(k)
-		if err != nil {
-			return nil, err
-		}
-
-		return PubASN1, nil
-
-	default:
-		return nil, errors.New("Invalid key type. It must be *ecdsa.PublicKey")
-	}
 }
 
 // PublicKeyToEncryptedPEM converts a public key to encrypted pem

@@ -16,7 +16,7 @@ limitations under the License.
 
 package bccsp
 
-// 加入国密商密系列算法选项类别
+// 国密商密系列算法选项类别
 
 const (
 	// SM2 国密商密第2号, 中国官方采用的一种“椭圆曲线加密算法”。

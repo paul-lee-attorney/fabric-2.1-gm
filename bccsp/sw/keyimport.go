@@ -108,7 +108,7 @@ func (*sm2PKIXPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
-	sm2PK, err := utils.UnmarshalPKIXSM2PublicKey(der)
+	sm2PK, err := utils.ParsePKIXSM2PublicKey(der)
 	if err != nil {
 		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
 	}
