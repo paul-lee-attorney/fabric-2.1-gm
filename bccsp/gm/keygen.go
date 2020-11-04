@@ -1,6 +1,4 @@
 /*
-Copyright IBM Corp. 2017 All Rights Reserved.
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -14,39 +12,41 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package sw
+package gm
 
 import (
-	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
 	"fmt"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/gm/sm2"
 )
 
-type ecdsaKeyGenerator struct {
+type sm2KeyGenerator struct {
 	curve elliptic.Curve
 }
 
-func (kg *ecdsaKeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
-	privKey, err := ecdsa.GenerateKey(kg.curve, rand.Reader)
+func (kg *sm2KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
+
+	privKey, err := sm2.GenerateKey(kg.curve, rand.Reader)
 	if err != nil {
-		return nil, fmt.Errorf("Failed generating ECDSA key for [%v]: [%s]", kg.curve, err)
+		return nil, fmt.Errorf("Failed generating SM2 key for [%v]: [%s]", kg.curve, err)
 	}
 
-	return &ecdsaPrivateKey{privKey}, nil
+	return &sm2PrivateKey{privKey}, nil
 }
 
-type aesKeyGenerator struct {
+type sm4KeyGenerator struct {
 	length int
 }
 
-func (kg *aesKeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
-	lowLevelKey, err := GetRandomBytes(int(kg.length))
+func (kg *sm4KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
+	lowLevelKey, err := sw.GetRandomBytes(int(kg.length))
 	if err != nil {
 		return nil, fmt.Errorf("Failed generating AES %d key [%s]", kg.length, err)
 	}
 
-	return &aesPrivateKey{lowLevelKey, false}, nil
+	return &sm4PrivateKey{lowLevelKey, false}, nil
 }

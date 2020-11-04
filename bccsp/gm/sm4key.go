@@ -1,6 +1,4 @@
 /*
-Copyright Suzhou Tongji Fintech Research Institute 2017 All Rights Reserved.
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -13,7 +11,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package sw
+
+package gm
 
 import (
 	"errors"
@@ -40,6 +39,8 @@ func (k *sm4PrivateKey) Bytes() (raw []byte, err error) {
 
 // SKI returns the subject key identifier of this key.
 func (k *sm4PrivateKey) SKI() (ski []byte) {
+
+	// sm3算法写入NIL会直接panic
 	if k.privKey == nil {
 		return nil
 	}

@@ -26,8 +26,6 @@ import (
 
 	mocks2 "github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/mocks"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw/mocks"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
-	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -86,28 +84,6 @@ func TestAES256ImportKeyOptsKeyImporter(t *testing.T) {
 	assert.Contains(t, err.Error(), "Invalid Key Length [")
 }
 
-func TestSM4ImportKeyOptsKeyImporter(t *testing.T) {
-	t.Parallel()
-
-	ki := sm4ImportKeyOptsKeyImporter{}
-
-	_, err := ki.KeyImport("Hello World", &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "invalid raw material, expected byte array")
-
-	_, err = ki.KeyImport(nil, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "invalid raw material, expected byte array")
-
-	_, err = ki.KeyImport([]byte(nil), &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "invalid raw material, it must not be nil")
-
-	_, err = ki.KeyImport([]byte{0}, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "invalid Key Length [")
-}
-
 func TestHMACImportKeyOptsKeyImporter(t *testing.T) {
 	t.Parallel()
 
@@ -156,42 +132,6 @@ func TestECDSAPKIXPublicKeyImportOptsKeyImporter(t *testing.T) {
 	assert.Contains(t, err.Error(), "Failed casting to ECDSA public key. Invalid raw material.")
 }
 
-func TestSM2PKIXPublicKeyImportOptsKeyImporter(t *testing.T) {
-	t.Parallel()
-
-	ki := sm2PKIXPublicKeyImportOptsKeyImporter{}
-
-	_, err := ki.KeyImport("Hello World", &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Invalid raw material. Expected byte array.")
-
-	_, err = ki.KeyImport(nil, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Invalid raw material. Expected byte array.")
-
-	_, err = ki.KeyImport([]byte(nil), &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Invalid raw. It must not be nil.")
-
-	_, err = ki.KeyImport([]byte{0}, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Failed converting PKIX to SM2 public key [")
-
-	k, err := rsa.GenerateKey(rand.Reader, 512)
-	assert.NoError(t, err)
-	raw, err := x509.MarshalPKIXPublicKey(&k.PublicKey)
-	assert.NoError(t, err)
-	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-
-	sm2K, err := sm2.GenerateKey(rand.Reader)
-	assert.NoError(t, err)
-	sm2KRaw, err := utils.MarshalPKIXSM2PublicKey(&sm2K.PublicKey)
-	assert.NoError(t, err)
-	_, err = ki.KeyImport(sm2KRaw, &mocks2.KeyImportOpts{})
-	assert.NoError(t, err)
-}
-
 func TestECDSAPrivateKeyImportOptsKeyImporter(t *testing.T) {
 	t.Parallel()
 
@@ -221,37 +161,6 @@ func TestECDSAPrivateKeyImportOptsKeyImporter(t *testing.T) {
 	assert.Contains(t, err.Error(), "Failed casting to ECDSA private key. Invalid raw material.")
 }
 
-func TestSM2PrivateKeyImportOptsKeyImporter(t *testing.T) {
-	t.Parallel()
-
-	ki := sm2PrivateKeyImportOptsKeyImporter{}
-
-	_, err := ki.KeyImport("Hello World", &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-
-	_, err = ki.KeyImport(nil, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-
-	_, err = ki.KeyImport([]byte(nil), &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-
-	_, err = ki.KeyImport([]byte{0}, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-
-	k, err := rsa.GenerateKey(rand.Reader, 512)
-	assert.NoError(t, err)
-	raw := x509.MarshalPKCS1PrivateKey(k)
-	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-
-	sm2K, err := sm2.GenerateKey(rand.Reader)
-	assert.NoError(t, err)
-	sm2KRaw, err := utils.MarshalPKCS8SM2PrivateKey(sm2K)
-	assert.NoError(t, err)
-	_, err = ki.KeyImport(sm2KRaw, &mocks2.KeyImportOpts{})
-	assert.NoError(t, err)
-}
-
 func TestECDSAGoPublicKeyImportOptsKeyImporter(t *testing.T) {
 	t.Parallel()
 
@@ -264,25 +173,6 @@ func TestECDSAGoPublicKeyImportOptsKeyImporter(t *testing.T) {
 	_, err = ki.KeyImport(nil, &mocks2.KeyImportOpts{})
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "Invalid raw material. Expected *ecdsa.PublicKey.")
-}
-
-func TestSM2GoPublicKeyImportOptsKeyImporter(t *testing.T) {
-	t.Parallel()
-
-	ki := sm2GoPublicKeyImportOptsKeyImporter{}
-
-	_, err := ki.KeyImport("Hello World", &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "invalid raw material. Expected *sm2.PublicKey")
-
-	_, err = ki.KeyImport(nil, &mocks2.KeyImportOpts{})
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "invalid raw material. Expected *sm2.PublicKey")
-
-	sm2K, err := sm2.GenerateKey(rand.Reader)
-	assert.NoError(t, err)
-	_, err = ki.KeyImport(&sm2K.PublicKey, &mocks2.KeyImportOpts{})
-	assert.NoError(t, err)
 }
 
 func TestX509PublicKeyImportOptsKeyImporter(t *testing.T) {

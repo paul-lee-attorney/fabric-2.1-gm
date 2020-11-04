@@ -8,11 +8,11 @@ package handlers_test
 import (
 	"crypto/sha256"
 
-	"github.com/hyperledger/fabric/bccsp/idemix/handlers"
-	"github.com/hyperledger/fabric/bccsp/idemix/handlers/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/idemix/handlers"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/idemix/handlers/mock"
 	"github.com/pkg/errors"
 )
 

@@ -70,12 +70,6 @@ func (kd *ecdsaPublicKeyKeyDeriver) KeyDeriv(key bccsp.Key, opts bccsp.KeyDerivO
 	return &ecdsaPublicKey{tempSK}, nil
 }
 
-type sm2PublicKeyKeyDeriver struct{}
-
-func (kd *sm2PublicKeyKeyDeriver) KeyDeriv(key bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
-	return nil, errors.New("Not implemented")
-}
-
 type ecdsaPrivateKeyKeyDeriver struct{}
 
 func (kd *ecdsaPrivateKeyKeyDeriver) KeyDeriv(key bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
@@ -127,12 +121,6 @@ func (kd *ecdsaPrivateKeyKeyDeriver) KeyDeriv(key bccsp.Key, opts bccsp.KeyDeriv
 	return &ecdsaPrivateKey{tempSK}, nil
 }
 
-type sm2PrivateKeyKeyDeriver struct{}
-
-func (kd *sm2PrivateKeyKeyDeriver) KeyDeriv(key bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
-	return nil, errors.New("Not implemented")
-}
-
 type aesPrivateKeyKeyDeriver struct {
 	conf *config
 }
@@ -159,11 +147,4 @@ func (kd *aesPrivateKeyKeyDeriver) KeyDeriv(k bccsp.Key, opts bccsp.KeyDerivOpts
 	default:
 		return nil, fmt.Errorf("Unsupported 'KeyDerivOpts' provided [%v]", opts)
 	}
-}
-
-type sm4PrivateKeyKeyDeriver struct {
-}
-
-func (kd *sm4PrivateKeyKeyDeriver) KeyDeriv(k bccsp.Key, opts bccsp.KeyDerivOpts) (bccsp.Key, error) {
-	return nil, errors.New("Not implemented")
 }

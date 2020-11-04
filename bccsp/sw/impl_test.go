@@ -65,7 +65,6 @@ func TestMain(m *testing.M) {
 		{256, "SHA3"},
 		{384, "SHA2"},
 		{384, "SHA3"},
-		// {256, "SM3"}, // 加入SM3，256参数
 	}
 
 	var err error

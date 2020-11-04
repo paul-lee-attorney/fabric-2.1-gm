@@ -14,7 +14,6 @@ import (
 
 	mocks2 "github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/mocks"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw/mocks"
-	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -62,20 +61,6 @@ func TestECDSAKeyGenerator(t *testing.T) {
 	assert.Equal(t, ecdsaK.privKey.Curve, elliptic.P256())
 }
 
-func TestSM2KeyGenerator(t *testing.T) {
-	t.Parallel()
-
-	kg := &sm2KeyGenerator{curve: sm2.GetSm2P256V1()}
-
-	k, err := kg.KeyGen(nil)
-	assert.NoError(t, err)
-
-	sm2K, ok := k.(*sm2PrivateKey)
-	assert.True(t, ok)
-	assert.NotNil(t, sm2K.privKey)
-	assert.Equal(t, sm2K.privKey.Curve, sm2.GetSm2P256V1())
-}
-
 func TestAESKeyGenerator(t *testing.T) {
 	t.Parallel()
 
@@ -88,20 +73,6 @@ func TestAESKeyGenerator(t *testing.T) {
 	assert.True(t, ok)
 	assert.NotNil(t, aesK.privKey)
 	assert.Equal(t, len(aesK.privKey), 32)
-}
-
-func TestSM4KeyGenerator(t *testing.T) {
-	t.Parallel()
-
-	kg := &sm4KeyGenerator{length: 16}
-
-	k, err := kg.KeyGen(nil)
-	assert.NoError(t, err)
-
-	sm4K, ok := k.(*sm4PrivateKey)
-	assert.True(t, ok)
-	assert.NotNil(t, sm4K.privKey)
-	assert.Equal(t, len(sm4K.privKey), 16)
 }
 
 func TestAESKeyGeneratorInvalidInputs(t *testing.T) {

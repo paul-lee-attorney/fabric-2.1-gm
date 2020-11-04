@@ -13,19 +13,19 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package sw
+package gm
 
 import (
 	"hash"
 	"reflect"
 
-	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/pkg/errors"
 )
 
 var (
-	logger = flogging.MustGetLogger("bccsp_sw")
+	logger = flogging.MustGetLogger("bccsp_gm")
 )
 
 // CSP provides a generic implementation of the BCCSP interface based
@@ -235,6 +235,7 @@ func (csp *CSP) Sign(k bccsp.Key, digest []byte, opts bccsp.SignerOpts) (signatu
 		return nil, errors.Errorf("Unsupported 'SignKey' provided [%s]", keyType)
 	}
 
+	// SM2签名算法直接针对原始数据，不需要事先取哈希值
 	signature, err = signer.Sign(k, digest, opts)
 	if err != nil {
 		return nil, errors.Wrapf(err, "Failed signing with opts [%v]", opts)
