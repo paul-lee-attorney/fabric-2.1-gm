@@ -150,6 +150,11 @@ func pemToSM2PrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 
 // marshalSM2PrivateKey converts a SM2 private key to SEC 1, ASN.1 DER form.
 func marshalSM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
+
+	if key == nil {
+		return nil, errors.New("x509: input materials for sm2 private key marshalling shall not be nil")
+	}
+
 	privateKeyBytes := key.D.Bytes()
 	paddedPrivateKey := make([]byte, sm2.KeyBytes)
 	copy(paddedPrivateKey[len(paddedPrivateKey)-len(privateKeyBytes):], privateKeyBytes)
@@ -265,8 +270,13 @@ func parsePKCS8SM2PrivateKey(der []byte) (*sm2.PrivateKey, error) {
 	return key, nil
 }
 
-// pemToSM4 extracts from the PEM an SM4 private key
-func pemToSM4(raw []byte, pwd []byte) ([]byte, error) {
+// SM4toPEM encapsulates a SM4 key in the PEM format
+func SM4toPEM(raw []byte) []byte {
+	return pem.EncodeToMemory(&pem.Block{Type: "SM4 PRIVATE KEY", Bytes: raw})
+}
+
+// PEMtoSM4 extracts from the PEM an SM4 private key
+func PEMtoSM4(raw []byte, pwd []byte) ([]byte, error) {
 	if len(raw) == 0 {
 		return nil, errors.New("Invalid PEM. It must be different from nil")
 	}
@@ -288,6 +298,26 @@ func pemToSM4(raw []byte, pwd []byte) ([]byte, error) {
 	}
 
 	return block.Bytes, nil
+}
+
+// SM4toEncryptedPEM encapsulates a SM4 key in the encrypted PEM format
+func SM4toEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
+	if len(raw) == 0 {
+		return nil, errors.New("Invalid aes key. It must be different from nil")
+	}
+	if len(pwd) == 0 {
+		return SM4toPEM(raw), nil
+	}
+
+	blockType := "SM4 PRIVATE KEY"
+
+	pem, err := sm4EncryptPEMBlock(blockType, raw, pwd)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return pem, nil
 }
 
 // sm4EncryptPEMBlock encrypt raw message into PEM format via SM4. refer: x509.EncryptPEMBlock()
@@ -495,6 +525,10 @@ type pkixPublicKey struct {
 // 将SM2公钥转换成符合PKIX, ASN.1 DER编码规则的形式.
 func MarshalPKIXSM2PublicKey(pub *sm2.PublicKey) ([]byte, error) {
 
+	if pub == nil {
+		return nil, errors.New("input sm2 public key shall not be nil")
+	}
+
 	var publicKeyBytes []byte
 	var publicKeyAlgorithm pkix.AlgorithmIdentifier
 
@@ -530,6 +564,10 @@ type publicKeyInfo struct {
 // ParsePKIXSM2PublicKey parse a DER-encoded ASN.1 data into SM2 public key object.
 // 将符合PKIX, ASN.1 DER编码规则的SM2公钥反序列化为对象.
 func ParsePKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
+
+	if len(der) == 0 || der == nil {
+		return nil, errors.New("x509: raw materials of SM2 public key shall not be nil")
+	}
 
 	var pki publicKeyInfo
 

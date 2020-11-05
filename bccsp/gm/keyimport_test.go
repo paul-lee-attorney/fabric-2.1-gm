@@ -26,6 +26,7 @@ import (
 
 	mocks2 "github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/mocks"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw/mocks"
+	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -82,6 +83,21 @@ func TestSM4ImportKeyOptsKeyImporter(t *testing.T) {
 	_, err = ki.KeyImport([]byte{0}, &mocks2.KeyImportOpts{})
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "Invalid Key Length [")
+
+	// 测试SM4随机秘钥，成功导入
+	kg := &sm4KeyGenerator{length: 16}
+
+	k, err := kg.KeyGen(nil)
+	assert.NoError(t, err)
+
+	kk := k.(*sm4PrivateKey)
+
+	kk.exportable = true
+	kRaw, err := kk.Bytes()
+	assert.NoError(t, err)
+
+	_, err = ki.KeyImport(kRaw, &mocks2.KeyImportOpts{})
+	assert.NoError(t, err)
 }
 
 func TestSM2PKIXPublicKeyImportOptsKeyImporter(t *testing.T) {
@@ -112,6 +128,16 @@ func TestSM2PKIXPublicKeyImportOptsKeyImporter(t *testing.T) {
 	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "Failed converting PKIX to SM2 public key [")
+
+	// 测试SM2公钥导入
+	kSM2, err := sm2.GenerateKey(rand.Reader)
+	assert.NoError(t, err)
+
+	raw, err = MarshalPKIXSM2PublicKey(&kSM2.PublicKey)
+	assert.NoError(t, err)
+	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
+	assert.NoError(t, err)
+
 }
 
 func TestSM2PrivateKeyImportOptsKeyImporter(t *testing.T) {
@@ -141,6 +167,15 @@ func TestSM2PrivateKeyImportOptsKeyImporter(t *testing.T) {
 	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "Failed converting PKIX to SM2 public key")
+
+	//SM2私钥测试
+	kSM2, err := sm2.GenerateKey(rand.Reader)
+	assert.NoError(t, err)
+
+	raw, err = marshalPKCS8SM2PrivateKey(kSM2)
+	assert.NoError(t, err)
+	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
+	assert.NoError(t, err)
 }
 
 func TestSM2GoPublicKeyImportOptsKeyImporter(t *testing.T) {
@@ -155,6 +190,14 @@ func TestSM2GoPublicKeyImportOptsKeyImporter(t *testing.T) {
 	_, err = ki.KeyImport(nil, &mocks2.KeyImportOpts{})
 	assert.Error(t, err)
 	assert.Contains(t, err.Error(), "Invalid raw material. Expected *sm2.PublicKey.")
+
+	//SM2公钥测试
+	kSM2, err := sm2.GenerateKey(rand.Reader)
+	assert.NoError(t, err)
+
+	_, err = ki.KeyImport(&kSM2.PublicKey, &mocks2.KeyImportOpts{})
+	assert.NoError(t, err)
+
 }
 
 func TestX509PublicKeyImportOptsKeyImporter(t *testing.T) {

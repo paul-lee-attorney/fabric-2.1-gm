@@ -19,7 +19,6 @@ import (
 	"fmt"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
 	"github.com/paul-lee-attorney/gm/sm2"
 )
 
@@ -42,7 +41,7 @@ type sm4KeyGenerator struct {
 }
 
 func (kg *sm4KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
-	lowLevelKey, err := sw.GetRandomBytes(int(kg.length))
+	lowLevelKey, err := getRandomBytes(int(kg.length))
 	if err != nil {
 		return nil, fmt.Errorf("Failed generating AES %d key [%s]", kg.length, err)
 	}

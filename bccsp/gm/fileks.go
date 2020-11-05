@@ -294,9 +294,7 @@ func (ks *fileBasedKeyStore) storePublicKey(alias string, publicKey interface{})
 
 func (ks *fileBasedKeyStore) storeKey(alias string, key []byte) error {
 
-	blockType := "SM4 PRIVATE KEY"
-
-	pem, err := sm4EncryptPEMBlock(blockType, key, ks.pwd)
+	pem, err := SM4toEncryptedPEM(key, ks.pwd)
 
 	if err != nil {
 		logger.Errorf("Failed converting key to PEM [%s]: [%s]", alias, err)
@@ -361,7 +359,7 @@ func (ks *fileBasedKeyStore) loadKey(alias string) ([]byte, error) {
 		return nil, err
 	}
 
-	key, err := pemToSM4(pem, ks.pwd)
+	key, err := PEMtoSM4(pem, ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed parsing key [%s]: [%s]", alias, err)
 		return nil, err

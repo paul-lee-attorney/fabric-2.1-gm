@@ -209,3 +209,22 @@ func (*sm4cbcpkcs7Decryptor) Decrypt(k bccsp.Key, ciphertext []byte, opts bccsp.
 		return nil, fmt.Errorf("Mode not recognized [%s]", opts)
 	}
 }
+
+// getRandomBytes returns len random looking bytes
+func getRandomBytes(len int) ([]byte, error) {
+	if len < 0 {
+		return nil, errors.New("Len must be larger than 0")
+	}
+
+	buffer := make([]byte, len)
+
+	n, err := rand.Read(buffer)
+	if err != nil {
+		return nil, err
+	}
+	if n != len {
+		return nil, fmt.Errorf("Buffer not filled. Requested [%d], got [%d]", len, n)
+	}
+
+	return buffer, nil
+}

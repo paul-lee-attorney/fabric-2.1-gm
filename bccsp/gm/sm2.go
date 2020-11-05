@@ -1,4 +1,7 @@
 /*
+Copyright Paul Lee based on IBM's works. 2020 All Rights Reserved.
+
+
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -32,7 +35,10 @@ func signSM2(k *sm2.PrivateKey, digest []byte, opts bccsp.SignerOpts) (signature
 func verifySM2(k *sm2.PublicKey, signature, digest []byte, opts bccsp.SignerOpts) (valid bool, err error) {
 	// sm2.Sign() 第2个输入参数为userID，若为nil则导入SM2的默认用户识别码。
 	// 返回为数字签名校验结果。验签失败，valid值为false, 不会返回错误。
-	valid = sm2.Verify(k, nil, digest, signature)
+	valid, err = sm2.Verify(k, nil, digest, signature)
+	if err != nil {
+		return false, err
+	}
 	return valid, nil
 }
 

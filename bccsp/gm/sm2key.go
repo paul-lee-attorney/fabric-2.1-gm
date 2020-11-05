@@ -73,7 +73,11 @@ type sm2PublicKey struct {
 // Bytes converts this key to its byte representation,
 // if this operation is allowed.
 func (k *sm2PublicKey) Bytes() (raw []byte, err error) {
-	raw = k.pubKey.GetRawBytes()
+	raw, err = MarshalPKIXSM2PublicKey(k.pubKey)
+	if err != nil {
+		return nil, err
+	}
+
 	return
 }
 
