@@ -1,5 +1,5 @@
 /*
-Copyright IBM Corp. 2017 All Rights Reserved.
+Copyright Paul Lee 2020 revise and update based on IBM works. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22,13 +22,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSWFactoryName(t *testing.T) {
-	f := &SWFactory{}
-	assert.Equal(t, f.Name(), SoftwareBasedFactoryName)
+func TestGMFactoryName(t *testing.T) {
+	f := &GMFactory{}
+	assert.Equal(t, f.Name(), GMFactoryName)
 }
 
-func TestSWFactoryGetInvalidArgs(t *testing.T) {
-	f := &SWFactory{}
+func TestGMFactoryGetInvalidArgs(t *testing.T) {
+	f := &GMFactory{}
 
 	_, err := f.Get(nil)
 	assert.Error(t, err, "Invalid config. It must not be nil.")
@@ -36,20 +36,21 @@ func TestSWFactoryGetInvalidArgs(t *testing.T) {
 	_, err = f.Get(&FactoryOpts{})
 	assert.Error(t, err, "Invalid config. It must not be nil.")
 
+	// 国密工厂，若不是临时性秘钥，不需要配置信息
 	opts := &FactoryOpts{
 		SwOpts: &SwOpts{},
 	}
 	_, err = f.Get(opts)
-	assert.Error(t, err, "CSP:500 - Failed initializing configuration at [0,]")
+	assert.NoError(t, err)
 }
 
-func TestSWFactoryGet(t *testing.T) {
-	f := &SWFactory{}
+func TestGMFactoryGet(t *testing.T) {
+	f := &GMFactory{}
 
 	opts := &FactoryOpts{
 		SwOpts: &SwOpts{
 			SecLevel:   256,
-			HashFamily: "SHA2",
+			HashFamily: "SM3",
 		},
 	}
 	csp, err := f.Get(opts)
@@ -59,7 +60,7 @@ func TestSWFactoryGet(t *testing.T) {
 	opts = &FactoryOpts{
 		SwOpts: &SwOpts{
 			SecLevel:     256,
-			HashFamily:   "SHA2",
+			HashFamily:   "SM3",
 			FileKeystore: &FileKeystoreOpts{KeyStorePath: os.TempDir()},
 		},
 	}

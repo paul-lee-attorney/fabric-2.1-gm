@@ -22,6 +22,7 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/mocks"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
 	"github.com/paul-lee-attorney/gm/sm2"
@@ -67,10 +68,10 @@ func TestInit(t *testing.T) {
 	assert.True(t, ecdsa.Verify(signer.Public().(*ecdsa.PublicKey), []byte{0, 1, 2, 3}, R, S))
 
 	// Test sm2 algo
-	sm2.GetSm2P256V1()
+	// sm2.GetSm2P256V1()
 	sm2PrivKey, err := sm2.GenerateKey(rand.Reader)
 	assert.NoError(t, err)
-	sm2PubKeyRaw, err := utils.MarshalPKIXSM2PublicKey(&sm2PrivKey.PublicKey)
+	sm2PubKeyRaw, err := gm.MarshalPKIXSM2PublicKey(&sm2PrivKey.PublicKey)
 	assert.NoError(t, err)
 
 	signer, err = New(&mocks.MockBCCSP{}, &mocks.MockKey{PK: &mocks.MockKey{BytesValue: sm2PubKeyRaw}})

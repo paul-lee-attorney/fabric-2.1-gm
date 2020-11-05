@@ -1,5 +1,5 @@
 /*
-Copyright IBM Corp. 2016 All Rights Reserved.
+Copyright Paul Lee 2020 revise and update based on IBM works. All Rights Reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -60,5 +60,5 @@ func (f *GMFactory) Get(config *FactoryOpts) (bccsp.BCCSP, error) {
 		ks = gm.NewDummyKeyStore()
 	}
 
-	return gm.NewWithParams(gmOpts.SecLevel, gmOpts.HashFamily, ks)
+	return gm.NewWithParams(ks)
 }

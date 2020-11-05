@@ -45,7 +45,7 @@ func initFactories(config *FactoryOpts) error {
 		config.ProviderName = "GM"
 	}
 
-	// 默认启动配置
+	// 默认启动的Sw配置
 	if config.SwOpts == nil {
 		config.SwOpts = GetDefaultOpts().SwOpts
 	}

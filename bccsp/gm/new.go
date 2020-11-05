@@ -7,7 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package gm
 
 import (
-	"crypto/elliptic"
 	"hash"
 	"reflect"
 
@@ -18,7 +17,7 @@ import (
 )
 
 type config struct {
-	ellipticCurve elliptic.Curve   // 椭圆曲线配置
+	ellipticCurve sm2.P256V1Curve  // 椭圆曲线配置
 	hashFunction  func() hash.Hash // 哈希函数配置
 }
 
@@ -53,10 +52,10 @@ func NewWithParams(keyStore bccsp.KeyStore) (bccsp.BCCSP, error) {
 	// of the following call fails.
 
 	// Set the Encryptors
-	gmbccsp.AddWrapper(reflect.TypeOf(&sm4PrivateKey{}), &sm4Encryptor{}) // sm4 encryptor
+	gmbccsp.AddWrapper(reflect.TypeOf(&sm4PrivateKey{}), &sm4cbcpkcs7Encryptor{}) // sm4 encryptor
 
 	// Set the Decryptors
-	gmbccsp.AddWrapper(reflect.TypeOf(&sm4PrivateKey{}), &sm4Decryptor{}) // 	sm4 decryptor
+	gmbccsp.AddWrapper(reflect.TypeOf(&sm4PrivateKey{}), &sm4cbcpkcs7Decryptor{}) // 	sm4 decryptor
 
 	// Set the Signers
 	gmbccsp.AddWrapper(reflect.TypeOf(&sm2PrivateKey{}), &sm2Signer{}) // sm2 signor

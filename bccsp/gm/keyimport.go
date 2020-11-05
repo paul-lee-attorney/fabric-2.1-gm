@@ -21,15 +21,15 @@ type sm4ImportKeyOptsKeyImporter struct{}
 func (*sm4ImportKeyOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
 	sm4Raw, ok := raw.([]byte)
 	if !ok {
-		return nil, errors.New("invalid raw material, expected byte array")
+		return nil, errors.New("Invalid raw material. Expected byte array.")
 	}
 
 	if sm4Raw == nil {
-		return nil, errors.New("invalid raw material, it must not be nil")
+		return nil, errors.New("Invalid raw material. It must not be nil.")
 	}
 
 	if len(sm4Raw) != 16 {
-		return nil, fmt.Errorf("invalid Key Length [%d], must be 16 bytes", len(sm4Raw))
+		return nil, fmt.Errorf("Invalid Key Length [%d], must be 16 bytes", len(sm4Raw))
 	}
 
 	return &sm4PrivateKey{sm4Raw, false}, nil
@@ -47,7 +47,7 @@ func (*sm2PKIXPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
-	sm2PK, err := parsePKIXSM2PublicKey(der)
+	sm2PK, err := ParsePKIXSM2PublicKey(der)
 	if err != nil {
 		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
 	}
@@ -60,11 +60,11 @@ type sm2PrivateKeyImportOptsKeyImporter struct{}
 func (*sm2PrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
 	der, ok := raw.([]byte)
 	if !ok {
-		return nil, errors.New("Invalid raw material for SM2 private key import,expected byte array")
+		return nil, errors.New("Invalid raw material. Expected byte array.")
 	}
 
 	if len(der) == 0 {
-		return nil, errors.New("invalid raw, it must not be nil")
+		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
 	sm2Priv, err := parsePKCS8SM2PrivateKey(der)
@@ -80,7 +80,7 @@ type sm2GoPublicKeyImportOptsKeyImporter struct{}
 func (*sm2GoPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp.KeyImportOpts) (bccsp.Key, error) {
 	pubKey, ok := raw.(*sm2.PublicKey)
 	if !ok {
-		return nil, errors.New("invalid raw material. Expected *sm2.PublicKey")
+		return nil, errors.New("Invalid raw material. Expected *sm2.PublicKey.")
 	}
 
 	return &sm2PublicKey{pubKey}, nil
@@ -104,6 +104,6 @@ func (ki *x509PublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 			pk,
 			&bccsp.SM2GoPublicKeyImportOpts{Temporary: opts.Ephemeral()})
 	default:
-		return nil, errors.New("Certificate's public key type not recognized. Supported keys: [ECDSA].")
+		return nil, errors.New("Certificate's public key type not recognized. Supported keys: [SM2]")
 	}
 }

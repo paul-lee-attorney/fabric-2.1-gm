@@ -1,5 +1,5 @@
 /*
-Copyright IBM Corp. All Rights Reserved.
+Copyright Paul Lee. All Rights Reserved.
 
 SPDX-License-Identifier: Apache-2.0
 */
@@ -7,7 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package gm
 
 import (
-	"crypto/cipher"
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/x509"
@@ -23,7 +22,6 @@ import (
 
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/paul-lee-attorney/gm/sm3"
-	"github.com/paul-lee-attorney/gm/sm4"
 )
 
 // pkcs8 reflects an ASN.1, PKCS#8 PrivateKey. See
@@ -316,33 +314,16 @@ func sm4EncryptPEMBlock(blockType string, raw []byte, pwd []byte) ([]byte, error
 	// matching the key derivation in DecryptPEMBlock.
 	key := deriveKey(pwd, iv[:8])
 
-	//计算输入消息需要填充的字节长度
-	pad := blockSize - len(raw)%blockSize
-
-	//创设目标字节切片
-	encrypted := make([]byte, len(raw), len(raw)+pad)
-
-	//将输入消息拷贝到目标数组
-	copy(encrypted, raw)
-
-	//以填充字节长度为内容填充目标字节切片
-	for i := 0; i < pad; i++ {
-		encrypted = append(encrypted, byte(pad))
-	}
-
-	sm4Block, err := sm4.NewCipher(key)
+	encrypted, err := SM4CBCPKCS7EncryptWithIV(iv, key, raw)
 	if err != nil {
 		return nil, err
 	}
-
-	enc := cipher.NewCBCEncrypter(sm4Block, iv)
-	enc.CryptBlocks(encrypted, encrypted)
 
 	block := &pem.Block{
 		Type: blockType,
 		Headers: map[string]string{
 			"Proc-Type": "4,ENCRYPTED",
-			"DEK-Info":  "SM4-CBC" + "," + hex.EncodeToString(iv),
+			"DEK-Info":  "SM4CBCPKCS7" + "," + hex.EncodeToString(iv),
 		},
 		Bytes: encrypted,
 	}
@@ -351,7 +332,7 @@ func sm4EncryptPEMBlock(blockType string, raw []byte, pwd []byte) ([]byte, error
 }
 
 // sm4DecryptPEMBlock decrypt PEM block via SM4.
-// 将输入消息用SM4加密并转化为PEM格式的函数。
+// 将输入消息用SM4加密并转化为PEM格式的函数, 其中密文格式采用CBC模式，PKCS7规范填充尾部字节。
 func sm4DecryptPEMBlock(block *pem.Block, pwd []byte) ([]byte, error) {
 
 	if len(pwd) == 0 || pwd == nil {
@@ -378,21 +359,17 @@ func sm4DecryptPEMBlock(block *pem.Block, pwd []byte) ([]byte, error) {
 	// 截取哈希值前16字节，进而获得SM4加密秘钥
 	key := deriveKey(pwd, iv[:8])
 
-	// 创建SM4密文实例
-	sm4Block, err := sm4.NewCipher(key)
-
-	// 按照Block密文长度，创建目标明文字节数组
-	data := make([]byte, len(block.Bytes))
-
-	// SM4实际上实现了cipher.Block接口，因此，可直接利用标准包cipher创设CBCDecrypter接口实例
-	dec := cipher.NewCBCDecrypter(sm4Block, iv)
-	dec.CryptBlocks(data, block.Bytes)
+	data, err := SM4CBCPKCS7Decrypt(key, block.Bytes)
+	if err != nil {
+		return nil, err
+	}
 
 	return data, nil
 }
 
 // deriveKey 为秘钥派生函数，参考Openssl和go标准库，用SM3为哈希函数
-// 将密码加盐取SM3哈希后，将哈希值前16位取出作为SM4秘钥使用。
+// 将密码加盐（初始向量前8字节）取SM3哈希后，将哈希值前16位取出作为SM4秘钥使用。
+// 不同于SM2国标派生函数的32位计数器加盐，与Fabric内置算法保持一致。
 func deriveKey(password, salt []byte) []byte {
 	hash := sm3.New() // SM4 秘钥长度为128位，16字节，而SM3只能生成256位哈希值
 	out := make([]byte, 16)
@@ -427,14 +404,14 @@ func pemToSM2PublicKey(raw []byte, pwd []byte) (interface{}, error) {
 		if err != nil {
 			return nil, fmt.Errorf("Failed PEM decryption. [%s]", err)
 		}
-		key, err := parsePKIXSM2PublicKey(decrypted)
+		key, err := ParsePKIXSM2PublicKey(decrypted)
 		if err != nil {
 			return nil, err
 		}
 		return key, err
 	}
 
-	cert, err := parsePKIXSM2PublicKey(block.Bytes)
+	cert, err := ParsePKIXSM2PublicKey(block.Bytes)
 	if err != nil {
 		return nil, err
 	}
@@ -457,7 +434,7 @@ func sm2PublicKeyToPEM(publicKey interface{}, pwd []byte) ([]byte, error) {
 			return nil, errors.New("Invalid SM2 public key. It must be different from nil")
 		}
 
-		PubASN1, err := marshalPKIXSM2PublicKey(k)
+		PubASN1, err := MarshalPKIXSM2PublicKey(k)
 		if err != nil {
 			return nil, err
 		}
@@ -488,7 +465,7 @@ func sm2PublicKeyToEncryptedPEM(publicKey interface{}, pwd []byte) ([]byte, erro
 		if k == nil {
 			return nil, errors.New("Invalid ecdsa public key. It must be different from nil")
 		}
-		raw, err := marshalPKIXSM2PublicKey(k)
+		raw, err := MarshalPKIXSM2PublicKey(k)
 		if err != nil {
 			return nil, err
 		}
@@ -514,9 +491,9 @@ type pkixPublicKey struct {
 	BitString asn1.BitString
 }
 
-// marshalPKIXSM2PublicKey converts a SM2 public key to PKIX, ASN.1 DER form.
+// MarshalPKIXSM2PublicKey converts a SM2 public key to PKIX, ASN.1 DER form.
 // 将SM2公钥转换成符合PKIX, ASN.1 DER编码规则的形式.
-func marshalPKIXSM2PublicKey(pub *sm2.PublicKey) ([]byte, error) {
+func MarshalPKIXSM2PublicKey(pub *sm2.PublicKey) ([]byte, error) {
 
 	var publicKeyBytes []byte
 	var publicKeyAlgorithm pkix.AlgorithmIdentifier
@@ -550,14 +527,16 @@ type publicKeyInfo struct {
 	PublicKey asn1.BitString
 }
 
-// parsePKIXSM2PublicKey parse a DER-encoded ASN.1 data into SM2 public key object.
+// ParsePKIXSM2PublicKey parse a DER-encoded ASN.1 data into SM2 public key object.
 // 将符合PKIX, ASN.1 DER编码规则的SM2公钥反序列化为对象.
-func parsePKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
+func ParsePKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 
 	var pki publicKeyInfo
 
-	if rest, err := asn1.Unmarshal(der, &pki); len(rest) != 0 || err != nil {
-		return nil, errors.New("failed to parse SM2 public key")
+	if rest, err := asn1.Unmarshal(der, &pki); err != nil {
+		return nil, err
+	} else if len(rest) != 0 {
+		return nil, errors.New("x509: trailing data after ASN.1 of public-key")
 	}
 
 	// 校验算法是否属于ECDSA
@@ -567,13 +546,12 @@ func parsePKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 
 	paramsData := pki.Algorithm.Parameters.FullBytes
 	namedCurveOID := new(asn1.ObjectIdentifier)
-	rest, err := asn1.Unmarshal(paramsData, namedCurveOID)
-	if err != nil {
+	if rest, err := asn1.Unmarshal(paramsData, namedCurveOID); err != nil {
 		return nil, err
-	}
-	if len(rest) != 0 {
+	} else if len(rest) != 0 {
 		return nil, errors.New("x509: trailing data after SM2 parameters")
 	}
+
 	// 校验基础曲线是否为SM2推荐曲线
 	if !namedCurveOID.Equal(oidSM2P256V1) {
 		return nil, errors.New("x509: CurveOID is not the OID of SM2P256")

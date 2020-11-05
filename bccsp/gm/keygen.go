@@ -15,7 +15,6 @@ limitations under the License.
 package gm
 
 import (
-	"crypto/elliptic"
 	"crypto/rand"
 	"fmt"
 
@@ -25,12 +24,12 @@ import (
 )
 
 type sm2KeyGenerator struct {
-	curve elliptic.Curve
+	curve sm2.P256V1Curve
 }
 
 func (kg *sm2KeyGenerator) KeyGen(opts bccsp.KeyGenOpts) (bccsp.Key, error) {
 
-	privKey, err := sm2.GenerateKey(kg.curve, rand.Reader)
+	privKey, err := sm2.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, fmt.Errorf("Failed generating SM2 key for [%v]: [%s]", kg.curve, err)
 	}

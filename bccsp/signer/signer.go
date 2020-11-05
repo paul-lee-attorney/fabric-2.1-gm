@@ -11,6 +11,7 @@ import (
 	"io"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
 	"github.com/pkg/errors"
 )
@@ -47,12 +48,17 @@ func New(csp bccsp.BCCSP, key bccsp.Key) (crypto.Signer, error) {
 		return nil, errors.Wrap(err, "failed marshalling public key")
 	}
 
-	pk, err := utils.DERToPublicKey(raw)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed marshalling der to public key")
+	// 增加SM2解析方法, 若没有错误则返回SM2公钥
+	if pk, err := gm.ParsePKIXSM2PublicKey(raw); err == nil {
+		return &bccspCryptoSigner{csp, key, pk}, nil
 	}
 
-	return &bccspCryptoSigner{csp, key, pk}, nil
+	//若SM2公钥解析失败，则尝试其他算法的公钥解析，若没有错误则返回结果
+	if pk, err := utils.DERToPublicKey(raw); err == nil {
+		return &bccspCryptoSigner{csp, key, pk}, nil
+	}
+
+	return nil, errors.New("failed marshalling der to public key")
 }
 
 // Public returns the public key corresponding to the opaque,

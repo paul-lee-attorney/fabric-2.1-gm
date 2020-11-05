@@ -22,13 +22,10 @@ func GetDefaultOpts() *FactoryOpts {
 	return &FactoryOpts{
 		// ProviderName: "SW",
 		ProviderName: "GM",
-		// SwOpts: &SwOpts{
-		// 	HashFamily: "SHA2",
-		// 	SecLevel:   256,
-		// 	Ephemeral:  true,
-		// },
+
+		// 如果转入GM工厂，则仅有Ephemeral参数有意义，其他Opts没有意义
 		SwOpts: &SwOpts{
-			HashFamily: "SM3",
+			HashFamily: "SHA2",
 			SecLevel:   256,
 			Ephemeral:  true,
 		},
