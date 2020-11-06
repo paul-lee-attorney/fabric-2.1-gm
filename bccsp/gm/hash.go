@@ -17,21 +17,26 @@ limitations under the License.
 package gm
 
 import (
+	"errors"
 	"hash"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/gm/sm3"
 )
 
-type hasher struct {
-	hash func() hash.Hash
-}
+type hasher struct{}
 
 func (c *hasher) Hash(msg []byte, opts bccsp.HashOpts) ([]byte, error) {
-	h := c.hash()
+
+	if len(msg) == 0 || msg == nil {
+		return nil, errors.New("input message shall not be nil")
+	}
+
+	h := sm3.New()
 	h.Write(msg)
 	return h.Sum(nil), nil
 }
 
 func (c *hasher) GetHash(opts bccsp.HashOpts) (hash.Hash, error) {
-	return c.hash(), nil
+	return sm3.New(), nil
 }

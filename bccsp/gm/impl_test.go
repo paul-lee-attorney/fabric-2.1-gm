@@ -352,7 +352,7 @@ func TestSM2Sign(t *testing.T) {
 
 	msg := []byte("Hello World")
 
-	digest, err := provider.Hash(msg, &bccsp.SHAOpts{})
+	digest, err := provider.Hash(msg, &bccsp.SM3Opts{})
 	if err != nil {
 		t.Fatalf("Failed computing HASH [%s]", err)
 	}
@@ -378,7 +378,7 @@ func TestSM2Verify(t *testing.T) {
 
 	msg := []byte("Hello World")
 
-	digest, err := provider.Hash(msg, &bccsp.SHAOpts{})
+	digest, err := provider.Hash(msg, &bccsp.SM3Opts{})
 	if err != nil {
 		t.Fatalf("Failed computing HASH [%s]", err)
 	}
@@ -463,7 +463,7 @@ func TestSM2KeyImportFromExportedKey(t *testing.T) {
 	// Sign and verify with the imported public key
 	msg := []byte("Hello World")
 
-	digest, err := provider.Hash(msg, &bccsp.SHAOpts{})
+	digest, err := provider.Hash(msg, &bccsp.SM3Opts{})
 	if err != nil {
 		t.Fatalf("Failed computing HASH [%s]", err)
 	}
@@ -521,7 +521,7 @@ func TestSM2KeyImportFromSM2PublicKey(t *testing.T) {
 	// Sign and verify with the imported public key
 	msg := []byte("Hello World")
 
-	digest, err := provider.Hash(msg, &bccsp.SHAOpts{})
+	digest, err := provider.Hash(msg, &bccsp.SM3Opts{})
 	if err != nil {
 		t.Fatalf("Failed computing HASH [%s]", err)
 	}
@@ -583,7 +583,7 @@ func TestSM2KeyImportFromSM2PrivateKey(t *testing.T) {
 	// Sign and verify with the imported public key
 	msg := []byte("Hello World")
 
-	digest, err := provider.Hash(msg, &bccsp.SHAOpts{})
+	digest, err := provider.Hash(msg, &bccsp.SM3Opts{})
 	if err != nil {
 		t.Fatalf("Failed computing HASH [%s]", err)
 	}
@@ -781,13 +781,13 @@ func TestSHA(t *testing.T) {
 	provider, _, cleanup := currentTestConfig.Provider(t)
 	defer cleanup()
 
-	for i := 0; i < 100; i++ {
+	for i := 1; i < 100; i++ {
 		b, err := getRandomBytes(i)
 		if err != nil {
 			t.Fatalf("Failed getting random bytes [%s]", err)
 		}
 
-		h1, err := provider.Hash(b, &bccsp.SHAOpts{})
+		h1, err := provider.Hash(b, &bccsp.SM3Opts{})
 		if err != nil {
 			t.Fatalf("Failed computing SHA [%s]", err)
 		}

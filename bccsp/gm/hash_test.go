@@ -93,11 +93,11 @@ func TestGetHash(t *testing.T) {
 func TestHasher(t *testing.T) {
 	t.Parallel()
 
-	hasher := &hasher{hash: sm3.New}
+	hasher := &hasher{}
 
 	msg := []byte("Hello World")
 	out, err := hasher.Hash(msg, nil)
-	assert.NoError(t, err)
+	assert.Error(t, err)
 	h := sm3.New()
 	h.Write(msg)
 	out2 := h.Sum(nil)

@@ -67,12 +67,15 @@ func (*sm2PrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp
 		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
-	sm2Priv, err := parsePKCS8SM2PrivateKey(der)
-	if err != nil {
-		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
+	if key, err := parsePKCS8SM2PrivateKey(der); err == nil {
+		return &sm2PrivateKey{key}, nil
 	}
 
-	return &sm2PrivateKey{sm2Priv}, nil
+	if key, err := parseSM2PrivateKey(der); err == nil {
+		return &sm2PrivateKey{key}, nil
+	}
+
+	return nil, errors.New("failed import SM2 private key")
 }
 
 type sm2GoPublicKeyImportOptsKeyImporter struct{}
