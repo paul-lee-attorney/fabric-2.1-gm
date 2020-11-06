@@ -1,5 +1,5 @@
 /*
-Copyright Paul Lee 2020 based on IBM's works. All Rights Reserved.
+Copyright Paul Lee update based on IBM's works. 2020 All Rights Reserved.
 
 SPDX-License-Identifier: Apache-2.0
 */
