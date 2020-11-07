@@ -16,6 +16,7 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/pkg/errors"

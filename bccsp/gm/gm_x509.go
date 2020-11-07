@@ -92,7 +92,7 @@ func sm2PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, er
 			return nil, errors.New("Invalid ecdsa private key. It must be different from nil")
 		}
 
-		raw, err := MarshalSM2Privatekey(k)
+		raw, err := MarshalSM2PrivateKey(k)
 		if err != nil {
 			return nil, err
 		}
@@ -148,8 +148,8 @@ func pemToSM2PrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 	return cert, err
 }
 
-// MarshalSM2Privatekey converts a SM2 private key to SEC 1, ASN.1 DER form.
-func MarshalSM2Privatekey(key *sm2.PrivateKey) ([]byte, error) {
+// MarshalSM2PrivateKey converts a SM2 private key to SEC 1, ASN.1 DER form.
+func MarshalSM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
 
 	if key == nil {
 		return nil, errors.New("x509: input materials for sm2 private key marshalling shall not be nil")
@@ -232,7 +232,7 @@ func MarshalPKCS8SM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
 		},
 	}
 
-	if privKey.PrivateKey, err = MarshalSM2Privatekey(key); err != nil {
+	if privKey.PrivateKey, err = MarshalSM2PrivateKey(key); err != nil {
 		return nil, errors.New("failed to marshal EC private key while building PKCS#8: " + err.Error())
 	}
 
