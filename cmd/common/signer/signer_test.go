@@ -14,6 +14,7 @@ import (
 	"testing"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
