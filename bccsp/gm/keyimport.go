@@ -69,11 +69,11 @@ func (*sm2PrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp
 		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
-	if key, err := parsePKCS8SM2PrivateKey(der); err == nil {
+	if key, err := ParsePKCS8SM2PrivateKey(der); err == nil {
 		return &sm2PrivateKey{key}, nil
 	}
 
-	if key, err := parseSM2PrivateKey(der); err == nil {
+	if key, err := ParseSM2PrivateKey(der); err == nil {
 		return &sm2PrivateKey{key}, nil
 	}
 

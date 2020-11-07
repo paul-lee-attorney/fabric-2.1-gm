@@ -65,7 +65,7 @@ func sm2PrivateKeyToPEM(privateKey interface{}, pwd []byte) ([]byte, error) {
 			return nil, errors.New("Invalid ecdsa private key. It must be different from nil.")
 		}
 
-		pkcs8Bytes, err := marshalPKCS8SM2PrivateKey(k)
+		pkcs8Bytes, err := MarshalPKCS8SM2PrivateKey(k)
 		if err != nil {
 			return nil, fmt.Errorf("error marshaling EC key to asn1 [%s]", err)
 		}
@@ -92,7 +92,7 @@ func sm2PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, er
 			return nil, errors.New("Invalid ecdsa private key. It must be different from nil")
 		}
 
-		raw, err := marshalSM2PrivateKey(k)
+		raw, err := MarshalSM2Privatekey(k)
 		if err != nil {
 			return nil, err
 		}
@@ -133,7 +133,7 @@ func pemToSM2PrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 			return nil, fmt.Errorf("Failed PEM decryption [%s]", err)
 		}
 
-		key, err := parseSM2PrivateKey(decrypted)
+		key, err := ParseSM2PrivateKey(decrypted)
 		if err != nil {
 			return nil, err
 		}
@@ -141,15 +141,15 @@ func pemToSM2PrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 		return key, err
 	}
 
-	cert, err := parsePKCS8SM2PrivateKey(block.Bytes)
+	cert, err := ParsePKCS8SM2PrivateKey(block.Bytes)
 	if err != nil {
 		return nil, err
 	}
 	return cert, err
 }
 
-// marshalSM2PrivateKey converts a SM2 private key to SEC 1, ASN.1 DER form.
-func marshalSM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
+// MarshalSM2Privatekey converts a SM2 private key to SEC 1, ASN.1 DER form.
+func MarshalSM2Privatekey(key *sm2.PrivateKey) ([]byte, error) {
 
 	if key == nil {
 		return nil, errors.New("x509: input materials for sm2 private key marshalling shall not be nil")
@@ -167,10 +167,10 @@ func marshalSM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
 	})
 }
 
-// parseSM2PrivateKey parses a SM2 in form of SEC 1, ASN.1 DER back to object.
+// ParseSM2PrivateKey parses a SM2 in form of SEC 1, ASN.1 DER back to object.
 // 解析依照ASN.1规范的椭圆曲线私钥结构定义的SM2.
 // ref: crypto/x509/sec1.go ---- ParseECPrivateKey()
-func parseSM2PrivateKey(der []byte) (key *sm2.PrivateKey, err error) {
+func ParseSM2PrivateKey(der []byte) (key *sm2.PrivateKey, err error) {
 	var privKey ecPrivateKey
 	if _, err := asn1.Unmarshal(der, &privKey); err != nil {
 		return nil, errors.New("failed to parse EC private key: " + err.Error())
@@ -212,9 +212,9 @@ func parseSM2PrivateKey(der []byte) (key *sm2.PrivateKey, err error) {
 	return priv, nil
 }
 
-// marshalPKCS8SM2PrivateKey convert SM2 private key into PKCS#8 []byte
+// MarshalPKCS8SM2PrivateKey convert SM2 private key into PKCS#8 []byte
 // ref: crypto/x509/pkcs8.go ---- MarshalPKCS8PrivateKey()
-func marshalPKCS8SM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
+func MarshalPKCS8SM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
 
 	var privKey pkcs8
 
@@ -232,15 +232,15 @@ func marshalPKCS8SM2PrivateKey(key *sm2.PrivateKey) ([]byte, error) {
 		},
 	}
 
-	if privKey.PrivateKey, err = marshalSM2PrivateKey(key); err != nil {
+	if privKey.PrivateKey, err = MarshalSM2Privatekey(key); err != nil {
 		return nil, errors.New("failed to marshal EC private key while building PKCS#8: " + err.Error())
 	}
 
 	return asn1.Marshal(privKey)
 }
 
-// parsePKCS8SM2PrivateKey 解析PKCS8格式的采用DER规则编码的SM2私钥.
-func parsePKCS8SM2PrivateKey(der []byte) (*sm2.PrivateKey, error) {
+// ParsePKCS8SM2PrivateKey 解析PKCS8格式的采用DER规则编码的SM2私钥.
+func ParsePKCS8SM2PrivateKey(der []byte) (*sm2.PrivateKey, error) {
 
 	var privKey pkcs8
 
@@ -262,7 +262,7 @@ func parsePKCS8SM2PrivateKey(der []byte) (*sm2.PrivateKey, error) {
 		return nil, fmt.Errorf("PKCS#8 wrapped Curve is note the SM2 EC ")
 	}
 
-	key, err := parseSM2PrivateKey(privKey.PrivateKey)
+	key, err := ParseSM2PrivateKey(privKey.PrivateKey)
 	if err != nil {
 		return nil, err
 	}

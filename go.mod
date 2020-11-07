@@ -28,7 +28,8 @@ require (
 	github.com/mitchellh/mapstructure v1.3.3
 	github.com/onsi/ginkgo v1.14.2
 	github.com/onsi/gomega v1.10.3
-	github.com/paul-lee-attorney/fabric-2.1-gm/bccsp v0.0.0-20201029021235-ed7e7e225c83
+	github.com/paul-lee-attorney/fabric-2.1-gm/bccsp v0.0.0-20201106041934-3c289ea58f19
+	github.com/paul-lee-attorney/gm v0.0.0-20201014053731-c3ade66b8a26
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.8.0
 	github.com/rcrowley/go-metrics v0.0.0-20200313005456-10cdbea86bc0

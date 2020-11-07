@@ -172,7 +172,7 @@ func TestSM2PrivateKeyImportOptsKeyImporter(t *testing.T) {
 	kSM2, err := sm2.GenerateKey(rand.Reader)
 	assert.NoError(t, err)
 
-	raw, err = marshalPKCS8SM2PrivateKey(kSM2)
+	raw, err = MarshalPKCS8SM2PrivateKey(kSM2)
 	assert.NoError(t, err)
 	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
 	assert.NoError(t, err)

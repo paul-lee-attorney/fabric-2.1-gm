@@ -552,7 +552,7 @@ func TestSM2KeyImportFromSM2PrivateKey(t *testing.T) {
 	}
 
 	// Import the sm2.PrivateKey
-	priv, err := marshalSM2PrivateKey(key)
+	priv, err := MarshalSM2Privatekey(key)
 	if err != nil {
 		t.Fatalf("Failed converting raw to sm2.PrivateKey [%s]", err)
 	}

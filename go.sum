@@ -391,6 +391,8 @@ github.com/pact-foundation/pact-go v1.0.4/go.mod h1:uExwJY4kCzNPcHRj+hCR/HBbOOIw
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/paul-lee-attorney/fabric-2.1-gm/bccsp v0.0.0-20201029021235-ed7e7e225c83 h1:xRI/Xz4JwzazvAJBUdKSRsWTgwVFBVa+l7VvdRl2gfQ=
 github.com/paul-lee-attorney/fabric-2.1-gm/bccsp v0.0.0-20201029021235-ed7e7e225c83/go.mod h1:hKxjUxw/FyGMytEHeysWyyPqarabSiwbQoyysRycMzo=
+github.com/paul-lee-attorney/fabric-2.1-gm/bccsp v0.0.0-20201106041934-3c289ea58f19 h1:l4TUd/aAi0EYBzgbZmfTmSjAGcl91lm3tCd9PrjSp0g=
+github.com/paul-lee-attorney/fabric-2.1-gm/bccsp v0.0.0-20201106041934-3c289ea58f19/go.mod h1:72GIiOKc1687ISm1DKVi9nac5Hrys8MJU9QRmcs9qzM=
 github.com/pborman/uuid v1.2.0/go.mod h1:X/NO0urCmaxf9VXbdlT7C2Yzkj2IKimNn4k+gtPdI/k=
 github.com/pelletier/go-toml v1.2.0 h1:T5zMGML61Wp+FlcbWjRDT7yAxhJNAiPPLOFECq181zc=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=

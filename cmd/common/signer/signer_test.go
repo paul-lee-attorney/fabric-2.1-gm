@@ -7,16 +7,14 @@ SPDX-License-Identifier: Apache-2.0
 package signer
 
 import (
-	"crypto/ecdsa"
-	"crypto/x509"
 	"encoding/pem"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,27 +32,31 @@ func TestSigner(t *testing.T) {
 	sig, err := signer.Sign(msg)
 	assert.NoError(t, err)
 
-	r, s, err := utils.UnmarshalECDSASignature(sig)
-	ecdsa.Verify(&signer.key.PublicKey, util.ComputeSHA256(msg), r, s)
+	// r, s, err := utils.UnmarshalECDSASignature(sig)
+	r, s, err := sm2.UnmarshalSign(sig)
+	// ecdsa.Verify(&signer.key.PublicKey, util.ComputeSHA256(msg), r, s)
+	result, err := sm2.VerifyByRS(&signer.key.PublicKey, nil, msg, r, s)
+	assert.NoError(t, err)
+	assert.True(t, result)
 }
 
 func TestSignerDifferentFormats(t *testing.T) {
-	key := `-----BEGIN EC PRIVATE KEY-----
+	key := `-----BEGIN SM2 PRIVATE KEY-----
 MHcCAQEEIOwCtOQIkowasuWoDQpXHgC547VHq+aBFaSyPOoV8mnGoAoGCCqGSM49
 AwEHoUQDQgAEEsrroAkPez9reWvJukufUqyfouJjakrKuhNBYuclkldqsLZ/TO+w
 ZsQXrlIqlmNalfYPX+NDDELqlpXQBeEqnA==
------END EC PRIVATE KEY-----`
+-----END SM2 PRIVATE KEY-----`
 
 	pemBlock, _ := pem.Decode([]byte(key))
 	assert.NotNil(t, pemBlock)
 
-	ecPK, err := x509.ParseECPrivateKey(pemBlock.Bytes)
+	ecPK, err := gm.ParseSM2PrivateKey(pemBlock.Bytes)
 	assert.NoError(t, err)
 
-	ec1, err := x509.MarshalECPrivateKey(ecPK)
+	ec1, err := gm.MarshalSM2PrivateKey(ecPK)
 	assert.NoError(t, err)
 
-	pkcs8, err := x509.MarshalPKCS8PrivateKey(ecPK)
+	pkcs8, err := gm.MarshalPKCS8SM2PrivateKey(ecPK)
 	assert.NoError(t, err)
 
 	for _, testCase := range []struct {
@@ -62,8 +64,8 @@ ZsQXrlIqlmNalfYPX+NDDELqlpXQBeEqnA==
 		keyBytes    []byte
 	}{
 		{
-			description: "EC1",
-			keyBytes:    pem.EncodeToMemory(&pem.Block{Type: "EC Private Key", Bytes: ec1}),
+			description: "SM2P256V1",
+			keyBytes:    pem.EncodeToMemory(&pem.Block{Type: "SM2 Private Key", Bytes: ec1}),
 		},
 		{
 			description: "PKCS8",
