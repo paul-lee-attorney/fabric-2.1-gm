@@ -43,7 +43,7 @@ func NewDefaultSecurityLevelWithKeystore(keyStore bccsp.KeyStore) (bccsp.BCCSP, 
 func NewWithParams(keyStore bccsp.KeyStore) (bccsp.BCCSP, error) {
 	// Init config 在没有设置秘钥派生函数的情况下，conf应该没有被调用
 	conf := &config{}
-	conf.ellipticCurve = sm2.GetSm2P256V1() //将SM2推荐椭圆曲线实例赋值给配置
+	conf.ellipticCurve = sm2.GetSM2P256V1() //将SM2推荐椭圆曲线实例赋值给配置
 	conf.hashFunction = sm3.New             // 将SM3哈希摘要实例初始化函数赋值给配置
 
 	gmbccsp, err := New(keyStore)

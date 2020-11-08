@@ -7,17 +7,12 @@ SPDX-License-Identifier: Apache-2.0
 package signer
 
 import (
-	"crypto/ecdsa"
-	"crypto/rand"
-	"encoding/asn1"
 	"encoding/pem"
 	"io/ioutil"
-	"math/big"
 
 	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/pkg/errors"
 )
@@ -73,6 +68,7 @@ func serializeIdentity(clientCert string, mspID string) ([]byte, error) {
 	return protoutil.MarshalOrPanic(sId), nil
 }
 
+// Sign returns a SM2 signature in form of ASN1 marshalized []bytes of DER
 func (si *Signer) Sign(msg []byte) ([]byte, error) {
 
 	// digest := util.ComputeSHA256(msg)
@@ -120,27 +116,27 @@ func parsePrivateKey(der []byte) (*sm2.PrivateKey, error) {
 	return key, nil
 }
 
-// 改造后，该私有函数将不被调用
-func signECDSA(k *ecdsa.PrivateKey, digest []byte) (signature []byte, err error) {
-	r, s, err := ecdsa.Sign(rand.Reader, k, digest)
-	if err != nil {
-		return nil, err
-	}
+// // 改造后，该私有函数将不被调用
+// func signECDSA(k *ecdsa.PrivateKey, digest []byte) (signature []byte, err error) {
+// 	r, s, err := ecdsa.Sign(rand.Reader, k, digest)
+// 	if err != nil {
+// 		return nil, err
+// 	}
 
-	s, err = utils.ToLowS(&k.PublicKey, s)
-	if err != nil {
-		return nil, err
-	}
+// 	s, err = utils.ToLowS(&k.PublicKey, s)
+// 	if err != nil {
+// 		return nil, err
+// 	}
 
-	return marshalECDSASignature(r, s)
-}
+// 	return marshalECDSASignature(r, s)
+// }
 
-// 改造后，该私有函数将不被调用
-func marshalECDSASignature(r, s *big.Int) ([]byte, error) {
-	return asn1.Marshal(ECDSASignature{r, s})
-}
+// // 改造后，该私有函数将不被调用
+// func marshalECDSASignature(r, s *big.Int) ([]byte, error) {
+// 	return asn1.Marshal(ECDSASignature{r, s})
+// }
 
-// 改造后，该类别将不被调用
-type ECDSASignature struct {
-	R, S *big.Int
-}
+// // 改造后，该类别将不被调用
+// type ECDSASignature struct {
+// 	R, S *big.Int
+// }

@@ -48,9 +48,9 @@ var (
 	oidPublicKeyECDSA = asn1.ObjectIdentifier{1, 2, 840, 10045, 2, 1}
 )
 
-// sm2PrivateKeyToPEM converts sm2 private key to PEM format.
+// SM2PrivateKeyToPEM converts sm2 private key to PEM format.
 // EC private keys are converted to PKCS#8 format.
-func sm2PrivateKeyToPEM(privateKey interface{}, pwd []byte) ([]byte, error) {
+func SM2PrivateKeyToPEM(privateKey interface{}, pwd []byte) ([]byte, error) {
 	// Validate inputs
 	if len(pwd) != 0 {
 		return sm2PrivateKeyToEncryptedPEM(privateKey, pwd)
@@ -182,7 +182,7 @@ func ParseSM2PrivateKey(der []byte) (key *sm2.PrivateKey, err error) {
 		return nil, fmt.Errorf("the oid does not equal to SM2 EC ")
 	}
 
-	curve := sm2.GetSm2P256V1()
+	curve := sm2.GetSM2P256V1()
 	k := new(big.Int).SetBytes(privKey.PrivateKey)
 	curveOrder := curve.Params().N
 	if k.Cmp(curveOrder) >= 0 {
@@ -596,7 +596,7 @@ func ParsePKIXSM2PublicKey(der []byte) (*sm2.PublicKey, error) {
 	}
 
 	// 初始化并获得SM2曲线
-	namedCurve := sm2.GetSm2P256V1()
+	namedCurve := sm2.GetSM2P256V1()
 
 	// 编码时没有对BitString移位，所以不必右对齐进行调整
 	publicKeyBytes := pki.PublicKey.RightAlign()

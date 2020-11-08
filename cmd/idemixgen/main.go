@@ -12,8 +12,6 @@ package main
 // the Identity Mixer MSP
 
 import (
-	"crypto/ecdsa"
-	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
@@ -25,6 +23,8 @@ import (
 	"github.com/hyperledger/fabric/common/tools/idemixgen/metadata"
 	"github.com/hyperledger/fabric/idemix"
 	"github.com/hyperledger/fabric/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/pkg/errors"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
@@ -63,11 +63,16 @@ func main() {
 
 		revocationKey, err := idemix.GenerateLongTermRevocationKey()
 		handleError(err)
-		encodedRevocationSK, err := x509.MarshalECPrivateKey(revocationKey)
+
+		// encodedRevocationSK, err := x509.MarshalECPrivateKey(revocationKey)
+		encodedRevocationSK, err := gm.MarshalSM2PrivateKey(revocationKey)
 		handleError(err)
+
 		pemEncodedRevocationSK := pem.EncodeToMemory(&pem.Block{Type: "PRIVATE KEY", Bytes: encodedRevocationSK})
 		handleError(err)
-		encodedRevocationPK, err := x509.MarshalPKIXPublicKey(revocationKey.Public())
+		// encodedRevocationPK, err := x509.MarshalPKIXPublicKey(revocationKey.Public())
+		encodedRevocationPK, err := gm.MarshalPKIXSM2PublicKey(revocationKey.Public())
+
 		handleError(err)
 		pemEncodedRevocationPK := pem.EncodeToMemory(&pem.Block{Type: "PUBLIC KEY", Bytes: encodedRevocationPK})
 
@@ -158,7 +163,7 @@ func readIssuerKey() (*idemix.IssuerKey, []byte) {
 	return key, ipkBytes
 }
 
-func readRevocationKey() *ecdsa.PrivateKey {
+func readRevocationKey() *sm2.PrivateKey {
 	path := filepath.Join(*genCAInput, IdemixDirIssuer, IdemixConfigRevocationKey)
 	keyBytes, err := ioutil.ReadFile(path)
 	if err != nil {
@@ -169,7 +174,8 @@ func readRevocationKey() *ecdsa.PrivateKey {
 	if block == nil {
 		handleError(errors.Errorf("failed to decode ECDSA private key"))
 	}
-	key, err := x509.ParseECPrivateKey(block.Bytes)
+	// key, err := x509.ParseECPrivateKey(block.Bytes)
+	key, err := gm.ParseSM2PrivateKey(block.Bytes)
 	handleError(err)
 
 	return key

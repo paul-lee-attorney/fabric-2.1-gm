@@ -70,7 +70,7 @@ func TestBigKeyFile(t *testing.T) {
 
 	cspKey := &sm2PrivateKey{privKey}
 	ski := cspKey.SKI()
-	rawKey, err := sm2PrivateKeyToPEM(privKey, nil)
+	rawKey, err := SM2PrivateKeyToPEM(privKey, nil)
 	assert.NoError(t, err)
 
 	// Large padding array, of some values PEM parser will NOOP

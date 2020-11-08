@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package signer
 
 import (
+	"crypto/rand"
 	"encoding/pem"
 	"io/ioutil"
 	"os"
@@ -42,13 +43,17 @@ func TestSigner(t *testing.T) {
 }
 
 func TestSignerDifferentFormats(t *testing.T) {
-	key := `-----BEGIN SM2 PRIVATE KEY-----
-MHcCAQEEIOwCtOQIkowasuWoDQpXHgC547VHq+aBFaSyPOoV8mnGoAoGCCqGSM49
-AwEHoUQDQgAEEsrroAkPez9reWvJukufUqyfouJjakrKuhNBYuclkldqsLZ/TO+w
-ZsQXrlIqlmNalfYPX+NDDELqlpXQBeEqnA==
------END SM2 PRIVATE KEY-----`
+	// 	key := `-----BEGIN SM2 PRIVATE KEY-----
+	// MHcCAQEEIOwCtOQIkowasuWoDQpXHgC547VHq+aBFaSyPOoV8mnGoAoGCCqGSM49
+	// AwEHoUQDQgAEEsrroAkPez9reWvJukufUqyfouJjakrKuhNBYuclkldqsLZ/TO+w
+	// ZsQXrlIqlmNalfYPX+NDDELqlpXQBeEqnA==
+	// -----END SM2 PRIVATE KEY-----`
 
-	pemBlock, _ := pem.Decode([]byte(key))
+	key, err := sm2.GenerateKey(rand.Reader)
+
+	privKeyPem, err := gm.SM2PrivateKeyToPEM(key, nil)
+
+	pemBlock, _ := pem.Decode([]byte(privKeyPem))
 	assert.NotNil(t, pemBlock)
 
 	ecPK, err := gm.ParseSM2PrivateKey(pemBlock.Bytes)
