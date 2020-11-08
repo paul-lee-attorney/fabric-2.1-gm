@@ -10,7 +10,6 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
-	"crypto/sha256"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
@@ -23,6 +22,9 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric/internal/cryptogen/csp"
+	"github.com/paul-lee-attorney/gm/sm2"
+	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
+	"github.com/paul-lee-attorney/gm/sm3"
 	"github.com/pkg/errors"
 )
 
@@ -67,6 +69,8 @@ func NewCA(
 	template := x509Template()
 	//this is a CA
 	template.IsCA = true
+
+	// 将x509证书的KeyUsage属性枚举变量相互连接
 	template.KeyUsage |= x509.KeyUsageDigitalSignature |
 		x509.KeyUsageKeyEncipherment | x509.KeyUsageCertSign |
 		x509.KeyUsageCRLSign
@@ -151,7 +155,7 @@ func (ca *CA) SignCertificate(
 		}
 	}
 
-	cert, err := genCertificateECDSA(
+	cert, err := genCertificateSM2(
 		baseDir,
 		name,
 		&template,
@@ -168,21 +172,24 @@ func (ca *CA) SignCertificate(
 }
 
 // compute Subject Key Identifier
-func computeSKI(privKey *ecdsa.PrivateKey) []byte {
+func computeSKI(privKey *sm2.PrivateKey) []byte {
 	// Marshall the public key
 	raw := elliptic.Marshal(privKey.Curve, privKey.PublicKey.X, privKey.PublicKey.Y)
 
 	// Hash it
-	hash := sha256.Sum256(raw)
-	return hash[:]
+	// hash := sha256.Sum256(raw)
+
+	hash := sm3.New()
+	hash.Write(raw)
+	return hash.Sum(nil)
 }
 
 // default template for X509 subject
 func subjectTemplate() pkix.Name {
 	return pkix.Name{
-		Country:  []string{"US"},
-		Locality: []string{"San Francisco"},
-		Province: []string{"California"},
+		Country:  []string{"CHINA"},
+		Locality: []string{"Beijing"},
+		Province: []string{"Beijing"},
 	}
 }
 
@@ -241,18 +248,54 @@ func x509Template() x509.Certificate {
 
 }
 
-// generate a signed X509 certificate using ECDSA
-func genCertificateECDSA(
+// // generate a signed X509 certificate using ECDSA
+// func genCertificateECDSA(
+// 	baseDir,
+// 	name string,
+// 	template,
+// 	parent *x509.Certificate,
+// 	pub *ecdsa.PublicKey,
+// 	priv interface{},
+// ) (*x509.Certificate, error) {
+
+// 	//create the x509 public cert
+// 	certBytes, err := x509.CreateCertificate(rand.Reader, template, parent, pub, priv)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+
+// 	//write cert out to file
+// 	fileName := filepath.Join(baseDir, name+"-cert.pem")
+// 	certFile, err := os.Create(fileName)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	//pem encode the cert
+// 	err = pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certBytes})
+// 	certFile.Close()
+// 	if err != nil {
+// 		return nil, err
+// 	}
+
+// 	x509Cert, err := x509.ParseCertificate(certBytes)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+// 	return x509Cert, nil
+// }
+
+// generate a signed X509 certificate using SM2
+func genCertificateSM2(
 	baseDir,
 	name string,
 	template,
 	parent *x509.Certificate,
-	pub *ecdsa.PublicKey,
+	pub *sm2.PublicKey,
 	priv interface{},
 ) (*x509.Certificate, error) {
 
-	//create the x509 public cert
-	certBytes, err := x509.CreateCertificate(rand.Reader, template, parent, pub, priv)
+	// create SM2 public cert
+	certBytes, err := sm2cert.CreateCertificateBytes(template, parent, pub, priv)
 	if err != nil {
 		return nil, err
 	}
@@ -264,21 +307,58 @@ func genCertificateECDSA(
 		return nil, err
 	}
 	//pem encode the cert
-	err = pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certBytes})
+	err = pem.Encode(certFile, &pem.Block{Type: "SM2 CERTIFICATE", Bytes: certBytes})
 	certFile.Close()
 	if err != nil {
 		return nil, err
 	}
 
-	x509Cert, err := x509.ParseCertificate(certBytes)
+	// x509Cert, err := x509.ParseCertificate(certBytes)
+	// if err != nil {
+	// 	return nil, err
+	// }
+
+	sm2Cert, err := sm2cert.ParseCertificate(certBytes)
 	if err != nil {
 		return nil, err
 	}
-	return x509Cert, nil
+
+	return sm2Cert, nil
 }
 
-// LoadCertificateECDSA load a ecdsa cert from a file in cert path
-func LoadCertificateECDSA(certPath string) (*x509.Certificate, error) {
+// // LoadCertificateECDSA load a ecdsa cert from a file in cert path
+// func LoadCertificateECDSA(certPath string) (*x509.Certificate, error) {
+// 	var cert *x509.Certificate
+// 	var err error
+
+// 	walkFunc := func(path string, info os.FileInfo, err error) error {
+// 		if strings.HasSuffix(path, ".pem") {
+// 			rawCert, err := ioutil.ReadFile(path)
+// 			if err != nil {
+// 				return err
+// 			}
+// 			block, _ := pem.Decode(rawCert)
+// 			if block == nil || block.Type != "CERTIFICATE" {
+// 				return errors.Errorf("%s: wrong PEM encoding", path)
+// 			}
+// 			cert, err = x509.ParseCertificate(block.Bytes)
+// 			if err != nil {
+// 				return errors.Errorf("%s: wrong DER encoding", path)
+// 			}
+// 		}
+// 		return nil
+// 	}
+
+// 	err = filepath.Walk(certPath, walkFunc)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+
+// 	return cert, err
+// }
+
+// LoadCertificateSM2 load a sm2 cert from a file in cert path
+func LoadCertificateSM2(certPath string) (*x509.Certificate, error) {
 	var cert *x509.Certificate
 	var err error
 
@@ -289,10 +369,10 @@ func LoadCertificateECDSA(certPath string) (*x509.Certificate, error) {
 				return err
 			}
 			block, _ := pem.Decode(rawCert)
-			if block == nil || block.Type != "CERTIFICATE" {
+			if block == nil || block.Type != "SM2 CERTIFICATE" {
 				return errors.Errorf("%s: wrong PEM encoding", path)
 			}
-			cert, err = x509.ParseCertificate(block.Bytes)
+			cert, err = sm2cert.ParseCertificate(block.Bytes)
 			if err != nil {
 				return errors.Errorf("%s: wrong DER encoding", path)
 			}

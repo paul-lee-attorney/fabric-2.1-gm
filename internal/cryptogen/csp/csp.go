@@ -74,12 +74,12 @@ func parsePrivateKeyPEM(rawKey []byte) (*sm2.PrivateKey, error) {
 	return key, nil
 }
 
-// GeneratePrivateKey creates an EC private key using a P-256 curve and stores
+// GeneratePrivateKey creates an SM2 private key using  SM2P256V1 curve and stores
 // it in keystorePath.
 func GeneratePrivateKey(keystorePath string) (*sm2.PrivateKey, error) {
 
 	// priv, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
-	priv, err := sm2.GenerateKey(sm2.GetSM2P256V1(), rand.Reader)
+	priv, err := sm2.GenerateKey(rand.Reader)
 	if err != nil {
 		return nil, errors.WithMessage(err, "failed to generate private key")
 	}
@@ -90,7 +90,7 @@ func GeneratePrivateKey(keystorePath string) (*sm2.PrivateKey, error) {
 		return nil, errors.WithMessage(err, "failed to marshal private key")
 	}
 
-	pemEncoded := pem.EncodeToMemory(&pem.Block{Type: "PRIVATE KEY", Bytes: pkcs8Encoded})
+	pemEncoded := pem.EncodeToMemory(&pem.Block{Type: "SM2 PRIVATE KEY", Bytes: pkcs8Encoded})
 
 	keyFile := filepath.Join(keystorePath, "priv_sk")
 	err = ioutil.WriteFile(keyFile, pemEncoded, 0600)
