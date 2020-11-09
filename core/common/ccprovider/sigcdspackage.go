@@ -158,7 +158,9 @@ func (ccpack *SignedCDSPackage) getCDSData(scds *pb.SignedChaincodeDeploymentSpe
 	}
 
 	//get the hash object
-	hash, err := ccpack.GetHasher.GetHash(&bccsp.SHAOpts{})
+	// hash, err := ccpack.GetHasher.GetHash(&bccsp.SHAOpts{})
+	hash, err := ccpack.GetHasher.GetHash(&bccsp.SM3Opts{})
+
 	if err != nil {
 		return nil, nil, nil, err
 	}

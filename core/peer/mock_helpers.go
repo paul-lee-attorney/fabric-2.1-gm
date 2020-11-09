@@ -10,7 +10,7 @@ import (
 	"github.com/hyperledger/fabric/common/channelconfig"
 	configtxtest "github.com/hyperledger/fabric/common/configtx/test"
 	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 )
 
 func CreateMockChannel(p *Peer, cid string, resources channelconfig.Resources) error {
@@ -31,7 +31,7 @@ func CreateMockChannel(p *Peer, cid string, resources channelconfig.Resources) e
 		p.channels = map[string]*Channel{}
 	}
 
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	if err != nil {
 		return err
 	}

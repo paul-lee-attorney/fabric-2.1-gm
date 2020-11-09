@@ -27,7 +27,8 @@ const (
 )
 
 var (
-	hashOpts = &bccsp.SHA256Opts{}
+	// hashOpts = &bccsp.SHA256Opts{}
+	hashOpts = &bccsp.SM3Opts{}
 )
 
 // RangeQueryResultsHelper helps preparing range query results for phantom items detection during validation.

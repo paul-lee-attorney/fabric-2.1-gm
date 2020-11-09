@@ -134,7 +134,9 @@ func (ccpack *CDSPackage) getCDSData(cds *pb.ChaincodeDeploymentSpec) ([]byte, [
 
 	//compute hashes now
 	// hash, err := factory.GetDefault().GetHash(&bccsp.SHAOpts{})
-	hash, err := ccpack.GetHasher.GetHash(&bccsp.SHAOpts{})
+	// hash, err := ccpack.GetHasher.GetHash(&bccsp.SHAOpts{})
+	hash, err := ccpack.GetHasher.GetHash(&bccsp.SM3Opts{})
+
 	if err != nil {
 		return nil, nil, nil, err
 	}

@@ -7,7 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package crypto
 
 import (
-	"crypto/x509"
 	"encoding/pem"
 	"time"
 
@@ -44,11 +43,12 @@ func certExpirationTime(pemBytes []byte) time.Time {
 		return cert.NotAfter
 	}
 
-	cert, err := x509.ParseCertificate(bl.Bytes)
-	if err != nil {
-		return time.Time{}
-	}
-	return cert.NotAfter
+	// cert, err := x509.ParseCertificate(bl.Bytes)
+	// if err != nil {
+	// 	return time.Time{}
+	// }
+	// return cert.NotAfter
+	return time.Time{}
 }
 
 // MessageFunc notifies a message happened with the given format, and can be replaced with Warnf or Infof of a logger.

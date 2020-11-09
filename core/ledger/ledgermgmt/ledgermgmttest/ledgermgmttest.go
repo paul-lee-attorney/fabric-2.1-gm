@@ -13,14 +13,14 @@ import (
 	"github.com/hyperledger/fabric/core/ledger"
 	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
 	"github.com/hyperledger/fabric/core/ledger/mock"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 )
 
 // NewInitializer returns an instance of ledgermgmt Initializer
 // with minimum fields populated so as not to cause a failure during construction of LedgerMgr.
 // This is intended to be used for creating an instance of LedgerMgr for testing
 func NewInitializer(testLedgerDir string) *ledgermgmt.Initializer {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	if err != nil {
 		panic(fmt.Errorf("Failed to initialize cryptoProvider bccsp: %s", err))
 	}

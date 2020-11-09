@@ -7,7 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package api
 
 import (
-	"crypto/x509"
 	"encoding/base64"
 	"encoding/json"
 	"encoding/pem"
@@ -19,6 +18,8 @@ import (
 	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric/gossip/common"
 	"google.golang.org/grpc"
+
+	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
 )
 
 // MessageCryptoService is the contract between the gossip component and the
@@ -129,7 +130,8 @@ func (pit PeerIdentityType) String() string {
 		return fmt.Sprintf("non PEM encoded identity: %s", base64Representation)
 	}
 
-	cert, _ := x509.ParseCertificate(bl.Bytes)
+	// cert, _ := x509.ParseCertificate(bl.Bytes)
+	cert, _ := sm2cert.ParseCertificate(bl.Bytes)
 	if cert == nil {
 		return fmt.Sprintf("non x509 identity: %s", base64Representation)
 	}

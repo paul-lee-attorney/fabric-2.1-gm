@@ -9,12 +9,13 @@ package cluster
 import (
 	"bytes"
 	"context"
-	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"sync"
 	"sync/atomic"
 	"time"
+
+	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/orderer"
@@ -320,7 +321,9 @@ func (c *Comm) updateStubInMapping(channel string, mapping MemberMapping, node R
 // a stub atomically.
 func (c *Comm) createRemoteContext(stub *Stub, channel string) func() (*RemoteContext, error) {
 	return func() (*RemoteContext, error) {
-		cert, err := x509.ParseCertificate(stub.ServerTLSCert)
+		// cert, err := x509.ParseCertificate(stub.ServerTLSCert)
+		cert, err := sm2cert.ParseCertificate(stub.ServerTLSCert)
+
 		if err != nil {
 			pemString := string(pem.EncodeToMemory(&pem.Block{Bytes: stub.ServerTLSCert}))
 			c.Logger.Errorf("Invalid DER for channel %s, endpoint %s, ID %d: %v", channel, stub.Endpoint, stub.ID, pemString)

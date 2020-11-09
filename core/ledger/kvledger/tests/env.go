@@ -29,7 +29,7 @@ import (
 	"github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -50,7 +50,7 @@ type env struct {
 }
 
 func newEnv(t *testing.T) *env {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 	return newEnvWithInitializer(t, &ledgermgmt.Initializer{
 		Hasher: cryptoProvider,
@@ -216,7 +216,7 @@ func populateMissingsWithTestDefaults(t *testing.T, initializer *ledgermgmt.Init
 		identityDeserializerFactory := func(chainID string) msp.IdentityDeserializer {
 			return mgmt.GetManagerForChain(chainID)
 		}
-		cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+		cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 		assert.NoError(t, err)
 		mspID := "test-mspid"
 		membershipInfoProvider := privdata.NewMembershipInfoProvider(mspID, createSelfSignedData(cryptoProvider), identityDeserializerFactory)

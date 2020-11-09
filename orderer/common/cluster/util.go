@@ -28,6 +28,7 @@ import (
 	"github.com/hyperledger/fabric/internal/pkg/comm"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )
@@ -381,7 +382,8 @@ func (ep EndpointCriteria) String() string {
 			if bl == nil {
 				break
 			}
-			cert, err := x509.ParseCertificate(bl.Bytes)
+			// cert, err := x509.ParseCertificate(bl.Bytes)
+			cert, err := sm2cert.ParseCertificate(bl.Bytes)
 			if err != nil {
 				break
 			}

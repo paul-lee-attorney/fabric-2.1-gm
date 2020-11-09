@@ -90,7 +90,7 @@ func newCertKeyPair(isCA bool, isServer bool, host string, certSigner crypto.Sig
 	}
 
 	// rawBytes, err := x509.CreateCertificate(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
-	rawBytes, err := sm2cert.CreateCertificate(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
+	rawBytes, err := sm2cert.CreateCertificateBytes(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
 	if err != nil {
 		return nil, err
 	}

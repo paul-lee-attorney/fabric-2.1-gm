@@ -14,6 +14,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	"github.com/hyperledger/fabric/common/channelconfig"
+	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
 	"github.com/pkg/errors"
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"
@@ -192,7 +193,8 @@ func parseCertificateFromBytes(cert []byte) (*x509.Certificate, error) {
 		return &x509.Certificate{}, fmt.Errorf("no PEM data found in cert[% x]", cert)
 	}
 
-	certificate, err := x509.ParseCertificate(pemBlock.Bytes)
+	// certificate, err := x509.ParseCertificate(pemBlock.Bytes)
+	certificate, err := sm2cert.ParseCertificate(pemBlock.Bytes)
 	if err != nil {
 		return &x509.Certificate{}, err
 	}

@@ -18,6 +18,8 @@ import (
 	"github.com/pkg/errors"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/peer"
+
+	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
 )
 
 // AddPemToCertPool adds PEM-encoded certs to a cert pool
@@ -45,7 +47,8 @@ func pemToX509Certs(pemCerts []byte) ([]*x509.Certificate, []string, error) {
 			break
 		}
 
-		cert, err := x509.ParseCertificate(block.Bytes)
+		// cert, err := x509.ParseCertificate(block.Bytes)
+		cert, err := sm2cert.ParseCertificate(block.Bytes)
 		if err != nil {
 			return nil, []string{}, err
 		}
