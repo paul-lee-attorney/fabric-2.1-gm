@@ -16,9 +16,11 @@ import (
 	"github.com/golang/protobuf/proto"
 	m "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
+
+	sm2cert "github.com/paul-lee-attorney/gm/cert"
+
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/signer"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
 	"github.com/pkg/errors"
 )
 
@@ -148,10 +150,13 @@ func NewBccspMspWithKeyStore(version MSPVersion, keyStore bccsp.KeyStore, bccsp 
 		return nil, err
 	}
 
-	csp, err := sw.NewWithParams(
-		factory.GetDefaultOpts().SwOpts.SecLevel,
-		factory.GetDefaultOpts().SwOpts.HashFamily,
-		keyStore)
+	// csp, err := sw.NewWithParams(
+	// 	factory.GetDefaultOpts().SwOpts.SecLevel,
+	// 	factory.GetDefaultOpts().SwOpts.HashFamily,
+	// 	keyStore)
+
+	csp, err := gm.NewWithParams(keyStore)
+
 	if err != nil {
 		return nil, err
 	}
@@ -173,7 +178,14 @@ func (msp *bccspmsp) getCertFromPem(idBytes []byte) (*x509.Certificate, error) {
 
 	// get a cert
 	var cert *x509.Certificate
-	cert, err := x509.ParseCertificate(pemCert.Bytes)
+
+	// 若PEM标题没有标注“SM2”就直接返回错误。
+	if pemCert.Type != "SM2 CERTIFICATE" {
+		return nil, errors.News("the certificate does not use SM2 as its algo")
+	}
+
+	// cert, err := x509.ParseCertificate(pemCert.Bytes)
+	cert, err := sm2cert.ParseCertificate(pemCert.Bytes)
 	if err != nil {
 		return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 cert")
 	}
@@ -226,7 +238,11 @@ func (msp *bccspmsp) getSigningIdentityFromConf(sidInfo *m.SigningIdentityInfo) 
 		if pemKey == nil {
 			return nil, errors.Errorf("%s: wrong PEM encoding", sidInfo.PrivateSigner.KeyIdentifier)
 		}
-		privKey, err = msp.bccsp.KeyImport(pemKey.Bytes, &bccsp.ECDSAPrivateKeyImportOpts{Temporary: true})
+
+		// privKey, err = msp.bccsp.KeyImport(pemKey.Bytes, &bccsp.ECDSAPrivateKeyImportOpts{Temporary: true})
+
+		// 将ECDSA私钥替换成SM2私钥
+		privKey, err = msp.bccsp.KeyImport(pemKey.Bytes, &bccsp.SM2PrivateKeyImportOpts{Temporary: true})
 		if err != nil {
 			return nil, errors.WithMessage(err, "getIdentityFromBytes error: Failed to import EC private key")
 		}
@@ -404,7 +420,18 @@ func (msp *bccspmsp) deserializeIdentityInternal(serializedIdentity []byte) (Ide
 	if bl == nil {
 		return nil, errors.New("could not decode the PEM structure")
 	}
-	cert, err := x509.ParseCertificate(bl.Bytes)
+
+	// 根据PEM的block.Type信息判断是否适用SM2的证书解析函数
+	if bl.Type != "SM2 CERTIFICATE" {
+		return nil, errors.New("the certificate is not a SM2 certificate")
+	}
+
+	// cert, err := x509.ParseCertificate(bl.Bytes)
+	// if err != nil {
+	// 	return nil, errors.Wrap(err, "parseCertificate failed")
+	// }
+
+	cert, err := sm2cert.ParseCertificate(bl.Bytes)
 	if err != nil {
 		return nil, errors.Wrap(err, "parseCertificate failed")
 	}
@@ -795,6 +822,8 @@ func (msp *bccspmsp) getCertificationChainIdentifierFromChain(chain []*x509.Cert
 // do have signatures in Low-S. If this is not the case, the certificate
 // is regenerated to have a Low-S signature.
 func (msp *bccspmsp) sanitizeCert(cert *x509.Certificate) (*x509.Certificate, error) {
+
+	// 使用SM2推荐曲线后，isECDSASignedCert()的返回值会是false
 	if isECDSASignedCert(cert) {
 		// Lookup for a parent certificate to perform the sanitization
 		var parentCert *x509.Certificate
@@ -812,11 +841,12 @@ func (msp *bccspmsp) sanitizeCert(cert *x509.Certificate) (*x509.Certificate, er
 			parentCert = chain[1]
 		}
 
-		// Sanitize
+		Sanitize
 		cert, err = sanitizeECDSASignedCert(cert, parentCert)
 		if err != nil {
 			return nil, err
 		}
+
 	}
 	return cert, nil
 }
@@ -834,9 +864,11 @@ func (msp *bccspmsp) IsWellFormed(identity *m.SerializedIdentity) error {
 	// 1) Must ensure PEM block is of type CERTIFICATE or is empty
 	// 2) Must not replace getCertFromPem with this method otherwise we will introduce
 	//    a change in validation logic which will result in a chain fork.
-	if bl.Type != "CERTIFICATE" && bl.Type != "" {
-		return errors.Errorf("pem type is %s, should be 'CERTIFICATE' or missing", bl.Type)
+	if bl.Type != "SM2 CERTIFICATE" && bl.Type != "" {
+		return errors.Errorf("pem type is %s, should be 'SM2 CERTIFICATE' or missing", bl.Type)
 	}
-	_, err := x509.ParseCertificate(bl.Bytes)
+
+	// _, err := x509.ParseCertificate(bl.Bytes)
+	_, err := sm2cert.ParseCertificate(bl.Bytes)
 	return err
 }

@@ -102,13 +102,13 @@ func GeneratePrivateKey(keystorePath string) (*sm2.PrivateKey, error) {
 }
 
 /**
-ECDSA signer implements the crypto.Signer interface for ECDSA keys.  The
+SM2 signer implements the crypto.Signer interface for SM2 keys.  The
 Sign method ensures signatures are created with Low S values since Fabric
 normalizes all signatures to Low S.
 See https://github.com/bitcoin/bips/blob/master/bip-0146.mediawiki#low_s
 for more detail.
 
-将所有ECDSA相关内容替换为SM2
+将所有ECDSA相关内容替换为SM2, 适用曲线为SM2国标的推荐曲线
 
 */
 

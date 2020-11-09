@@ -78,22 +78,29 @@ func (msp *bccspmsp) getCertifiersIdentifier(certRaw []byte) ([]byte, error) {
 
 }
 
+// 全面替换哈希函数为bccsp.SM3
 func (msp *bccspmsp) setupCrypto(conf *m.FabricMSPConfig) error {
 	msp.cryptoConfig = conf.CryptoConfig
 	if msp.cryptoConfig == nil {
 		// Move to defaults
 		msp.cryptoConfig = &m.FabricCryptoConfig{
-			SignatureHashFamily:            bccsp.SHA2,
-			IdentityIdentifierHashFunction: bccsp.SHA256,
+			// SignatureHashFamily:            bccsp.SHA2,
+			// IdentityIdentifierHashFunction: bccsp.SHA256,
+			SignatureHashFamily:            bccsp.SM3,
+			IdentityIdentifierHashFunction: bccsp.SM3,
 		}
 		mspLogger.Debugf("CryptoConfig was nil. Move to defaults.")
 	}
 	if msp.cryptoConfig.SignatureHashFamily == "" {
-		msp.cryptoConfig.SignatureHashFamily = bccsp.SHA2
+		// msp.cryptoConfig.SignatureHashFamily = bccsp.SHA2
+		msp.cryptoConfig.SignatureHashFamily = bccsp.SM3
+
 		mspLogger.Debugf("CryptoConfig.SignatureHashFamily was nil. Move to defaults.")
 	}
 	if msp.cryptoConfig.IdentityIdentifierHashFunction == "" {
-		msp.cryptoConfig.IdentityIdentifierHashFunction = bccsp.SHA256
+		// msp.cryptoConfig.IdentityIdentifierHashFunction = bccsp.SHA256
+		msp.cryptoConfig.IdentityIdentifierHashFunction = bccsp.SM3
+
 		mspLogger.Debugf("CryptoConfig.IdentityIdentifierHashFunction was nil. Move to defaults.")
 	}
 

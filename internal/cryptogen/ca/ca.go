@@ -369,7 +369,7 @@ func LoadCertificateSM2(certPath string) (*x509.Certificate, error) {
 				return err
 			}
 			block, _ := pem.Decode(rawCert)
-			if block == nil || block.Type != "SM2 CERTIFICATE" {
+			if block == nil || block.Type != "SM2 CERTIFICATE" &&  {
 				return errors.Errorf("%s: wrong PEM encoding", path)
 			}
 			cert, err = sm2cert.ParseCertificate(block.Bytes)

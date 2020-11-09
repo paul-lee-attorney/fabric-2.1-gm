@@ -15,7 +15,7 @@ import (
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/common/configtx/test"
 	"github.com/hyperledger/fabric/common/crypto"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 
 	"github.com/hyperledger/fabric/common/ledger/testutil/fakes"
 	lutils "github.com/hyperledger/fabric/core/ledger/util"
@@ -34,7 +34,8 @@ func init() {
 	if err != nil {
 		panic(fmt.Errorf("Could not load msp config, err %s", err))
 	}
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	// cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	if err != nil {
 		panic(fmt.Errorf("Initialize cryptoProvider failed: %s", err))
 	}

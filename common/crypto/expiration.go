@@ -11,6 +11,8 @@ import (
 	"encoding/pem"
 	"time"
 
+	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
+
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/msp"
 )
@@ -32,6 +34,16 @@ func certExpirationTime(pemBytes []byte) time.Time {
 		// If the identity isn't a PEM block, we make no decisions about the expiration time
 		return time.Time{}
 	}
+
+	// 加入SM2证书解析
+	if bl.Type == "SM2 CERTIFICATE" {
+		cert, err := sm2cert.ParseCertificate(bl.Bytes)
+		if err != nil {
+			return time.Time{}
+		}
+		return cert.NotAfter
+	}
+
 	cert, err := x509.ParseCertificate(bl.Bytes)
 	if err != nil {
 		return time.Time{}
