@@ -111,8 +111,8 @@ func sm2PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, er
 	}
 }
 
-// pemToSM2PrivateKey unmarshals a pem to SM2 private key
-func pemToSM2PrivateKey(raw []byte, pwd []byte) (interface{}, error) {
+// PEMtoSM2PrivateKey unmarshals a pem to SM2 private key
+func PEMtoSM2PrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 	if len(raw) == 0 {
 		return nil, errors.New("Invalid PEM. It must be different from nil")
 	}

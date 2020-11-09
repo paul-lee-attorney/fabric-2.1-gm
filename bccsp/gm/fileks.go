@@ -220,7 +220,7 @@ func (ks *fileBasedKeyStore) searchKeystoreForSKI(ski []byte) (k bccsp.Key, err 
 			continue
 		}
 
-		key, err := pemToSM2PrivateKey(raw, ks.pwd)
+		key, err := PEMtoSM2PrivateKey(raw, ks.pwd)
 		if err != nil {
 			continue
 		}
@@ -320,7 +320,7 @@ func (ks *fileBasedKeyStore) loadPrivateKey(alias string) (interface{}, error) {
 		return nil, err
 	}
 
-	privateKey, err := pemToSM2PrivateKey(raw, ks.pwd)
+	privateKey, err := PEMtoSM2PrivateKey(raw, ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed parsing private key [%s]: [%s].", alias, err.Error())
 		return nil, err
