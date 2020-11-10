@@ -152,8 +152,10 @@ func InitCrypto(mspMgrConfigDir, localMSPID, localMSPType string) error {
 // SetBCCSPKeystorePath sets the file keystore path for the SW BCCSP provider
 // to an absolute path relative to the config file
 func SetBCCSPKeystorePath() {
-	viper.Set("peer.BCCSP.SW.FileKeyStore.KeyStore",
-		config.GetPath("peer.BCCSP.SW.FileKeyStore.KeyStore"))
+	// viper.Set("peer.BCCSP.SW.FileKeyStore.KeyStore",
+	// 	config.GetPath("peer.BCCSP.SW.FileKeyStore.KeyStore"))
+	viper.Set("peer.BCCSP.GM.FileKeyStore.KeyStore",
+		config.GetPath("peer.BCCSP.GM.FileKeyStore.KeyStore"))
 }
 
 // GetDefaultSigner return a default Signer(Default/PEER) for cli

@@ -104,9 +104,9 @@ peer:
     timewindow: 15m
   fileSystemPath: filesystem
   BCCSP:
-    Default: SW
-    SW:
-      Hash: SHA2
+    Default: GM
+    GM:
+      Hash: SM3
       Security: 256
       FileKeyStore:
         KeyStore:
