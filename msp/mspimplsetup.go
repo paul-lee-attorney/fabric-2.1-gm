@@ -78,7 +78,7 @@ func (msp *bccspmsp) getCertifiersIdentifier(certRaw []byte) ([]byte, error) {
 
 }
 
-// 全面替换哈希函数为bccsp.SM3
+// 全面替换缺省适用的哈希函数为SM3
 func (msp *bccspmsp) setupCrypto(conf *m.FabricMSPConfig) error {
 	msp.cryptoConfig = conf.CryptoConfig
 	if msp.cryptoConfig == nil {

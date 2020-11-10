@@ -179,17 +179,19 @@ func (msp *bccspmsp) getCertFromPem(idBytes []byte) (*x509.Certificate, error) {
 	// get a cert
 	var cert *x509.Certificate
 
-	// 若PEM标题没有标注“SM2”就直接返回错误。
-	if pemCert.Type != "SM2 CERTIFICATE" {
-		return nil, errors.News("the certificate does not use SM2 as its algo")
+	// 若PEM标题标注“SM2”, 指引向sm2cert解析函数。
+	if pemCert.Type == "SM2 CERTIFICATE" {
+		cert, err := sm2cert.ParseCertificate(pemCert.Bytes)
+		if err != nil {
+			return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 SM2 cert")
+		}
+		return cert, nil
 	}
 
-	// cert, err := x509.ParseCertificate(pemCert.Bytes)
-	cert, err := sm2cert.ParseCertificate(pemCert.Bytes)
+	cert, err := x509.ParseCertificate(pemCert.Bytes)
 	if err != nil {
 		return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 cert")
 	}
-
 	return cert, nil
 }
 
@@ -421,17 +423,15 @@ func (msp *bccspmsp) deserializeIdentityInternal(serializedIdentity []byte) (Ide
 		return nil, errors.New("could not decode the PEM structure")
 	}
 
-	// 根据PEM的block.Type信息判断是否适用SM2的证书解析函数
-	if bl.Type != "SM2 CERTIFICATE" {
-		return nil, errors.New("the certificate is not a SM2 certificate")
+	// 根据PEM的block.Type信息，导向sm2证书解析函数
+	if bl.Type == "SM2 CERTIFICATE" {
+		cert, err := sm2cert.ParseCertificate(bl.Bytes)
+		if err != nil {
+			return nil, errors.Wrap(err, "parseCertificate failed")
+		}
 	}
 
-	// cert, err := x509.ParseCertificate(bl.Bytes)
-	// if err != nil {
-	// 	return nil, errors.Wrap(err, "parseCertificate failed")
-	// }
-
-	cert, err := sm2cert.ParseCertificate(bl.Bytes)
+	cert, err := x509.ParseCertificate(bl.Bytes)
 	if err != nil {
 		return nil, errors.Wrap(err, "parseCertificate failed")
 	}

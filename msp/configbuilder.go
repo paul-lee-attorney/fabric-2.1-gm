@@ -336,8 +336,10 @@ func getMspConfig(dir string, ID string, sigid *msp.SigningIdentityInfo) (*msp.M
 
 	// Set FabricCryptoConfig
 	cryptoConfig := &msp.FabricCryptoConfig{
-		SignatureHashFamily:            bccsp.SHA2,
-		IdentityIdentifierHashFunction: bccsp.SHA256,
+		// SignatureHashFamily:            bccsp.SHA2,
+		// IdentityIdentifierHashFunction: bccsp.SHA256,
+		SignatureHashFamily:            bccsp.SM3,
+		IdentityIdentifierHashFunction: bccsp.SM3,
 	}
 
 	// Compose FabricMSPConfig

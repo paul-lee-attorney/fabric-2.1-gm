@@ -58,6 +58,7 @@ func newIdentity(cert *x509.Certificate, pk bccsp.Key, msp *bccspmsp) (Identity,
 	}
 
 	// Sanitize first the certificate
+	// 使用SM2推荐曲线后，将直接返回原证书
 	cert, err := msp.sanitizeCert(cert)
 	if err != nil {
 		return nil, err
