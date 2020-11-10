@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package crypto
 
 import (
+	"crypto/x509"
 	"encoding/pem"
 	"time"
 
@@ -34,7 +35,7 @@ func certExpirationTime(pemBytes []byte) time.Time {
 		return time.Time{}
 	}
 
-	// 加入SM2证书解析
+	// 根据block的Type信息，将SM2算法证书转向SM2证书解析函数
 	if bl.Type == "SM2 CERTIFICATE" {
 		cert, err := sm2cert.ParseCertificate(bl.Bytes)
 		if err != nil {
@@ -43,12 +44,12 @@ func certExpirationTime(pemBytes []byte) time.Time {
 		return cert.NotAfter
 	}
 
-	// cert, err := x509.ParseCertificate(bl.Bytes)
-	// if err != nil {
-	// 	return time.Time{}
-	// }
-	// return cert.NotAfter
-	return time.Time{}
+	// 如果Type信息中没有加入"SM2"信息，则调用x509标准库解析函数
+	cert, err := x509.ParseCertificate(bl.Bytes)
+	if err != nil {
+		return time.Time{}
+	}
+	return cert.NotAfter
 }
 
 // MessageFunc notifies a message happened with the given format, and can be replaced with Warnf or Infof of a logger.

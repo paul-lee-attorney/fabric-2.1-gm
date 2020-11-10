@@ -37,14 +37,15 @@ func newPrivKey() (*sm2.PrivateKey, []byte, error) {
 }
 
 func newCertTemplate() (x509.Certificate, error) {
+	// 1左移128位，获得16字节长随机数作为序列号
 	sn, err := rand.Int(rand.Reader, new(big.Int).Lsh(big.NewInt(1), 128))
 	if err != nil {
 		return x509.Certificate{}, err
 	}
 	return x509.Certificate{
 		Subject:      pkix.Name{SerialNumber: sn.String()},
-		NotBefore:    time.Now().Add(time.Hour * (-24)),
-		NotAfter:     time.Now().Add(time.Hour * 24),
+		NotBefore:    time.Now().Add(time.Hour * (-24)), // 提前24小时
+		NotAfter:     time.Now().Add(time.Hour * 24),    // 延后24小时
 		KeyUsage:     x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
 		SerialNumber: sn,
 	}, nil
@@ -94,6 +95,7 @@ func newCertKeyPair(isCA bool, isServer bool, host string, certSigner crypto.Sig
 	if err != nil {
 		return nil, err
 	}
+	// 在EPM块的Type字段，写入“SM2”标识
 	pubKey := encodePEM("SM2 CERTIFICATE", rawBytes)
 
 	block, _ := pem.Decode(pubKey)
@@ -106,12 +108,14 @@ func newCertKeyPair(isCA bool, isServer bool, host string, certSigner crypto.Sig
 	if err != nil {
 		return nil, err
 	}
+
+	// 在PEM块Type，加注"SM2"标识
 	privKey := encodePEM("SM2 PRIVATE KEY", privBytes)
 	return &CertKeyPair{
-		Key:     privKey,
-		Cert:    pubKey,
-		Signer:  privateKey,
-		TLSCert: cert,
+		Key:     privKey,    // PEM, DER, PKCS8格式私钥
+		Cert:    pubKey,     // PEM, DER, x509.Certificate格式证书
+		Signer:  privateKey, // *sm2.PrivateKey 格式私钥
+		TLSCert: cert,       // x509.Certificate格式证书
 	}, nil
 }
 
