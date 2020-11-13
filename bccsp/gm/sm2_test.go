@@ -52,7 +52,7 @@ func TestVerifySM2(t *testing.T) {
 	// 测试SM2签字
 	R, S, err := sm2.UnmarshalSign(sigma)
 	assert.NoError(t, err)
-	S.Add(sm2.GetSm2P256V1().Params().N, big.NewInt(1))
+	S.Add(sm2.GetSM2P256V1().Params().N, big.NewInt(1))
 	sigmaWrongS, err := sm2.MarshalSign(R, S)
 	assert.NoError(t, err)
 	_, err = verifySM2(&sk.PublicKey, sigmaWrongS, msg, nil)

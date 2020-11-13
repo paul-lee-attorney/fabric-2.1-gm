@@ -97,7 +97,6 @@ func TestHasher(t *testing.T) {
 
 	msg := []byte("Hello World")
 	out, err := hasher.Hash(msg, nil)
-	assert.Error(t, err)
 	h := sm3.New()
 	h.Write(msg)
 	out2 := h.Sum(nil)

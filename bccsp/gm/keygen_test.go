@@ -50,7 +50,7 @@ func TestKeyGen(t *testing.T) {
 func TestSM2KeyGenerator(t *testing.T) {
 	t.Parallel()
 
-	kg := &sm2KeyGenerator{curve: sm2.GetSm2P256V1()}
+	kg := &sm2KeyGenerator{curve: sm2.GetSM2P256V1()}
 
 	k, err := kg.KeyGen(nil)
 	assert.NoError(t, err)
@@ -58,7 +58,7 @@ func TestSM2KeyGenerator(t *testing.T) {
 	sm2K, ok := k.(*sm2PrivateKey)
 	assert.True(t, ok)
 	assert.NotNil(t, sm2K.privKey)
-	assert.Equal(t, sm2K.privKey.Curve, sm2.GetSm2P256V1())
+	assert.Equal(t, sm2K.privKey.Curve, sm2.GetSM2P256V1())
 }
 
 func TestSM4KeyGenerator(t *testing.T) {

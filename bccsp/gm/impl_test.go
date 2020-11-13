@@ -133,10 +133,10 @@ func TestKeyGenSM2Opts(t *testing.T) {
 	}
 
 	sm2Key := k.(*sm2PrivateKey).privKey
-	if !sm2.GetSm2P256V1().IsOnCurve(sm2Key.X, sm2Key.Y) {
+	if !sm2.GetSM2P256V1().IsOnCurve(sm2Key.X, sm2Key.Y) {
 		t.Fatal("P256 generated key in invalid. The public key must be on the P256 curve.")
 	}
-	if sm2.GetSm2P256V1() != sm2Key.Curve {
+	if sm2.GetSM2P256V1() != sm2Key.Curve {
 		t.Fatal("P256 generated key in invalid. The curve must be P256.")
 	}
 	if sm2Key.D.Cmp(big.NewInt(0)) == 0 {

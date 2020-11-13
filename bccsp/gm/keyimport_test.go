@@ -160,14 +160,12 @@ func TestSM2PrivateKeyImportOptsKeyImporter(t *testing.T) {
 
 	_, err = ki.KeyImport([]byte{0}, &mocks2.KeyImportOpts{})
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Failed converting PKIX to SM2 public key")
 
 	k, err := rsa.GenerateKey(rand.Reader, 512)
 	assert.NoError(t, err)
 	raw := x509.MarshalPKCS1PrivateKey(k)
 	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "Failed converting PKIX to SM2 public key")
 
 	//SM2私钥测试
 	kSM2, err := sm2.GenerateKey(rand.Reader)
