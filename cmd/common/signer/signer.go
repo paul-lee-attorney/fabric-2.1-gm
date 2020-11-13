@@ -12,7 +12,7 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric/protoutil"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/pkg/errors"
 )
@@ -97,7 +97,7 @@ func loadPrivateKey(file string) (*sm2.PrivateKey, error) {
 // Based on crypto/tls/tls.go but modified for Fabric:
 func parsePrivateKey(der []byte) (*sm2.PrivateKey, error) {
 	// OpenSSL 1.0.0 generates PKCS#8 keys.
-	if key, err := gm.ParsePKCS8SM2PrivateKey(der); err == nil {
+	if key, err := gmx509.ParsePKCS8SM2PrivateKey(der); err == nil {
 		// switch key := key.(type) {
 		// // Fabric only supports ECDSA at the moment.
 		// case *ecdsa.PrivateKey:
@@ -108,7 +108,7 @@ func parsePrivateKey(der []byte) (*sm2.PrivateKey, error) {
 	}
 
 	// OpenSSL ecparam generates SEC1 EC private keys for ECDSA.
-	key, err := gm.ParseSM2PrivateKey(der)
+	key, err := gmx509.ParseSM2PrivateKey(der)
 	if err != nil {
 		return nil, errors.Errorf("failed to parse private key: %v", err)
 	}

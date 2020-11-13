@@ -19,7 +19,8 @@ import (
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/internal/pkg/comm"
-	gmx509 "github.com/paul-lee-attorney/gm/sm2/cert"
+
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"

@@ -20,7 +20,8 @@ import (
 	"github.com/hyperledger/fabric/orderer/common/cluster"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
-	gmx509 "github.com/paul-lee-attorney/gm/sm2/cert"
+
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/pkg/errors"
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"

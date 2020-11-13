@@ -19,7 +19,7 @@ import (
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/peer"
 
-	gmx509 "github.com/paul-lee-attorney/gm/x509"
+	"github.com/paul-lee-attorney/gm/gmx509"
 )
 
 // AddPemToCertPool adds PEM-encoded certs to a cert pool

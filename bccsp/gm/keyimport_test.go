@@ -26,6 +26,7 @@ import (
 
 	mocks2 "github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/mocks"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw/mocks"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
@@ -133,7 +134,7 @@ func TestSM2PKIXPublicKeyImportOptsKeyImporter(t *testing.T) {
 	kSM2, err := sm2.GenerateKey(rand.Reader)
 	assert.NoError(t, err)
 
-	raw, err = MarshalPKIXSM2PublicKey(&kSM2.PublicKey)
+	raw, err = gmx509.MarshalPKIXSM2PublicKey(&kSM2.PublicKey)
 	assert.NoError(t, err)
 	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
 	assert.NoError(t, err)
@@ -172,7 +173,7 @@ func TestSM2PrivateKeyImportOptsKeyImporter(t *testing.T) {
 	kSM2, err := sm2.GenerateKey(rand.Reader)
 	assert.NoError(t, err)
 
-	raw, err = MarshalPKCS8SM2PrivateKey(kSM2)
+	raw, err = gmx509.MarshalPKCS8SM2PrivateKey(kSM2)
 	assert.NoError(t, err)
 	_, err = ki.KeyImport(raw, &mocks2.KeyImportOpts{})
 	assert.NoError(t, err)

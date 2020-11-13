@@ -14,7 +14,9 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	"github.com/hyperledger/fabric/common/channelconfig"
-	gmx509 "github.com/paul-lee-attorney/gm/sm2/cert"
+
+	"github.com/paul-lee-attorney/gm/gmx509"
+
 	"github.com/pkg/errors"
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"

@@ -26,7 +26,8 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/gm/sm2"
 
-	gmx509 "github.com/paul-lee-attorney/gm/x509"
+	"github.com/paul-lee-attorney/gm/gmx509"
+
 )
 
 //command line flags
@@ -93,7 +94,7 @@ func genKeySM2(name string) (*sm2.PrivateKey, error) {
 		return nil, err
 	}
 	//write key out to file
-	keyBytes, err := gm.MarshalSM2PrivateKey(priv)
+	keyBytes, err := gmx509.MarshalSM2PrivateKey(priv)
 	keyFile, err := os.OpenFile(name+"-key.pem", os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
 		return nil, err

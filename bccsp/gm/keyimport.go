@@ -15,6 +15,7 @@ import (
 	"reflect"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 )
 
@@ -49,7 +50,7 @@ func (*sm2PKIXPublicKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bc
 		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
-	sm2PK, err := ParsePKIXSM2PublicKey(der)
+	sm2PK, err := gmx509.ParsePKIXSM2PublicKey(der)
 	if err != nil {
 		return nil, fmt.Errorf("Failed converting PKIX to SM2 public key [%s]", err)
 	}
@@ -69,11 +70,11 @@ func (*sm2PrivateKeyImportOptsKeyImporter) KeyImport(raw interface{}, opts bccsp
 		return nil, errors.New("Invalid raw. It must not be nil.")
 	}
 
-	if key, err := ParsePKCS8SM2PrivateKey(der); err == nil {
+	if key, err := gmx509.ParsePKCS8SM2PrivateKey(der); err == nil {
 		return &sm2PrivateKey{key}, nil
 	}
 
-	if key, err := ParseSM2PrivateKey(der); err == nil {
+	if key, err := gmx509.ParseSM2PrivateKey(der); err == nil {
 		return &sm2PrivateKey{key}, nil
 	}
 

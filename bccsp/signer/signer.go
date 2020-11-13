@@ -11,8 +11,8 @@ import (
 	"io"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/pkg/errors"
 )
 
@@ -49,7 +49,7 @@ func New(csp bccsp.BCCSP, key bccsp.Key) (crypto.Signer, error) {
 	}
 
 	// 增加SM2解析方法, 若没有错误则返回SM2公钥
-	if pk, err := gm.ParsePKIXSM2PublicKey(raw); err == nil {
+	if pk, err := gmx509.ParsePKIXSM2PublicKey(raw); err == nil {
 		return &bccspCryptoSigner{csp, key, pk}, nil
 	}
 

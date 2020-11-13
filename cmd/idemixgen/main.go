@@ -23,7 +23,7 @@ import (
 	"github.com/hyperledger/fabric/common/tools/idemixgen/metadata"
 	"github.com/hyperledger/fabric/idemix"
 	"github.com/hyperledger/fabric/msp"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/pkg/errors"
 	"gopkg.in/alecthomas/kingpin.v2"
@@ -65,13 +65,13 @@ func main() {
 		handleError(err)
 
 		// encodedRevocationSK, err := x509.MarshalECPrivateKey(revocationKey)
-		encodedRevocationSK, err := gm.MarshalSM2PrivateKey(revocationKey)
+		encodedRevocationSK, err := gmx509.MarshalSM2PrivateKey(revocationKey)
 		handleError(err)
 
 		pemEncodedRevocationSK := pem.EncodeToMemory(&pem.Block{Type: "PRIVATE KEY", Bytes: encodedRevocationSK})
 		handleError(err)
 		// encodedRevocationPK, err := x509.MarshalPKIXPublicKey(revocationKey.Public())
-		encodedRevocationPK, err := gm.MarshalPKIXSM2PublicKey(revocationKey.Public())
+		encodedRevocationPK, err := gmx509.MarshalPKIXSM2PublicKey(revocationKey.Public())
 
 		handleError(err)
 		pemEncodedRevocationPK := pem.EncodeToMemory(&pem.Block{Type: "PUBLIC KEY", Bytes: encodedRevocationPK})
@@ -175,7 +175,7 @@ func readRevocationKey() *sm2.PrivateKey {
 		handleError(errors.Errorf("failed to decode ECDSA private key"))
 	}
 	// key, err := x509.ParseECPrivateKey(block.Bytes)
-	key, err := gm.ParseSM2PrivateKey(block.Bytes)
+	key, err := gmx509.ParseSM2PrivateKey(block.Bytes)
 	handleError(err)
 
 	return key

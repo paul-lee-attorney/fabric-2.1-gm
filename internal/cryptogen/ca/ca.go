@@ -24,7 +24,8 @@ import (
 	"github.com/hyperledger/fabric/internal/cryptogen/csp"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/paul-lee-attorney/gm/sm3"
-	gmx509 "github.com/paul-lee-attorney/gm/x509"
+
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/pkg/errors"
 )
 

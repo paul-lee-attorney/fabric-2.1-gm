@@ -15,8 +15,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/gm/sm2"
+
+	"github.com/paul-lee-attorney/gm/gmx509"
+
 	"github.com/pkg/errors"
 )
 
@@ -61,7 +63,7 @@ func parsePrivateKeyPEM(rawKey []byte) (*sm2.PrivateKey, error) {
 	}
 
 	// key, err := x509.ParsePKCS8PrivateKey(block.Bytes)
-	key, err := gm.ParsePKCS8SM2PrivateKey(block.Bytes)
+	key, err := gmx509.ParsePKCS8SM2PrivateKey(block.Bytes)
 	if err != nil {
 		return nil, errors.WithMessage(err, "pem bytes are not PKCS8 encoded ")
 	}
@@ -85,7 +87,7 @@ func GeneratePrivateKey(keystorePath string) (*sm2.PrivateKey, error) {
 	}
 
 	// pkcs8Encoded, err := x509.MarshalPKCS8PrivateKey(priv)
-	pkcs8Encoded, err := gm.MarshalPKCS8SM2PrivateKey(priv)
+	pkcs8Encoded, err := gmx509.MarshalPKCS8SM2PrivateKey(priv)
 	if err != nil {
 		return nil, errors.WithMessage(err, "failed to marshal private key")
 	}

@@ -13,8 +13,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/msp"
-
-	gmx509 "github.com/paul-lee-attorney/gm/x509"
+	"github.com/paul-lee-attorney/gm/gmx509"
 )
 
 // ExpiresAt returns when the given identity expires, or a zero time.Time

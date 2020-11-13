@@ -14,6 +14,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
@@ -70,7 +71,7 @@ func TestBigKeyFile(t *testing.T) {
 
 	cspKey := &sm2PrivateKey{privKey}
 	ski := cspKey.SKI()
-	rawKey, err := SM2PrivateKeyToPEM(privKey, nil)
+	rawKey, err := gmx509.SM2PrivateKeyToPEM(privKey, nil)
 	assert.NoError(t, err)
 
 	// Large padding array, of some values PEM parser will NOOP

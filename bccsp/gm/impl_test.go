@@ -19,6 +19,7 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw/mocks"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/paul-lee-attorney/gm/sm3"
 	"github.com/stretchr/testify/assert"
@@ -504,7 +505,7 @@ func TestSM2KeyImportFromSM2PublicKey(t *testing.T) {
 		t.Fatalf("Failed getting SM2 raw public key [%s]", err)
 	}
 
-	pub, err := ParsePKIXSM2PublicKey(pkRaw)
+	pub, err := gmx509.ParsePKIXSM2PublicKey(pkRaw)
 	if err != nil {
 		t.Fatalf("Failed converting raw to sm2.PublicKey [%s]", err)
 	}
@@ -552,7 +553,7 @@ func TestSM2KeyImportFromSM2PrivateKey(t *testing.T) {
 	}
 
 	// Import the sm2.PrivateKey
-	priv, err := MarshalSM2PrivateKey(key)
+	priv, err := gmx509.MarshalSM2PrivateKey(key)
 	if err != nil {
 		t.Fatalf("Failed converting raw to sm2.PrivateKey [%s]", err)
 	}
@@ -566,7 +567,7 @@ func TestSM2KeyImportFromSM2PrivateKey(t *testing.T) {
 	}
 
 	// Import the sm2.PublicKey
-	pub, err := MarshalPKIXSM2PublicKey(&key.PublicKey)
+	pub, err := gmx509.MarshalPKIXSM2PublicKey(&key.PublicKey)
 	if err != nil {
 		t.Fatalf("Failed converting raw to sm2.PublicKey [%s]", err)
 	}

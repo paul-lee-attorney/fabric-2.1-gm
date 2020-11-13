@@ -14,8 +14,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
-
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
@@ -51,18 +50,18 @@ func TestSignerDifferentFormats(t *testing.T) {
 
 	key, err := sm2.GenerateKey(rand.Reader)
 
-	privKeyPem, err := gm.SM2PrivateKeyToPEM(key, nil)
+	privKeyPem, err := gmx509.SM2PrivateKeyToPEM(key, nil)
 
 	pemBlock, _ := pem.Decode([]byte(privKeyPem))
 	assert.NotNil(t, pemBlock)
 
-	ecPK, err := gm.ParseSM2PrivateKey(pemBlock.Bytes)
+	ecPK, err := gmx509.ParseSM2PrivateKey(pemBlock.Bytes)
 	assert.NoError(t, err)
 
-	ec1, err := gm.MarshalSM2PrivateKey(ecPK)
+	ec1, err := gmx509.MarshalSM2PrivateKey(ecPK)
 	assert.NoError(t, err)
 
-	pkcs8, err := gm.MarshalPKCS8SM2PrivateKey(ecPK)
+	pkcs8, err := gmx509.MarshalPKCS8SM2PrivateKey(ecPK)
 	assert.NoError(t, err)
 
 	for _, testCase := range []struct {

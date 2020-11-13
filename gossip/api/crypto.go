@@ -19,7 +19,7 @@ import (
 	"github.com/hyperledger/fabric/gossip/common"
 	"google.golang.org/grpc"
 
-	gmx509 "github.com/paul-lee-attorney/gm/x509"
+	"github.com/paul-lee-attorney/gm/gmx509"
 )
 
 // MessageCryptoService is the contract between the gossip component and the

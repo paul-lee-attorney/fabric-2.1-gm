@@ -16,9 +16,8 @@ import (
 	"net"
 	"time"
 
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
-	gmx509 "github.com/paul-lee-attorney/gm/x509"
 
 	"github.com/pkg/errors"
 )
@@ -28,7 +27,7 @@ func newPrivKey() (*sm2.PrivateKey, []byte, error) {
 	if err != nil {
 		return nil, nil, err
 	}
-	privBytes, err := gm.MarshalPKCS8SM2PrivateKey(privateKey)
+	privBytes, err := gmx509.MarshalPKCS8SM2PrivateKey(privateKey)
 	if err != nil {
 		return nil, nil, err
 	}

@@ -21,6 +21,7 @@ import (
 	"errors"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/paul-lee-attorney/gm/sm3"
 )
@@ -76,7 +77,7 @@ type sm2PublicKey struct {
 // Bytes converts this key to its byte representation,
 // if this operation is allowed.
 func (k *sm2PublicKey) Bytes() (raw []byte, err error) {
-	raw, err = MarshalPKIXSM2PublicKey(k.pubKey)
+	raw, err = gmx509.MarshalPKIXSM2PublicKey(k.pubKey)
 	if err != nil {
 		return nil, err
 	}

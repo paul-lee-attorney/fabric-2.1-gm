@@ -25,6 +25,7 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/mocks"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm4"
 	"github.com/stretchr/testify/assert"
 )
@@ -516,8 +517,8 @@ func TestVariousSM4KeyEncoding(t *testing.T) {
 	}
 
 	// PEM format
-	pem := SM4toPEM(key)
-	keyFromPEM, err := PEMtoSM4(pem, nil)
+	pem := gmx509.SM4toPEM(key)
+	keyFromPEM, err := gmx509.PEMtoSM4(pem, nil)
 	if err != nil {
 		t.Fatalf("Failed converting PEM to SM4 key [%s]", err)
 	}
@@ -526,11 +527,11 @@ func TestVariousSM4KeyEncoding(t *testing.T) {
 	}
 
 	// Encrypted PEM format
-	pem, err = SM4toEncryptedPEM(key, []byte("passwd"))
+	pem, err = gmx509.SM4toEncryptedPEM(key, []byte("passwd"))
 	if err != nil {
 		t.Fatalf("Failed converting SM4 key to Encrypted PEM [%s]", err)
 	}
-	keyFromPEM, err = PEMtoSM4(pem, []byte("passwd"))
+	keyFromPEM, err = gmx509.PEMtoSM4(pem, []byte("passwd"))
 	if err != nil {
 		t.Fatalf("Failed converting encrypted PEM to SM4 key [%s]", err)
 	}

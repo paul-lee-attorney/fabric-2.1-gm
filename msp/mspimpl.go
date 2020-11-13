@@ -17,7 +17,7 @@ import (
 	m "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 
-	gmx509 "github.com/paul-lee-attorney/gm/cert"
+	"github.com/paul-lee-attorney/gm/gmx509"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/signer"
