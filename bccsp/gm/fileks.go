@@ -278,7 +278,7 @@ func (ks *fileBasedKeyStore) storePrivateKey(alias string, privateKey interface{
 }
 
 func (ks *fileBasedKeyStore) storePublicKey(alias string, publicKey interface{}) error {
-	rawKey, err := gmx509.Sm2PublicKeyToPEM(publicKey, ks.pwd)
+	rawKey, err := gmx509.SM2PublicKeyToPEM(publicKey, ks.pwd)
 	if err != nil {
 		logger.Errorf("Failed converting public key to PEM [%s]: [%s]", alias, err)
 		return err
