@@ -53,7 +53,7 @@ var (
 func SM2PrivateKeyToPEM(privateKey interface{}, pwd []byte) ([]byte, error) {
 	// Validate inputs
 	if len(pwd) != 0 {
-		return sm2PrivateKeyToEncryptedPEM(privateKey, pwd)
+		return Sm2PrivateKeyToEncryptedPEM(privateKey, pwd)
 	}
 	if privateKey == nil {
 		return nil, errors.New("Invalid key. It must be different from nil.")
@@ -80,8 +80,8 @@ func SM2PrivateKeyToPEM(privateKey interface{}, pwd []byte) ([]byte, error) {
 	}
 }
 
-// sm2PrivateKeyToEncryptedPEM converts a private key into an encrypted PEM
-func sm2PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, error) {
+// Sm2PrivateKeyToEncryptedPEM converts a private key into an encrypted PEM
+func Sm2PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, error) {
 	if privateKey == nil {
 		return nil, errors.New("Invalid private key. It must be different from nil.")
 	}
@@ -99,7 +99,7 @@ func sm2PrivateKeyToEncryptedPEM(privateKey interface{}, pwd []byte) ([]byte, er
 
 		blockType := "SM2 PRIVATE KEY"
 
-		block, err := sm4EncryptPEMBlock(blockType, raw, pwd)
+		block, err := Sm4EncryptPEMBlock(blockType, raw, pwd)
 		if err != nil {
 			return nil, err
 		}
@@ -128,7 +128,7 @@ func PEMtoSM2PrivateKey(raw []byte, pwd []byte) (interface{}, error) {
 			return nil, errors.New("Encrypted Key. Need a password")
 		}
 
-		decrypted, err := sm4DecryptPEMBlock(block, pwd)
+		decrypted, err := Sm4DecryptPEMBlock(block, pwd)
 		if err != nil {
 			return nil, fmt.Errorf("Failed PEM decryption [%s]", err)
 		}
@@ -290,7 +290,7 @@ func PEMtoSM4(raw []byte, pwd []byte) ([]byte, error) {
 			return nil, errors.New("Encrypted Key. Password must be different from nil")
 		}
 
-		decrypted, err := sm4DecryptPEMBlock(block, pwd)
+		decrypted, err := Sm4DecryptPEMBlock(block, pwd)
 		if err != nil {
 			return nil, fmt.Errorf("Failed PEM decryption. [%s]", err)
 		}
@@ -311,7 +311,7 @@ func SM4toEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
 
 	blockType := "SM4 PRIVATE KEY"
 
-	pem, err := sm4EncryptPEMBlock(blockType, raw, pwd)
+	pem, err := Sm4EncryptPEMBlock(blockType, raw, pwd)
 
 	if err != nil {
 		return nil, err
@@ -320,9 +320,9 @@ func SM4toEncryptedPEM(raw []byte, pwd []byte) ([]byte, error) {
 	return pem, nil
 }
 
-// sm4EncryptPEMBlock encrypt raw message into PEM format via SM4. refer: x509.EncryptPEMBlock()
+// Sm4EncryptPEMBlock encrypt raw message into PEM format via SM4. refer: x509.EncryptPEMBlock()
 // 将输入消息用SM4加密并转化为PEM格式的函数。
-func sm4EncryptPEMBlock(blockType string, raw []byte, pwd []byte) ([]byte, error) {
+func Sm4EncryptPEMBlock(blockType string, raw []byte, pwd []byte) ([]byte, error) {
 
 	if len(raw) == 0 || raw == nil {
 		return nil, errors.New("Invalid SM4 key. It must be different from nil")
@@ -361,9 +361,9 @@ func sm4EncryptPEMBlock(blockType string, raw []byte, pwd []byte) ([]byte, error
 	return pem.EncodeToMemory(block), nil
 }
 
-// sm4DecryptPEMBlock decrypt PEM block via SM4.
+// Sm4DecryptPEMBlock decrypt PEM block via SM4.
 // 将输入消息用SM4加密并转化为PEM格式的函数, 其中密文格式采用CBC模式，PKCS7规范填充尾部字节。
-func sm4DecryptPEMBlock(block *pem.Block, pwd []byte) ([]byte, error) {
+func Sm4DecryptPEMBlock(block *pem.Block, pwd []byte) ([]byte, error) {
 
 	if len(pwd) == 0 || pwd == nil {
 		return nil, errors.New("password shall not be nil")
@@ -414,8 +414,8 @@ func deriveKey(password, salt []byte) []byte {
 	return out
 }
 
-// pemToSM2PublicKey unmarshals a pem to public key
-func pemToSM2PublicKey(raw []byte, pwd []byte) (interface{}, error) {
+// PemToSM2PublicKey unmarshals a pem to public key
+func PemToSM2PublicKey(raw []byte, pwd []byte) (interface{}, error) {
 	if len(raw) == 0 {
 		return nil, errors.New("invalid PEM. It must be different from nil")
 	}
@@ -430,7 +430,7 @@ func pemToSM2PublicKey(raw []byte, pwd []byte) (interface{}, error) {
 			return nil, errors.New("encrypted Key. Password must be different from nil")
 		}
 
-		decrypted, err := sm4DecryptPEMBlock(block, pwd)
+		decrypted, err := Sm4DecryptPEMBlock(block, pwd)
 		if err != nil {
 			return nil, fmt.Errorf("Failed PEM decryption. [%s]", err)
 		}
@@ -448,10 +448,10 @@ func pemToSM2PublicKey(raw []byte, pwd []byte) (interface{}, error) {
 	return cert, err
 }
 
-// sm2PublicKeyToPEM marshals a public key to the pem format
-func sm2PublicKeyToPEM(publicKey interface{}, pwd []byte) ([]byte, error) {
+// Sm2PublicKeyToPEM marshals a public key to the pem format
+func Sm2PublicKeyToPEM(publicKey interface{}, pwd []byte) ([]byte, error) {
 	if len(pwd) != 0 {
-		return sm2PublicKeyToEncryptedPEM(publicKey, pwd)
+		return Sm2PublicKeyToEncryptedPEM(publicKey, pwd)
 	}
 
 	if publicKey == nil {
@@ -481,8 +481,8 @@ func sm2PublicKeyToPEM(publicKey interface{}, pwd []byte) ([]byte, error) {
 	}
 }
 
-// sm2PublicKeyToEncryptedPEM converts a public key to encrypted pem
-func sm2PublicKeyToEncryptedPEM(publicKey interface{}, pwd []byte) ([]byte, error) {
+// Sm2PublicKeyToEncryptedPEM converts a public key to encrypted pem
+func Sm2PublicKeyToEncryptedPEM(publicKey interface{}, pwd []byte) ([]byte, error) {
 	if publicKey == nil {
 		return nil, errors.New("Invalid public key. It must be different from nil")
 	}
@@ -502,7 +502,7 @@ func sm2PublicKeyToEncryptedPEM(publicKey interface{}, pwd []byte) ([]byte, erro
 
 		blockType := "MS2 PUBLIC KEY"
 
-		block, err := sm4EncryptPEMBlock(blockType, raw, pwd)
+		block, err := Sm4EncryptPEMBlock(blockType, raw, pwd)
 		if err != nil {
 			return nil, err
 		}

@@ -20,7 +20,7 @@ import (
 	"github.com/hyperledger/fabric/orderer/common/cluster"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
-	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
+	gmx509 "github.com/paul-lee-attorney/gm/sm2/cert"
 	"github.com/pkg/errors"
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"
@@ -260,7 +260,7 @@ func validateCert(pemData []byte, certRole string) error {
 	}
 
 	// if _, err := x509.ParseCertificate(bl.Bytes); err != nil {
-	if _, err := sm2cert.ParseCertificate(bl.Bytes); err != nil {
+	if _, err := gmx509.ParseCertificate(bl.Bytes); err != nil {
 		return errors.Errorf("%s TLS certificate has invalid ASN1 structure, %v: %s", certRole, err, string(pemData))
 	}
 	return nil

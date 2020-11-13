@@ -19,7 +19,7 @@ import (
 	"github.com/hyperledger/fabric/gossip/common"
 	"google.golang.org/grpc"
 
-	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
+	gmx509 "github.com/paul-lee-attorney/gm/x509"
 )
 
 // MessageCryptoService is the contract between the gossip component and the
@@ -131,7 +131,7 @@ func (pit PeerIdentityType) String() string {
 	}
 
 	// cert, _ := x509.ParseCertificate(bl.Bytes)
-	cert, _ := sm2cert.ParseCertificate(bl.Bytes)
+	cert, _ := gmx509.ParseCertificate(bl.Bytes)
 	if cert == nil {
 		return fmt.Sprintf("non x509 identity: %s", base64Representation)
 	}

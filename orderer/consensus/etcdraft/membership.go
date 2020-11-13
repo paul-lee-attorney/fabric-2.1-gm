@@ -14,7 +14,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	"github.com/hyperledger/fabric/common/channelconfig"
-	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
+	gmx509 "github.com/paul-lee-attorney/gm/sm2/cert"
 	"github.com/pkg/errors"
 	"go.etcd.io/etcd/raft"
 	"go.etcd.io/etcd/raft/raftpb"
@@ -194,7 +194,7 @@ func parseCertificateFromBytes(cert []byte) (*x509.Certificate, error) {
 	}
 
 	// certificate, err := x509.ParseCertificate(pemBlock.Bytes)
-	certificate, err := sm2cert.ParseCertificate(pemBlock.Bytes)
+	certificate, err := gmx509.ParseCertificate(pemBlock.Bytes)
 	if err != nil {
 		return &x509.Certificate{}, err
 	}

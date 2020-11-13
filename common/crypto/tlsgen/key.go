@@ -18,8 +18,7 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/gm/sm2"
-
-	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
+	gmx509 "github.com/paul-lee-attorney/gm/x509"
 
 	"github.com/pkg/errors"
 )
@@ -91,7 +90,7 @@ func newCertKeyPair(isCA bool, isServer bool, host string, certSigner crypto.Sig
 	}
 
 	// rawBytes, err := x509.CreateCertificate(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
-	rawBytes, err := sm2cert.CreateCertificateBytes(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
+	rawBytes, err := gmx509.CreateCertificateBytes(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +103,7 @@ func newCertKeyPair(isCA bool, isServer bool, host string, certSigner crypto.Sig
 	}
 
 	// cert, err := x509.ParseCertificate(block.Bytes)
-	cert, err := sm2cert.ParseCertificate(block.Bytes)
+	cert, err := gmx509.ParseCertificate(block.Bytes)
 	if err != nil {
 		return nil, err
 	}

@@ -15,12 +15,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
-
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/internal/pkg/comm"
+	gmx509 "github.com/paul-lee-attorney/gm/sm2/cert"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
@@ -322,7 +321,7 @@ func (c *Comm) updateStubInMapping(channel string, mapping MemberMapping, node R
 func (c *Comm) createRemoteContext(stub *Stub, channel string) func() (*RemoteContext, error) {
 	return func() (*RemoteContext, error) {
 		// cert, err := x509.ParseCertificate(stub.ServerTLSCert)
-		cert, err := sm2cert.ParseCertificate(stub.ServerTLSCert)
+		cert, err := gmx509.ParseCertificate(stub.ServerTLSCert)
 
 		if err != nil {
 			pemString := string(pem.EncodeToMemory(&pem.Block{Bytes: stub.ServerTLSCert}))

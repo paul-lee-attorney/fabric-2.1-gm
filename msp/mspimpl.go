@@ -17,7 +17,7 @@ import (
 	m "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 
-	sm2cert "github.com/paul-lee-attorney/gm/cert"
+	gmx509 "github.com/paul-lee-attorney/gm/cert"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/signer"
@@ -86,7 +86,8 @@ type bccspmsp struct {
 	name string
 
 	// verification options for MSP members
-	opts *x509.VerifyOptions
+	// opts *x509.VerifyOptions
+	opts *gmx509.VerifyOptions // 由于x509.CertPool太多的私有属性和私有方法，不得不重写整个与VerifyOptions相关的函数
 
 	// list of certificate revocation lists
 	CRL []*pkix.CertificateList
@@ -181,7 +182,7 @@ func (msp *bccspmsp) getCertFromPem(idBytes []byte) (*x509.Certificate, error) {
 
 	// 若PEM标题标注“SM2”, 指引向sm2cert解析函数。
 	if pemCert.Type == "SM2 CERTIFICATE" {
-		cert, err := sm2cert.ParseCertificate(pemCert.Bytes)
+		cert, err := gmx509.ParseCertificate(pemCert.Bytes)
 		if err != nil {
 			return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 SM2 cert")
 		}
@@ -425,7 +426,7 @@ func (msp *bccspmsp) deserializeIdentityInternal(serializedIdentity []byte) (Ide
 
 	// 根据PEM的block.Type信息，导向sm2证书解析函数
 	if bl.Type == "SM2 CERTIFICATE" {
-		cert, err := sm2cert.ParseCertificate(bl.Bytes)
+		cert, err := gmx509.ParseCertificate(bl.Bytes)
 		if err != nil {
 			return nil, errors.Wrap(err, "parseCertificate failed")
 		}
@@ -869,6 +870,6 @@ func (msp *bccspmsp) IsWellFormed(identity *m.SerializedIdentity) error {
 	}
 
 	// _, err := x509.ParseCertificate(bl.Bytes)
-	_, err := sm2cert.ParseCertificate(bl.Bytes)
+	_, err := gmx509.ParseCertificate(bl.Bytes)
 	return err
 }

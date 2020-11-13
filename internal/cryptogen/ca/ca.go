@@ -23,8 +23,8 @@ import (
 
 	"github.com/hyperledger/fabric/internal/cryptogen/csp"
 	"github.com/paul-lee-attorney/gm/sm2"
-	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
 	"github.com/paul-lee-attorney/gm/sm3"
+	gmx509 "github.com/paul-lee-attorney/gm/x509"
 	"github.com/pkg/errors"
 )
 
@@ -187,7 +187,7 @@ func computeSKI(privKey *sm2.PrivateKey) []byte {
 // default template for X509 subject
 func subjectTemplate() pkix.Name {
 	return pkix.Name{
-		Country:  []string{"CHINA"},
+		Country:  []string{"CN"},
 		Locality: []string{"Beijing"},
 		Province: []string{"Beijing"},
 	}
@@ -295,7 +295,7 @@ func genCertificateSM2(
 ) (*x509.Certificate, error) {
 
 	// create SM2 public cert
-	certBytes, err := sm2cert.CreateCertificateBytesBytes(template, parent, pub, priv)
+	certBytes, err := gmx509.CreateCertificateBytesBytes(template, parent, pub, priv)
 	if err != nil {
 		return nil, err
 	}
@@ -318,7 +318,7 @@ func genCertificateSM2(
 	// 	return nil, err
 	// }
 
-	sm2Cert, err := sm2cert.ParseCertificate(certBytes)
+	sm2Cert, err := gmx509.ParseCertificate(certBytes)
 	if err != nil {
 		return nil, err
 	}
@@ -372,7 +372,7 @@ func LoadCertificateSM2(certPath string) (*x509.Certificate, error) {
 			if block == nil || block.Type != "SM2 CERTIFICATE" {
 				return errors.Errorf("%s: wrong PEM encoding", path)
 			}
-			cert, err = sm2cert.ParseCertificate(block.Bytes)
+			cert, err = gmx509.ParseCertificate(block.Bytes)
 			if err != nil {
 				return errors.Errorf("%s: wrong DER encoding", path)
 			}

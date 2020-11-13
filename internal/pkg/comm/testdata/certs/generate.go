@@ -25,6 +25,8 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/gm/sm2"
+
+	gmx509 "github.com/paul-lee-attorney/gm/x509"
 )
 
 //command line flags
@@ -38,7 +40,7 @@ var (
 //default template for X509 subject of Beijing China
 func subjectTemplate() pkix.Name {
 	return pkix.Name{
-		Country:  []string{"CHINA"},
+		Country:  []string{"CN"},
 		Locality: []string{"Beijing"},
 		Province: []string{"Beijing"},
 	}
@@ -132,7 +134,7 @@ func genCertificateSM2(name string, template, parent *x509.Certificate, pub *sm2
 	priv *sm2.PrivateKey) (*x509.Certificate, error) {
 
 	//create the x509 public cert
-	certBytes, err := sm2cert.CreateCertificateBytes(rand.Reader, template, parent, pub, priv)
+	certBytes, err := gmx509.CreateCertificateBytes(rand.Reader, template, parent, pub, priv)
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +148,7 @@ func genCertificateSM2(name string, template, parent *x509.Certificate, pub *sm2
 	pem.Encode(certFile, &pem.Block{Type: "SM2 CERTIFICATE", Bytes: certBytes})
 	certFile.Close()
 
-	x509Cert, err := sm2cert.ParseCertificate(certBytes)
+	x509Cert, err := gmx509.ParseCertificate(certBytes)
 	if err != nil {
 		return nil, err
 	}

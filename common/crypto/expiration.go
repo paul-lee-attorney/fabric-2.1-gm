@@ -11,10 +11,10 @@ import (
 	"encoding/pem"
 	"time"
 
-	sm2cert "github.com/paul-lee-attorney/gm/sm2/cert"
-
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/msp"
+
+	gmx509 "github.com/paul-lee-attorney/gm/x509"
 )
 
 // ExpiresAt returns when the given identity expires, or a zero time.Time
@@ -37,7 +37,7 @@ func certExpirationTime(pemBytes []byte) time.Time {
 
 	// 根据block的Type信息，将SM2算法证书转向SM2证书解析函数
 	if bl.Type == "SM2 CERTIFICATE" {
-		cert, err := sm2cert.ParseCertificate(bl.Bytes)
+		cert, err := gmx509.ParseCertificate(bl.Bytes)
 		if err != nil {
 			return time.Time{}
 		}
