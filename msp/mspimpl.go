@@ -180,11 +180,10 @@ func (msp *bccspmsp) getCertFromPem(idBytes []byte) (*x509.Certificate, error) {
 	// get a cert
 	var cert *x509.Certificate
 
-	// 若PEM标题标注“SM2”, 指引向sm2cert解析函数。
 	if pemCert.Type == "SM2 CERTIFICATE" {
 		cert, err := gmx509.ParseCertificate(pemCert.Bytes)
 		if err != nil {
-			return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 SM2 cert")
+			return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 cert")
 		}
 		return cert, nil
 	}
@@ -424,17 +423,19 @@ func (msp *bccspmsp) deserializeIdentityInternal(serializedIdentity []byte) (Ide
 		return nil, errors.New("could not decode the PEM structure")
 	}
 
-	// 根据PEM的block.Type信息，导向sm2证书解析函数
+	var cert *x509.Certificate
+	var err error
+
 	if bl.Type == "SM2 CERTIFICATE" {
-		cert, err := gmx509.ParseCertificate(bl.Bytes)
+		cert, err = gmx509.ParseCertificate(bl.Bytes)
 		if err != nil {
 			return nil, errors.Wrap(err, "parseCertificate failed")
 		}
-	}
-
-	cert, err := x509.ParseCertificate(bl.Bytes)
-	if err != nil {
-		return nil, errors.Wrap(err, "parseCertificate failed")
+	} else {
+		cert, err = x509.ParseCertificate(bl.Bytes)
+		if err != nil {
+			return nil, errors.Wrap(err, "parseCertificate failed")
+		}
 	}
 
 	// Now we have the certificate; make sure that its fields
@@ -745,12 +746,13 @@ func (msp *bccspmsp) getCertificationChainForBCCSPIdentity(id *identity) ([]*x50
 	return msp.getValidationChain(id.cert, false)
 }
 
-func (msp *bccspmsp) getUniqueValidationChain(cert *x509.Certificate, opts x509.VerifyOptions) ([]*x509.Certificate, error) {
+func (msp *bccspmsp) getUniqueValidationChain(cert *x509.Certificate, opts gmx509.VerifyOptions) ([]*x509.Certificate, error) {
 	// ask golang to validate the cert for us based on the options that we've built at setup time
 	if msp.opts == nil {
 		return nil, errors.New("the supplied identity has no verify options")
 	}
-	validationChains, err := cert.Verify(opts)
+	// validationChains, err := cert.Verify(opts)
+	validationChains, err := gmx509.Verify(cert, opts)
 	if err != nil {
 		return nil, errors.WithMessage(err, "the supplied identity is not valid")
 	}
@@ -842,7 +844,6 @@ func (msp *bccspmsp) sanitizeCert(cert *x509.Certificate) (*x509.Certificate, er
 			parentCert = chain[1]
 		}
 
-		Sanitize
 		cert, err = sanitizeECDSASignedCert(cert, parentCert)
 		if err != nil {
 			return nil, err
@@ -865,11 +866,15 @@ func (msp *bccspmsp) IsWellFormed(identity *m.SerializedIdentity) error {
 	// 1) Must ensure PEM block is of type CERTIFICATE or is empty
 	// 2) Must not replace getCertFromPem with this method otherwise we will introduce
 	//    a change in validation logic which will result in a chain fork.
-	if bl.Type != "SM2 CERTIFICATE" && bl.Type != "" {
+	if bl.Type != "CERTIFICATE" && bl.Type != "SM2 CERTIFICATE" && bl.Type != "" {
 		return errors.Errorf("pem type is %s, should be 'SM2 CERTIFICATE' or missing", bl.Type)
 	}
 
-	// _, err := x509.ParseCertificate(bl.Bytes)
-	_, err := gmx509.ParseCertificate(bl.Bytes)
+	if bl.Type == "SM2 CERTIFICATE" {
+		_, err := gmx509.ParseCertificate(bl.Bytes)
+		return err
+	}
+
+	_, err := x509.ParseCertificate(bl.Bytes)
 	return err
 }

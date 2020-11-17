@@ -21,7 +21,7 @@ import (
 	"testing"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -71,13 +71,13 @@ func TestValidateIntermediateConfigOU(t *testing.T) {
 	conf, err := GetLocalMspConfig("testdata/external", nil, "SampleOrg")
 	assert.NoError(t, err)
 
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 	thisMSP, err = newBccspMsp(MSPv1_0, cryptoProvider)
 	assert.NoError(t, err)
-	ks, err := sw.NewFileBasedKeyStore(nil, filepath.Join("testdata/external", "keystore"), true)
+	ks, err := gm.NewFileBasedKeyStore(nil, filepath.Join("testdata/external", "keystore"), true)
 	assert.NoError(t, err)
-	csp, err := sw.NewWithParams(256, "SHA2", ks)
+	csp, err := gm.NewWithParams(ks)
 	assert.NoError(t, err)
 	thisMSP.(*bccspmsp).bccsp = csp
 

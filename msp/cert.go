@@ -132,7 +132,7 @@ func (c certificate) String() string {
 	}
 	block := &pem.Block{
 		Bytes: b,
-		Type:  "CERTIFICATE",
+		Type:  "SM2 CERTIFICATE",
 	}
 	b = pem.EncodeToMemory(block)
 	return string(b)

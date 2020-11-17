@@ -17,8 +17,6 @@ limitations under the License.
 package msp
 
 import (
-	"crypto/ecdsa"
-	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/x509"
 	"crypto/x509/pkix"
@@ -28,105 +26,106 @@ import (
 	"testing"
 	"time"
 
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/gm/gmx509"
+	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSanitizeCertWithRSA(t *testing.T) {
-	cert := &x509.Certificate{}
-	cert.SignatureAlgorithm = x509.MD2WithRSA
-	result := isECDSASignedCert(cert)
-	assert.False(t, result)
+// func TestSanitizeCertWithRSA(t *testing.T) {
+// 	cert := &x509.Certificate{}
+// 	cert.SignatureAlgorithm = x509.MD2WithRSA
+// 	result := isECDSASignedCert(cert)
+// 	assert.False(t, result)
 
-	cert.SignatureAlgorithm = x509.ECDSAWithSHA512
-	result = isECDSASignedCert(cert)
-	assert.True(t, result)
-}
+// 	cert.SignatureAlgorithm = x509.ECDSAWithSHA512
+// 	result = isECDSASignedCert(cert)
+// 	assert.True(t, result)
+// }
 
-func TestSanitizeCertInvalidInput(t *testing.T) {
-	_, err := sanitizeECDSASignedCert(nil, nil)
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "certificate must be different from nil")
+// func TestSanitizeCertInvalidInput(t *testing.T) {
+// 	_, err := sanitizeECDSASignedCert(nil, nil)
+// 	assert.Error(t, err)
+// 	assert.Contains(t, err.Error(), "certificate must be different from nil")
 
-	_, err = sanitizeECDSASignedCert(&x509.Certificate{}, nil)
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "parent certificate must be different from nil")
+// 	_, err = sanitizeECDSASignedCert(&x509.Certificate{}, nil)
+// 	assert.Error(t, err)
+// 	assert.Contains(t, err.Error(), "parent certificate must be different from nil")
 
-	k, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
-	assert.NoError(t, err)
-	cert := &x509.Certificate{}
-	cert.PublicKey = &k.PublicKey
-	sigma, err := utils.MarshalECDSASignature(big.NewInt(1), elliptic.P256().Params().N)
-	assert.NoError(t, err)
-	cert.Signature = sigma
-	cert.PublicKeyAlgorithm = x509.ECDSA
-	cert.Raw = []byte{0, 1}
-	_, err = sanitizeECDSASignedCert(cert, cert)
-	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "asn1: structure error: tags don't match")
-}
+// 	k, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+// 	assert.NoError(t, err)
+// 	cert := &x509.Certificate{}
+// 	cert.PublicKey = &k.PublicKey
+// 	sigma, err := utils.MarshalECDSASignature(big.NewInt(1), elliptic.P256().Params().N)
+// 	assert.NoError(t, err)
+// 	cert.Signature = sigma
+// 	cert.PublicKeyAlgorithm = x509.ECDSA
+// 	cert.Raw = []byte{0, 1}
+// 	_, err = sanitizeECDSASignedCert(cert, cert)
+// 	assert.Error(t, err)
+// 	assert.Contains(t, err.Error(), "asn1: structure error: tags don't match")
+// }
 
-func TestSanitizeCert(t *testing.T) {
-	var k *ecdsa.PrivateKey
-	var cert *x509.Certificate
-	for {
-		k, cert = generateSelfSignedCert(t, time.Now())
+// func TestSanitizeCert(t *testing.T) {
+// 	var k *sm2.PrivateKey
+// 	var cert *x509.Certificate
+// 	for {
+// 		k, cert = generateSelfSignedCert(t, time.Now())
 
-		_, s, err := utils.UnmarshalECDSASignature(cert.Signature)
-		assert.NoError(t, err)
+// 		// _, s, err := utils.UnmarshalECDSASignature(cert.Signature)
+// 		// assert.NoError(t, err)
 
-		lowS, err := utils.IsLowS(&k.PublicKey, s)
-		assert.NoError(t, err)
+// 		// lowS, err := utils.IsLowS(&k.PublicKey, s)
+// 		// assert.NoError(t, err)
 
-		if !lowS {
-			break
-		}
-	}
+// 		// if !lowS {
+// 		// 	break
+// 		// }
+// 	}
 
-	sanitizedCert, err := sanitizeECDSASignedCert(cert, cert)
-	assert.NoError(t, err)
-	assert.NotEqual(t, cert.Signature, sanitizedCert.Signature)
+// 	// sanitizedCert, err := sanitizeECDSASignedCert(cert, cert)
+// 	// assert.NoError(t, err)
+// 	// assert.NotEqual(t, cert.Signature, sanitizedCert.Signature)
 
-	_, s, err := utils.UnmarshalECDSASignature(sanitizedCert.Signature)
-	assert.NoError(t, err)
+// 	// _, s, err := utils.UnmarshalECDSASignature(sanitizedCert.Signature)
+// 	// assert.NoError(t, err)
 
-	lowS, err := utils.IsLowS(&k.PublicKey, s)
-	assert.NoError(t, err)
-	assert.True(t, lowS)
-}
+// 	// lowS, err := utils.IsLowS(&k.PublicKey, s)
+// 	// assert.NoError(t, err)
+// 	// assert.True(t, lowS)
+// }
 
 func TestCertExpiration(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 	msp := &bccspmsp{bccsp: cryptoProvider}
-	msp.opts = &x509.VerifyOptions{}
+	msp.opts = &gmx509.VerifyOptions{}
 	msp.opts.DNSName = "test.example.com"
 
 	// Certificate is in the future
 	_, cert := generateSelfSignedCert(t, time.Now().Add(24*time.Hour))
-	msp.opts.Roots = x509.NewCertPool()
+	msp.opts.Roots = gmx509.NewCertPool()
 	msp.opts.Roots.AddCert(cert)
 	_, err = msp.getUniqueValidationChain(cert, msp.getValidityOptsForCert(cert))
 	assert.NoError(t, err)
 
 	// Certificate is in the past
 	_, cert = generateSelfSignedCert(t, time.Now().Add(-24*time.Hour))
-	msp.opts.Roots = x509.NewCertPool()
+	msp.opts.Roots = gmx509.NewCertPool()
 	msp.opts.Roots.AddCert(cert)
 	_, err = msp.getUniqueValidationChain(cert, msp.getValidityOptsForCert(cert))
 	assert.NoError(t, err)
 
 	// Certificate is in the middle
 	_, cert = generateSelfSignedCert(t, time.Now())
-	msp.opts.Roots = x509.NewCertPool()
+	msp.opts.Roots = gmx509.NewCertPool()
 	msp.opts.Roots.AddCert(cert)
 	_, err = msp.getUniqueValidationChain(cert, msp.getValidityOptsForCert(cert))
 	assert.NoError(t, err)
 }
 
-func generateSelfSignedCert(t *testing.T, now time.Time) (*ecdsa.PrivateKey, *x509.Certificate) {
-	k, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+func generateSelfSignedCert(t *testing.T, now time.Time) (*sm2.PrivateKey, *x509.Certificate) {
+	k, err := sm2.GenerateKey(rand.Reader)
 	assert.NoError(t, err)
 
 	// Generate a self-signed certificate
@@ -154,7 +153,7 @@ func generateSelfSignedCert(t *testing.T, now time.Time) (*ecdsa.PrivateKey, *x5
 		},
 		NotBefore:             now.Add(-1 * time.Hour),
 		NotAfter:              now.Add(1 * time.Hour),
-		SignatureAlgorithm:    x509.ECDSAWithSHA256,
+		SignatureAlgorithm:    x509.UnknownSignatureAlgorithm,
 		SubjectKeyId:          []byte{1, 2, 3, 4},
 		KeyUsage:              x509.KeyUsageCertSign,
 		ExtKeyUsage:           testExtKeyUsage,
@@ -176,10 +175,10 @@ func generateSelfSignedCert(t *testing.T, now time.Time) (*ecdsa.PrivateKey, *x5
 			},
 		},
 	}
-	certRaw, err := x509.CreateCertificate(rand.Reader, &template, &template, &k.PublicKey, k)
+	certRaw, err := gmx509.CreateCertificateBytes(&template, &template, &k.PublicKey, k)
 	assert.NoError(t, err)
 
-	cert, err := x509.ParseCertificate(certRaw)
+	cert, err := gmx509.ParseCertificate(certRaw)
 	assert.NoError(t, err)
 
 	return k, cert

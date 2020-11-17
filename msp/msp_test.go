@@ -22,11 +22,12 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -70,7 +71,7 @@ func TestGetSigningIdentityFromConfWithWrongPrivateCert(t *testing.T) {
 		localMsp.(*bccspmsp).opts.Roots = oldRoots
 	}()
 	_, cert := generateSelfSignedCert(t, time.Now())
-	localMsp.(*bccspmsp).opts.Roots = x509.NewCertPool()
+	localMsp.(*bccspmsp).opts.Roots = gmx509.NewCertPool()
 	localMsp.(*bccspmsp).opts.Roots.AddCert(cert)
 
 	// Use self signed cert as public key. Convert DER to PEM format
@@ -173,7 +174,7 @@ func (*bccspNoKeyLookupKS) GetKey(ski []byte) (k bccsp.Key, err error) {
 }
 
 func TestNotFoundInBCCSP(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	dir := configtest.GetDevMspDir()
@@ -183,9 +184,10 @@ func TestNotFoundInBCCSP(t *testing.T) {
 
 	thisMSP, err := newBccspMsp(MSPv1_0, cryptoProvider)
 	assert.NoError(t, err)
-	ks, err := sw.NewFileBasedKeyStore(nil, filepath.Join(dir, "keystore"), true)
+	ks, err := gm.NewFileBasedKeyStore(nil, filepath.Join(dir, "keystore"), true)
 	assert.NoError(t, err)
-	csp, err := sw.NewWithParams(256, "SHA2", ks)
+	// csp, err := gm.NewWithParams(256, "SHA2", ks)
+	csp, err := gm.NewWithParams(ks)
 	assert.NoError(t, err)
 	thisMSP.(*bccspmsp).bccsp = &bccspNoKeyLookupKS{csp}
 
@@ -220,7 +222,7 @@ func TestDeserializeIdentityFails(t *testing.T) {
 }
 
 func TestGetSigningIdentityFromVerifyingMSP(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	mspDir := configtest.GetDevMspDir()
@@ -346,7 +348,7 @@ func TestValidateCAIdentity(t *testing.T) {
 }
 
 func TestBadAdminIdentity(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	conf, err := GetLocalMspConfig("testdata/badadmin", nil, "SampleOrg")
@@ -354,9 +356,9 @@ func TestBadAdminIdentity(t *testing.T) {
 
 	thisMSP, err := newBccspMsp(MSPv1_0, cryptoProvider)
 	assert.NoError(t, err)
-	ks, err := sw.NewFileBasedKeyStore(nil, filepath.Join("testdata/badadmin", "keystore"), true)
+	ks, err := gm.NewFileBasedKeyStore(nil, filepath.Join("testdata/badadmin", "keystore"), true)
 	assert.NoError(t, err)
-	csp, err := sw.NewWithParams(256, "SHA2", ks)
+	csp, err := gm.NewWithParams(ks)
 	assert.NoError(t, err)
 	thisMSP.(*bccspmsp).bccsp = csp
 
@@ -971,7 +973,7 @@ func TestIdentityExpiresAt(t *testing.T) {
 }
 
 func TestIdentityExpired(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	expiredCertsDir := "testdata/expired"
@@ -981,10 +983,10 @@ func TestIdentityExpired(t *testing.T) {
 	thisMSP, err := newBccspMsp(MSPv1_0, cryptoProvider)
 	assert.NoError(t, err)
 
-	ks, err := sw.NewFileBasedKeyStore(nil, filepath.Join(expiredCertsDir, "keystore"), true)
+	ks, err := gm.NewFileBasedKeyStore(nil, filepath.Join(expiredCertsDir, "keystore"), true)
 	assert.NoError(t, err)
 
-	csp, err := sw.NewWithParams(256, "SHA2", ks)
+	csp, err := gm.NewWithParams(ks)
 	assert.NoError(t, err)
 	thisMSP.(*bccspmsp).bccsp = csp
 
@@ -1202,9 +1204,9 @@ func getLocalMSPWithVersionAndError(t *testing.T, dir string, version MSPVersion
 	conf, err := GetLocalMspConfig(dir, nil, "SampleOrg")
 	assert.NoError(t, err)
 
-	ks, err := sw.NewFileBasedKeyStore(nil, filepath.Join(dir, "keystore"), true)
+	ks, err := gm.NewFileBasedKeyStore(nil, filepath.Join(dir, "keystore"), true)
 	assert.NoError(t, err)
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 	thisMSP, err := NewBccspMspWithKeyStore(version, ks, cryptoProvider)
 	assert.NoError(t, err)
@@ -1216,10 +1218,10 @@ func getLocalMSP(t *testing.T, dir string) MSP {
 	conf, err := GetLocalMspConfig(dir, nil, "SampleOrg")
 	assert.NoError(t, err)
 
-	ks, err := sw.NewFileBasedKeyStore(nil, filepath.Join(dir, "keystore"), true)
+	ks, err := gm.NewFileBasedKeyStore(nil, filepath.Join(dir, "keystore"), true)
 	assert.NoError(t, err)
 
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 	thisMSP, err := NewBccspMspWithKeyStore(MSPv1_0, ks, cryptoProvider)
 	err = thisMSP.Setup(conf)
@@ -1232,9 +1234,9 @@ func getLocalMSPWithVersion(t *testing.T, dir string, version MSPVersion) MSP {
 	conf, err := GetLocalMspConfig(dir, nil, "SampleOrg")
 	assert.NoError(t, err)
 
-	ks, err := sw.NewFileBasedKeyStore(nil, filepath.Join(dir, "keystore"), true)
+	ks, err := gm.NewFileBasedKeyStore(nil, filepath.Join(dir, "keystore"), true)
 	assert.NoError(t, err)
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 	thisMSP, err := NewBccspMspWithKeyStore(version, ks, cryptoProvider)
 	assert.NoError(t, err)

@@ -16,6 +16,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	m "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	errors "github.com/pkg/errors"
 )
 
@@ -118,7 +119,7 @@ func (msp *bccspmsp) setupCAs(conf *m.FabricMSPConfig) error {
 	// Recall that sanitization is applied also to root CA and intermediate
 	// CA certificates. After their sanitization is done, the opts
 	// will be recreated using the sanitized certs.
-	msp.opts = &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()}
+	msp.opts = &gmx509.VerifyOptions{Roots: gmx509.NewCertPool(), Intermediates: gmx509.NewCertPool()}
 	for _, v := range conf.RootCerts {
 		cert, err := msp.getCertFromPem(v)
 		if err != nil {
@@ -158,7 +159,7 @@ func (msp *bccspmsp) setupCAs(conf *m.FabricMSPConfig) error {
 	}
 
 	// root CA and intermediate CA certificates are sanitized, they can be re-imported
-	msp.opts = &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()}
+	msp.opts = &gmx509.VerifyOptions{Roots: gmx509.NewCertPool(), Intermediates: gmx509.NewCertPool()}
 	for _, id := range msp.rootCerts {
 		msp.opts.Roots.AddCert(id.(*identity).cert)
 	}
@@ -427,7 +428,7 @@ func (msp *bccspmsp) setupOUs(conf *m.FabricMSPConfig) error {
 
 func (msp *bccspmsp) setupTLSCAs(conf *m.FabricMSPConfig) error {
 
-	opts := &x509.VerifyOptions{Roots: x509.NewCertPool(), Intermediates: x509.NewCertPool()}
+	opts := &gmx509.VerifyOptions{Roots: gmx509.NewCertPool(), Intermediates: gmx509.NewCertPool()}
 
 	// Load TLS root and intermediate CA identities
 	msp.tlsRootCerts = make([][]byte, len(conf.TlsRootCerts))

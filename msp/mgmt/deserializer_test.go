@@ -12,20 +12,20 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestNewDeserializersManager(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 	assert.NotNil(t, NewDeserializersManager(cryptoProvider))
 }
 
 func TestMspDeserializersManager_Deserialize(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	m := NewDeserializersManager(cryptoProvider)
@@ -43,7 +43,7 @@ func TestMspDeserializersManager_Deserialize(t *testing.T) {
 }
 
 func TestMspDeserializersManager_GetChannelDeserializers(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	m := NewDeserializersManager(cryptoProvider)
@@ -53,7 +53,7 @@ func TestMspDeserializersManager_GetChannelDeserializers(t *testing.T) {
 }
 
 func TestMspDeserializersManager_GetLocalDeserializer(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	m := NewDeserializersManager(cryptoProvider)

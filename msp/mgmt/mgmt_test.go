@@ -9,11 +9,11 @@ package mgmt
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/bccsp"
 	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -43,7 +43,7 @@ func TestGetManagerForChains_usingMSPConfigHandlers(t *testing.T) {
 }
 
 func TestGetIdentityDeserializer(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	XXXSetMSPManager("baz", msp.NewMSPManager())
@@ -54,7 +54,7 @@ func TestGetIdentityDeserializer(t *testing.T) {
 }
 
 func TestGetLocalSigningIdentityOrPanic(t *testing.T) {
-	cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+	cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 	assert.NoError(t, err)
 
 	sid := GetLocalSigningIdentityOrPanic(cryptoProvider)
