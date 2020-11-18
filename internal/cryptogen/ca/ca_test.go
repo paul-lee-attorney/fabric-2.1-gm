@@ -6,7 +6,6 @@ SPDX-License-Identifier: Apache-2.0
 package ca_test
 
 import (
-	"crypto/ecdsa"
 	"crypto/x509"
 	"io/ioutil"
 	"net"
@@ -14,8 +13,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/internal/cryptogen/ca"
-	"github.com/hyperledger/fabric/internal/cryptogen/csp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/ca"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/csp"
+	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -36,7 +36,59 @@ const (
 	testPostalCode         = "123456"
 )
 
-func TestLoadCertificateECDSA(t *testing.T) {
+// func TestLoadCertificateECDSA(t *testing.T) {
+// 	testDir, err := ioutil.TempDir("", "ca-test")
+// 	if err != nil {
+// 		t.Fatalf("Failed to create test directory: %s", err)
+// 	}
+// 	defer os.RemoveAll(testDir)
+
+// 	// generate private key
+// 	certDir, err := ioutil.TempDir(testDir, "certs")
+// 	if err != nil {
+// 		t.Fatalf("Failed to create certs directory: %s", err)
+// 	}
+// 	priv, err := csp.GeneratePrivateKey(certDir)
+// 	assert.NoError(t, err, "Failed to generate signed certificate")
+
+// 	// create our CA
+// 	caDir := filepath.Join(testDir, "ca")
+// 	rootCA, err := ca.NewCA(
+// 		caDir,
+// 		testCA3Name,
+// 		testCA3Name,
+// 		testCountry,
+// 		testProvince,
+// 		testLocality,
+// 		testOrganizationalUnit,
+// 		testStreetAddress,
+// 		testPostalCode,
+// 	)
+// 	assert.NoError(t, err, "Error generating CA")
+
+// 	cert, err := rootCA.SignCertificate(
+// 		certDir,
+// 		testName3,
+// 		nil,
+// 		nil,
+// 		&priv.PublicKey,
+// 		x509.KeyUsageDigitalSignature|x509.KeyUsageKeyEncipherment,
+// 		[]x509.ExtKeyUsage{x509.ExtKeyUsageAny},
+// 	)
+// 	assert.NoError(t, err, "Failed to generate signed certificate")
+// 	// KeyUsage should be x509.KeyUsageDigitalSignature | x509.KeyUsageKeyEncipherment
+// 	assert.Equal(t, x509.KeyUsageDigitalSignature|x509.KeyUsageKeyEncipherment,
+// 		cert.KeyUsage)
+// 	assert.Contains(t, cert.ExtKeyUsage, x509.ExtKeyUsageAny)
+
+// 	loadedCert, err := ca.LoadCertificateSM2(certDir)
+// 	assert.NoError(t, err)
+// 	assert.NotNil(t, loadedCert, "Should load cert")
+// 	assert.Equal(t, cert.SerialNumber, loadedCert.SerialNumber, "Should have same serial number")
+// 	assert.Equal(t, cert.Subject.CommonName, loadedCert.Subject.CommonName, "Should have same CN")
+// }
+
+func TestLoadCertificateSM2(t *testing.T) {
 	testDir, err := ioutil.TempDir("", "ca-test")
 	if err != nil {
 		t.Fatalf("Failed to create test directory: %s", err)
@@ -81,7 +133,7 @@ func TestLoadCertificateECDSA(t *testing.T) {
 		cert.KeyUsage)
 	assert.Contains(t, cert.ExtKeyUsage, x509.ExtKeyUsageAny)
 
-	loadedCert, err := ca.LoadCertificateECDSA(certDir)
+	loadedCert, err := ca.LoadCertificateSM2(certDir)
 	assert.NoError(t, err)
 	assert.NotNil(t, loadedCert, "Should load cert")
 	assert.Equal(t, cert.SerialNumber, loadedCert.SerialNumber, "Should have same serial number")
@@ -97,7 +149,7 @@ func TestLoadCertificateECDSA_wrongEncoding(t *testing.T) {
 	err = ioutil.WriteFile(filename, []byte("wrong_encoding"), 0644) // Wrong encoded cert
 	require.NoErrorf(t, err, "failed to create file %s", filename)
 
-	_, err = ca.LoadCertificateECDSA(testDir)
+	_, err = ca.LoadCertificateSM2(testDir)
 	assert.NotNil(t, err)
 	assert.EqualError(t, err, filename+": wrong PEM encoding")
 }
@@ -112,7 +164,7 @@ func TestLoadCertificateECDSA_empty_DER_cert(t *testing.T) {
 	err = ioutil.WriteFile(filename, []byte(empty_cert), 0644)
 	require.NoErrorf(t, err, "failed to create file %s", filename)
 
-	cert, err := ca.LoadCertificateECDSA(testDir)
+	cert, err := ca.LoadCertificateSM2(testDir)
 	assert.Nil(t, cert)
 	assert.NotNil(t, err)
 	assert.EqualError(t, err, filename+": wrong DER encoding")
@@ -248,7 +300,7 @@ func TestGenerateSignCertificate(t *testing.T) {
 		Name:     "badCA",
 		SignCert: &x509.Certificate{},
 	}
-	_, err = badCA.SignCertificate(certDir, testName, nil, nil, &ecdsa.PublicKey{},
+	_, err = badCA.SignCertificate(certDir, testName, nil, nil, &sm2.PublicKey{},
 		x509.KeyUsageKeyEncipherment, []x509.ExtKeyUsage{x509.ExtKeyUsageAny})
 	assert.Error(t, err, "Empty CA should not be able to sign")
 

@@ -7,7 +7,6 @@ package ca
 
 import (
 	"crypto"
-	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/x509"
@@ -21,7 +20,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hyperledger/fabric/internal/cryptogen/csp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/csp"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/paul-lee-attorney/gm/sm3"
 
@@ -88,7 +87,8 @@ func NewCA(
 	template.Subject = subject
 	template.SubjectKeyId = computeSKI(priv)
 
-	x509Cert, err := genCertificateECDSA(
+	x509Cert, err := genCertificateSM2(
+		// x509Cert, err := genCertificateECDSA(
 		baseDir,
 		name,
 		&template,
@@ -101,9 +101,15 @@ func NewCA(
 	}
 	ca = &CA{
 		Name: name,
-		Signer: &csp.ECDSASigner{
+
+		// Signer: &csp.ECDSASigner{
+		// 	PrivateKey: priv,
+		// },
+
+		Signer: &csp.SM2Signer{
 			PrivateKey: priv,
 		},
+
 		SignCert:           x509Cert,
 		Country:            country,
 		Province:           province,
@@ -123,7 +129,7 @@ func (ca *CA) SignCertificate(
 	name string,
 	orgUnits,
 	alternateNames []string,
-	pub *ecdsa.PublicKey,
+	pub *sm2.PublicKey,
 	ku x509.KeyUsage,
 	eku []x509.ExtKeyUsage,
 ) (*x509.Certificate, error) {
@@ -230,6 +236,7 @@ func subjectTemplateAdditional(
 func x509Template() x509.Certificate {
 
 	// generate a serial number
+	// 数字1左移128位，相当于限制最大随机数为（2^128-1）
 	serialNumberLimit := new(big.Int).Lsh(big.NewInt(1), 128)
 	serialNumber, _ := rand.Int(rand.Reader, serialNumberLimit)
 
@@ -246,7 +253,6 @@ func x509Template() x509.Certificate {
 		BasicConstraintsValid: true,
 	}
 	return x509
-
 }
 
 // // generate a signed X509 certificate using ECDSA
@@ -296,35 +302,70 @@ func genCertificateSM2(
 ) (*x509.Certificate, error) {
 
 	// create SM2 public cert
-	certBytes, err := gmx509.CreateCertificateBytesBytes(template, parent, pub, priv)
-	if err != nil {
-		return nil, err
+	switch pri := priv.(type) {
+	case *sm2.PrivateKey:
+		certBytes, err := gmx509.CreateCertificateBytes(template, parent, pub, pri)
+		if err != nil {
+			return nil, err
+		}
+		//write cert out to file
+		fileName := filepath.Join(baseDir, name+"-cert.pem")
+		certFile, err := os.Create(fileName)
+		if err != nil {
+			return nil, err
+		}
+		//pem encode the cert
+		err = pem.Encode(certFile, &pem.Block{Type: "SM2 CERTIFICATE", Bytes: certBytes})
+		certFile.Close()
+		if err != nil {
+			return nil, err
+		}
+
+		// x509Cert, err := x509.ParseCertificate(certBytes)
+		// if err != nil {
+		// 	return nil, err
+		// }
+
+		sm2Cert, err := gmx509.ParseCertificate(certBytes)
+		if err != nil {
+			return nil, err
+		}
+
+		return sm2Cert, nil
+	case *csp.SM2Signer:
+		certBytes, err := gmx509.CreateCertificateBytes(template, parent, pub, pri.PrivateKey)
+		if err != nil {
+			return nil, err
+		}
+		//write cert out to file
+		fileName := filepath.Join(baseDir, name+"-cert.pem")
+		certFile, err := os.Create(fileName)
+		if err != nil {
+			return nil, err
+		}
+		//pem encode the cert
+		err = pem.Encode(certFile, &pem.Block{Type: "SM2 CERTIFICATE", Bytes: certBytes})
+		certFile.Close()
+		if err != nil {
+			return nil, err
+		}
+
+		// x509Cert, err := x509.ParseCertificate(certBytes)
+		// if err != nil {
+		// 	return nil, err
+		// }
+
+		sm2Cert, err := gmx509.ParseCertificate(certBytes)
+		if err != nil {
+			return nil, err
+		}
+
+		return sm2Cert, nil
+
+	default:
+		return nil, errors.New("private key type is not sm2.PrivateKey")
 	}
 
-	//write cert out to file
-	fileName := filepath.Join(baseDir, name+"-cert.pem")
-	certFile, err := os.Create(fileName)
-	if err != nil {
-		return nil, err
-	}
-	//pem encode the cert
-	err = pem.Encode(certFile, &pem.Block{Type: "SM2 CERTIFICATE", Bytes: certBytes})
-	certFile.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	// x509Cert, err := x509.ParseCertificate(certBytes)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	sm2Cert, err := gmx509.ParseCertificate(certBytes)
-	if err != nil {
-		return nil, err
-	}
-
-	return sm2Cert, nil
 }
 
 // // LoadCertificateECDSA load a ecdsa cert from a file in cert path

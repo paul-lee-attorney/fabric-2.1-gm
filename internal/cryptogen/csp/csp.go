@@ -11,6 +11,7 @@ import (
 	"encoding/pem"
 	"io"
 	"io/ioutil"
+	"math/big"
 	"os"
 	"path/filepath"
 	"strings"
@@ -178,3 +179,7 @@ signatures in this canonical form.
 // type ECDSASignature struct {
 // 	R, S *big.Int
 // }
+
+type SM2Signature struct {
+	R, S *big.Int
+}
