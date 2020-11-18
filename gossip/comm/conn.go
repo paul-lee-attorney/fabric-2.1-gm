@@ -11,10 +11,10 @@ import (
 	"sync"
 
 	proto "github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/metrics"
-	"github.com/hyperledger/fabric/gossip/protoext"
-	"github.com/hyperledger/fabric/gossip/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/metrics"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/util"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 )

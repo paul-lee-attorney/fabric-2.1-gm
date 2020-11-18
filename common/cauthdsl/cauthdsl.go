@@ -12,7 +12,7 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	mb "github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"go.uber.org/zap/zapcore"
 )

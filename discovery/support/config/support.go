@@ -15,8 +15,8 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	mspconstants "github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/pkg/errors"
 )

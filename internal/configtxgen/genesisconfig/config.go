@@ -14,10 +14,10 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/common/viperutil"
-	cf "github.com/hyperledger/fabric/core/config"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/viperutil"
+	cf "github.com/paul-lee-attorney/fabric-2.1-gm/core/config"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/spf13/viper"
 )

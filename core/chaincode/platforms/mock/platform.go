@@ -4,7 +4,7 @@ package mock
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/core/chaincode/platforms/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/util"
 )
 
 type Platform struct {

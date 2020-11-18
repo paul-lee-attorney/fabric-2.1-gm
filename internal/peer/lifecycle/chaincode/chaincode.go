@@ -10,9 +10,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/internal/peer/common"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"

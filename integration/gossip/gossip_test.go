@@ -16,8 +16,8 @@ import (
 	"syscall"
 
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -45,7 +45,7 @@ var _ = Describe("Gossip Test", func() {
 		chaincode = nwo.Chaincode{
 			Name:    "mycc",
 			Version: "0.0",
-			Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+			Path:    “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
 			Ctor:    `{"Args":["init","a","100","b","200"]}`,
 			Policy:  `OR ('Org1MSP.member','Org2MSP.member')`,
 		}

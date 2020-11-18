@@ -19,7 +19,7 @@ package fsblkstorage
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger"
 )
 
 // blocksItr - an iterator for iterating over a sequence of blocks

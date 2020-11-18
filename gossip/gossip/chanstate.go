@@ -12,13 +12,13 @@ import (
 	"sync/atomic"
 
 	proto "github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/comm"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/gossip/channel"
-	"github.com/hyperledger/fabric/gossip/metrics"
-	"github.com/hyperledger/fabric/gossip/protoext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/comm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/discovery"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/gossip/channel"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/metrics"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
 )
 
 type channelState struct {

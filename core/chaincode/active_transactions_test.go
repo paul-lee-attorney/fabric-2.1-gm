@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package chaincode_test
 
 import (
-	"github.com/hyperledger/fabric/core/chaincode"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode"
 )
 
 var _ = Describe("ActiveTransactions", func() {

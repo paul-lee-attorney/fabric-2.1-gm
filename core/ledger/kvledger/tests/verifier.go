@@ -15,8 +15,8 @@ import (
 	"github.com/hyperledger/fabric-protos-go/ledger/queryresult"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
 	protopeer "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/ledger"
-	lgrutil "github.com/hyperledger/fabric/core/ledger/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	lgrutil "github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util"
 	"github.com/stretchr/testify/assert"
 )
 

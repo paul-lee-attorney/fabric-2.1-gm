@@ -12,14 +12,14 @@ import (
 	"io"
 
 	lb "github.com/hyperledger/fabric-protos-go/peer/lifecycle"
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle"
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle/mock"
-	"github.com/hyperledger/fabric/core/chaincode/persistence"
-	"github.com/hyperledger/fabric/core/container/externalbuilder"
-	"github.com/hyperledger/fabric/core/ledger"
-	ledgermock "github.com/hyperledger/fabric/core/ledger/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/persistence"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container/externalbuilder"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	ledgermock "github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/mock"
 	"github.com/pkg/errors"
 )
 

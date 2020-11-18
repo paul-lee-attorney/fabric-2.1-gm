@@ -17,9 +17,9 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric/orderer/common/broadcast"
-	"github.com/hyperledger/fabric/orderer/common/broadcast/mock"
-	"github.com/hyperledger/fabric/orderer/common/msgprocessor"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/broadcast"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/broadcast/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/msgprocessor"
 )
 
 var _ = Describe("Broadcast", func() {

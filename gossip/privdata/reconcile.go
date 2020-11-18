@@ -15,11 +15,11 @@ import (
 
 	protosgossip "github.com/hyperledger/fabric-protos-go/gossip"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	commonutil "github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/committer"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/gossip/metrics"
-	privdatacommon "github.com/hyperledger/fabric/gossip/privdata/common"
+	commonutil "github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/committer"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/metrics"
+	privdatacommon "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/privdata/common"
 	"github.com/pkg/errors"
 )
 

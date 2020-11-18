@@ -4,7 +4,7 @@ package mocks
 import (
 	"sync"
 
-	validation "github.com/hyperledger/fabric/core/handlers/validation/api/state"
+	validation "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api/state"
 )
 
 type StateFetcher struct {

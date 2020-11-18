@@ -5,11 +5,11 @@ import (
 	"sync"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/orderer/common/blockcutter"
-	"github.com/hyperledger/fabric/orderer/common/msgprocessor"
-	"github.com/hyperledger/fabric/orderer/consensus"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/blockcutter"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/msgprocessor"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 type FakeConsenterSupport struct {

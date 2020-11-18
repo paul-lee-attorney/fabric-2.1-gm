@@ -11,11 +11,11 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	mb "github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/common/cauthdsl"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/common/policydsl"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/cauthdsl"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policydsl"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 )

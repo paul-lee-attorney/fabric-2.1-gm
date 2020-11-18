@@ -35,14 +35,14 @@ func TestSpawnEtcdRaft(t *testing.T) {
 	gt.Expect(err).NotTo(HaveOccurred())
 
 	// Build the configtxgen binary
-	configtxgen, err := gexec.Build("github.com/hyperledger/fabric/cmd/configtxgen")
+	configtxgen, err := gexec.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/configtxgen")
 	gt.Expect(err).NotTo(HaveOccurred())
 
-	cryptogen, err := gexec.Build("github.com/hyperledger/fabric/cmd/cryptogen")
+	cryptogen, err := gexec.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
 	gt.Expect(err).NotTo(HaveOccurred())
 
 	// Build the orderer binary
-	orderer, err := gexec.Build("github.com/hyperledger/fabric/cmd/orderer")
+	orderer, err := gexec.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/orderer")
 	gt.Expect(err).NotTo(HaveOccurred())
 
 	defer gexec.CleanupBuildArtifacts()

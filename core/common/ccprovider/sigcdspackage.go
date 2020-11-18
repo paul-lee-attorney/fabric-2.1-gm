@@ -25,7 +25,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/common/ccpackage"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccpackage"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
 )

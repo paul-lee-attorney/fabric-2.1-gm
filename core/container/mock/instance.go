@@ -4,8 +4,8 @@ package mock
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/core/container"
-	"github.com/hyperledger/fabric/core/container/ccintf"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container/ccintf"
 )
 
 type Instance struct {

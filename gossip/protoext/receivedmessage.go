@@ -10,8 +10,8 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
 )
 
 // ReceivedMessage is a GossipMessage wrapper that

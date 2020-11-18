@@ -9,10 +9,10 @@ package ledgermgmttest
 import (
 	"fmt"
 
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	"github.com/hyperledger/fabric/core/ledger/mock"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/disabled"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/ledgermgmt"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/mock"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 )
 

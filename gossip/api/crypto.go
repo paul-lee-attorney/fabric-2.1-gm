@@ -16,7 +16,7 @@ import (
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
 	"google.golang.org/grpc"
 
 	"github.com/paul-lee-attorney/gm/gmx509"

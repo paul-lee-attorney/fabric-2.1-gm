@@ -16,7 +16,7 @@ excluded_packages=(
 
 # packages that must be run serially
 serial_packages=(
-    "github.com/hyperledger/fabric/gossip/..."
+    "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/..."
 )
 
 # packages which need to be tested with build tag pkcs11
@@ -26,7 +26,7 @@ pkcs11_packages=(
 
 # packages that are only tested when they (or their deps) change
 conditional_packages=(
-    "github.com/hyperledger/fabric/gossip/..."
+    "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/..."
 )
 
 # join array elements by the specified string
@@ -58,7 +58,7 @@ packages_diff() {
     git -C "${base_dir}" diff --no-commit-id --name-only -r "${1:-HEAD}" |
         (grep '.go$' || true) | \
         sed 's%/[^/]*$%%' | sort -u | \
-        awk '{print "github.com/hyperledger/fabric/"$1}'
+        awk '{print "github.com/paul-lee-attorney/fabric-2.1-gm/"$1}'
 }
 
 # obtain list of changed packages for verification
@@ -175,7 +175,7 @@ run_tests_with_coverage() {
 main() {
     # explicit exclusions for ppc and s390x
     if [ "$(uname -m)" == "ppc64le" ] || [ "$(uname -m)" == "s390x" ]; then
-        excluded_packages+=("github.com/hyperledger/fabric/core/chaincode/platforms/java")
+        excluded_packages+=("github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/java")
     fi
 
     # default behavior is to run all tests

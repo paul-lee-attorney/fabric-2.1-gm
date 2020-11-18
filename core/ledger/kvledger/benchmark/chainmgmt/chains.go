@@ -13,11 +13,11 @@ import (
 	"sync"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
-	"github.com/hyperledger/fabric/core/ledger/ledgermgmt/ledgermgmttest"
-	"github.com/hyperledger/fabric/core/ledger/util/couchdb"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx/test"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/ledgermgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/ledgermgmt/ledgermgmttest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util/couchdb"
 )
 
 // ChainID is a type used for the ids for the chains for experiments

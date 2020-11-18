@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/hyperledger/fabric/core/chaincode/accesscontrol"
-	"github.com/hyperledger/fabric/core/chaincode/extcc"
-	"github.com/hyperledger/fabric/core/container/ccintf"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/accesscontrol"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/extcc"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container/ccintf"
 	"github.com/pkg/errors"
 )
 

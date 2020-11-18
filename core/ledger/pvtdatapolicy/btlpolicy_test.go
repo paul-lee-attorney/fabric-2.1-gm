@@ -11,8 +11,8 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/common/privdata"
-	"github.com/hyperledger/fabric/core/ledger/pvtdatapolicy/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/privdata"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/pvtdatapolicy/mock"
 	"github.com/stretchr/testify/assert"
 )
 

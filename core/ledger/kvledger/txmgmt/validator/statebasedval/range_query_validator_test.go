@@ -20,10 +20,10 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb/stateleveldb"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/rwsetutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/statedb/stateleveldb"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/version"
 	"github.com/stretchr/testify/assert"
 )
 

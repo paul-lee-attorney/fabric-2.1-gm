@@ -10,7 +10,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/orderer/common/bootstrap"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/bootstrap"
 	"github.com/pkg/errors"
 )
 

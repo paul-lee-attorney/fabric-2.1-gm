@@ -13,9 +13,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/hyperledger/fabric/common/metrics/gendoc"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/gendoc"
 )
 
 var _ = Describe("Table", func() {

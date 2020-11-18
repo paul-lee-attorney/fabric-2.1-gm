@@ -20,9 +20,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/common/grpclogging/testpb"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/grpclogging/testpb"
 )
 
 //go:generate protoc --proto_path=testpb --go_out=plugins=grpc,paths=source_relative:testpb testpb/echo.proto

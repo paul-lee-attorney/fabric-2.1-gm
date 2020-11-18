@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/Shopify/sarama"
-	"github.com/hyperledger/fabric/common/flogging"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/stretchr/testify/assert"
 )

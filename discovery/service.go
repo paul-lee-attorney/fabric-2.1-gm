@@ -13,13 +13,13 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric-protos-go/discovery"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/discovery/protoext"
-	common2 "github.com/hyperledger/fabric/gossip/common"
-	discovery2 "github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/discovery/protoext"
+	common2 "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	discovery2 "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/discovery"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 )
 

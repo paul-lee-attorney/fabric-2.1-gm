@@ -17,9 +17,9 @@ import (
 	. "github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/hyperledger/fabric-protos-go/gossip"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/cmd/common"
-	discovery "github.com/hyperledger/fabric/discovery/client"
-	"github.com/hyperledger/fabric/gossip/protoext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/cmd/common"
+	discovery "github.com/paul-lee-attorney/fabric-2.1-gm/discovery/client"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
 	"github.com/pkg/errors"
 )
 

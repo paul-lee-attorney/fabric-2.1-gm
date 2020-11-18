@@ -12,10 +12,10 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/common/util"
-	lgr "github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/testutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	lgr "github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/stretchr/testify/require"
 )
 

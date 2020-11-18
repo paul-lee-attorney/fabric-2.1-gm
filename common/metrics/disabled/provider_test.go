@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package disabled_test
 
 import (
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/metrics/disabled"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/disabled"
 )
 
 var _ = Describe("Provider", func() {

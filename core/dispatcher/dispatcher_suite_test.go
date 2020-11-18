@@ -9,7 +9,7 @@ package dispatcher_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/dispatcher"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/dispatcher"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

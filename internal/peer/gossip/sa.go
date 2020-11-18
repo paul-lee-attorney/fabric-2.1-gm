@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package gossip
 
 import (
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/gossip/api"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 )
 

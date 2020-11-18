@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 package endorser
 
-import "github.com/hyperledger/fabric/common/metrics"
+import "github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
 
 var (
 	proposalDurationHistogramOpts = metrics.HistogramOpts{

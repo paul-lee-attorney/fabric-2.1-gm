@@ -15,11 +15,11 @@ import (
 	"time"
 
 	protopeer "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/core/ledger/kvledger"
-	"github.com/hyperledger/fabric/core/ledger/mock"
-	"github.com/hyperledger/fabric/core/ledger/util/couchdb"
-	"github.com/hyperledger/fabric/core/ledger/util/couchdbtest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/testutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util/couchdb"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util/couchdbtest"
 	"github.com/stretchr/testify/require"
 )
 

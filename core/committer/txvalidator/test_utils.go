@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package txvalidator
 
 import (
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 )
 
 //go:generate mockery -dir . -name ApplicationCapabilities -case underscore -output mocks

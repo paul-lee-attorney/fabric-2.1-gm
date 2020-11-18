@@ -10,9 +10,9 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-amcl/amcl"
-	cryptolib "github.com/hyperledger/fabric/idemix"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/idemix/handlers"
+	cryptolib "github.com/paul-lee-attorney/fabric-2.1-gm/idemix"
 	"github.com/pkg/errors"
 )
 

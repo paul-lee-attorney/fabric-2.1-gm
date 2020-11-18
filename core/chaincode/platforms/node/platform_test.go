@@ -15,8 +15,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/hyperledger/fabric/core/chaincode/platforms/util"
-	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )

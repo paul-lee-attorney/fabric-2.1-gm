@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	proto "github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/protoext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
 	"github.com/stretchr/testify/assert"
 )
 

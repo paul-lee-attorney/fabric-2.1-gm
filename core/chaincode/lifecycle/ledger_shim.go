@@ -9,9 +9,9 @@ package lifecycle
 import (
 	"github.com/hyperledger/fabric-chaincode-go/shim"
 	"github.com/hyperledger/fabric-protos-go/ledger/queryresult"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	validatorstate "github.com/hyperledger/fabric/core/handlers/validation/api/state"
-	"github.com/hyperledger/fabric/core/ledger"
+	commonledger "github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger"
+	validatorstate "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api/state"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 
 	"github.com/pkg/errors"
 )

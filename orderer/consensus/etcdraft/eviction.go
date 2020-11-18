@@ -13,9 +13,9 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/cluster"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"go.etcd.io/etcd/raft/raftpb"
 )
 

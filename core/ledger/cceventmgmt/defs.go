@@ -10,7 +10,7 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 )
 
 // ChaincodeDefinition captures the info about chaincode

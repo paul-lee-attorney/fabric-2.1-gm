@@ -13,8 +13,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/metrics/internal/namer"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/internal/namer"
 )
 
 // A Field represents data that is included in the reference table for metrics.

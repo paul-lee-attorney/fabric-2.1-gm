@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	metrics "github.com/hyperledger/fabric/common/metrics"
+	metrics "github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
 	mock "github.com/stretchr/testify/mock"
 )
 

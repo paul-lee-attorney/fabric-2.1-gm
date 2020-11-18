@@ -15,11 +15,11 @@ import (
 	"github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/gossip/api"
-	gcommon "github.com/hyperledger/fabric/gossip/common"
-	disc "github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
+	gcommon "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	disc "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/discovery"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -11,14 +11,14 @@ import (
 	mspproto "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric-protos-go/peer"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/genesis"
-	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/genesis"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 var logger = flogging.MustGetLogger("common.configtx.test")

@@ -9,15 +9,15 @@ package chaincode_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/channelconfig"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/core/chaincode"
-	"github.com/hyperledger/fabric/core/common/privdata"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	"github.com/hyperledger/fabric/core/ledger"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	commonledger "github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/privdata"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container/ccintf"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 )
 
 func TestChaincode(t *testing.T) {

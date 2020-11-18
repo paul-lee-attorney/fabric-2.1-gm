@@ -4,7 +4,7 @@ package mock
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/deliver"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/deliver"
 )
 
 type ChainManager struct {

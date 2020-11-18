@@ -15,9 +15,9 @@ import (
 	"time"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/core/handlers/library"
-	"github.com/hyperledger/fabric/core/testutil"
-	"github.com/hyperledger/fabric/internal/peer/node/mock"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/library"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/testutil"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/node/mock"
 	"github.com/mitchellh/mapstructure"
 	. "github.com/onsi/gomega"
 	msptesttools "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt/testtools"

@@ -9,8 +9,8 @@ package library
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/handlers/auth"
-	"github.com/hyperledger/fabric/core/handlers/decoration"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/auth"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/decoration"
 	"github.com/stretchr/testify/assert"
 )
 

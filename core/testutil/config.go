@@ -12,8 +12,8 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/config/configtest"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/spf13/viper"

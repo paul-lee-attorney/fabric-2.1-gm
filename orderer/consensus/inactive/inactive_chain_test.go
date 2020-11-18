@@ -9,7 +9,7 @@ package inactive_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/orderer/consensus/inactive"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/inactive"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 )

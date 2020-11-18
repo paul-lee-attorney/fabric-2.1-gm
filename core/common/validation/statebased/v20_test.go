@@ -9,11 +9,11 @@ package statebased
 import (
 	"testing"
 
-	verr "github.com/hyperledger/fabric/common/errors"
-	"github.com/hyperledger/fabric/core/common/validation/statebased/mocks"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	"github.com/hyperledger/fabric/protoutil"
+	verr "github.com/paul-lee-attorney/fabric-2.1-gm/common/errors"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/validation/statebased/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/rwsetutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"

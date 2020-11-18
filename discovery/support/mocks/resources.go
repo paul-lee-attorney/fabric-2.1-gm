@@ -4,9 +4,9 @@ package mocks
 import (
 	"sync"
 
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 )
 

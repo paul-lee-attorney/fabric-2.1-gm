@@ -12,8 +12,8 @@ import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 )
 

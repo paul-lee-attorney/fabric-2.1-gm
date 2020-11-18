@@ -12,12 +12,12 @@ import (
 	"time"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/orderer/consensus/solo/mocks"
-	mockblockcutter "github.com/hyperledger/fabric/orderer/mocks/common/blockcutter"
-	mockmultichannel "github.com/hyperledger/fabric/orderer/mocks/common/multichannel"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/solo/mocks"
+	mockblockcutter "github.com/paul-lee-attorney/fabric-2.1-gm/orderer/mocks/common/blockcutter"
+	mockmultichannel "github.com/paul-lee-attorney/fabric-2.1-gm/orderer/mocks/common/multichannel"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -11,7 +11,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-amcl/amcl/FP256BN"
-	cryptolib "github.com/hyperledger/fabric/idemix"
+	cryptolib "github.com/paul-lee-attorney/fabric-2.1-gm/idemix"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"

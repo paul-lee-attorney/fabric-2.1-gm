@@ -11,9 +11,9 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/capabilities"
-	"github.com/hyperledger/fabric/protoutil"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/capabilities"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 func TestApplicationInterface(t *testing.T) {

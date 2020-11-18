@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/hyperledger/fabric/internal/cryptogen/metadata"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/metadata"
 )
 
 const ProgramName = "configtxlator"

@@ -8,8 +8,8 @@ package builtin
 
 import (
 	"github.com/hyperledger/fabric-protos-go/peer"
-	. "github.com/hyperledger/fabric/core/handlers/endorsement/api"
-	. "github.com/hyperledger/fabric/core/handlers/endorsement/api/identities"
+	. "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/endorsement/api"
+	. "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/endorsement/api/identities"
 	"github.com/pkg/errors"
 )
 

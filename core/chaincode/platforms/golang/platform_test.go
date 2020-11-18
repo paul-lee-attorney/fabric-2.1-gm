@@ -21,8 +21,8 @@ import (
 	"testing"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/util"
-	"github.com/hyperledger/fabric/core/config/configtest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
@@ -79,8 +79,8 @@ func TestValidatePath(t *testing.T) {
 	}{
 		{path: "http://github.com/hyperledger/fabric/core/chaincode/platforms/golang/testdata/src/chaincodes/noop", succ: false},
 		{path: "https://github.com/hyperledger/fabric/core/chaincode/platforms/golang/testdata/src/chaincodes/noop", succ: false},
-		{path: "github.com/hyperledger/fabric/core/chaincode/platforms/golang/testdata/src/chaincodes/noop", succ: true},
-		{path: "github.com/hyperledger/fabric/bad/chaincode/golang/testdata/src/chaincodes/noop", succ: false},
+		{path: "github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/golang/testdata/src/chaincodes/noop", succ: true},
+		{path: "github.com/paul-lee-attorney/fabric-2.1-gm/bad/chaincode/golang/testdata/src/chaincodes/noop", succ: false},
 		{path: ":github.com/hyperledger/fabric/core/chaincode/platforms/golang/testdata/src/chaincodes/noop", succ: false},
 	}
 
@@ -104,7 +104,7 @@ func TestNormalizePath(t *testing.T) {
 		path   string
 		result string
 	}{
-		{path: "github.com/hyperledger/fabric/cmd/peer", result: "github.com/hyperledger/fabric/cmd/peer"},
+		{path: "github.com/paul-lee-attorney/fabric-2.1-gm/cmd/peer", result: "github.com/paul-lee-attorney/fabric-2.1-gm/cmd/peer"},
 		{path: "testdata/ccmodule", result: "ccmodule"},
 		{path: "missing", result: "missing"},
 		{path: tempdir, result: tempdir}, // /dev/null is returned from `go env GOMOD`
@@ -241,7 +241,7 @@ func tarContents(t *testing.T, payload []byte) []string {
 func TestGopathDeploymentPayload(t *testing.T) {
 	platform := &Platform{}
 
-	payload, err := platform.GetDeploymentPayload("github.com/hyperledger/fabric/core/chaincode/platforms/golang/testdata/src/chaincodes/noop")
+	payload, err := platform.GetDeploymentPayload("github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/golang/testdata/src/chaincodes/noop")
 	assert.NoError(t, err)
 
 	contents := tarContents(t, payload)
@@ -300,7 +300,7 @@ func updateGopath(t *testing.T, path string) func() {
 }
 
 func TestGetDeploymentPayload(t *testing.T) {
-	const testdata = "github.com/hyperledger/fabric/core/chaincode/platforms/golang/testdata/src/"
+	const testdata = "github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/golang/testdata/src/"
 
 	gopath, err := getGopath()
 	require.NoError(t, err)

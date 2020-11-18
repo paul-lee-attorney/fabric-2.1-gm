@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/hyperledger/fabric/integration/runner"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 )
 
 // CouchDBSetup setup external couchDB resource.

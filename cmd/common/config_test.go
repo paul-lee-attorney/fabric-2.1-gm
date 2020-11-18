@@ -14,8 +14,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/cmd/common/comm"
-	"github.com/hyperledger/fabric/cmd/common/signer"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/cmd/common/comm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/cmd/common/signer"
 	"github.com/stretchr/testify/assert"
 )
 

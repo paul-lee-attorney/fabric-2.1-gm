@@ -10,10 +10,10 @@ import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 )
 

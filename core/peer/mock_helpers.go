@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package peer
 
 import (
-	"github.com/hyperledger/fabric/common/channelconfig"
-	configtxtest "github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/core/ledger"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	configtxtest “github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx/test"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 )
 

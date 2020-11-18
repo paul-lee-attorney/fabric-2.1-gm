@@ -11,9 +11,9 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/tx"
-	pkgtx "github.com/hyperledger/fabric/pkg/tx"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/tx"
+	pkgtx "github.com/paul-lee-attorney/fabric-2.1-gm/pkg/tx"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"

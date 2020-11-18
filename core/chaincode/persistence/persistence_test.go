@@ -12,13 +12,13 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/hyperledger/fabric/common/chaincode"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/chaincode/persistence"
-	"github.com/hyperledger/fabric/core/chaincode/persistence/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/ginkgo/extensions/table"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/chaincode"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/persistence"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/persistence/mock"
 	"github.com/pkg/errors"
 )
 

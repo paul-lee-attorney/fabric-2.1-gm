@@ -29,31 +29,31 @@ import (
 	"github.com/hyperledger/fabric-protos-go/gossip"
 	msprotos "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/cauthdsl"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/common/policydsl"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/cclifecycle"
-	lifecyclemocks "github.com/hyperledger/fabric/core/cclifecycle/mocks"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/discovery"
-	disc "github.com/hyperledger/fabric/discovery/client"
-	"github.com/hyperledger/fabric/discovery/endorsement"
-	discsupport "github.com/hyperledger/fabric/discovery/support"
-	discacl "github.com/hyperledger/fabric/discovery/support/acl"
-	ccsupport "github.com/hyperledger/fabric/discovery/support/chaincode"
-	"github.com/hyperledger/fabric/discovery/support/config"
-	"github.com/hyperledger/fabric/discovery/support/mocks"
-	"github.com/hyperledger/fabric/gossip/api"
-	gcommon "github.com/hyperledger/fabric/gossip/common"
-	gdisc "github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/protoext"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
-	"github.com/hyperledger/fabric/protoutil"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/cauthdsl"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policydsl"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/cclifecycle"
+	lifecyclemocks “github.com/paul-lee-attorney/fabric-2.1-gm/core/cclifecycle/mocks"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery"
+	disc “github.com/paul-lee-attorney/fabric-2.1-gm/discovery/client"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery/endorsement"
+	discsupport “github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support"
+	discacl “github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/acl"
+	ccsupport “github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/chaincode"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/config"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/mocks"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
+	gcommon “github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	gdisc “github.com/paul-lee-attorney/fabric-2.1-gm/gossip/discovery"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/onsi/gomega/gexec"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
 	bccsp "github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
@@ -621,12 +621,12 @@ func createPolicyManagerGetter(t *testing.T, mspMgr msp.MSPManager) *mocks.Chann
 
 func buildBinaries() error {
 	var err error
-	cryptogen, err = gexec.Build("github.com/hyperledger/fabric/cmd/cryptogen")
+	cryptogen, err = gexec.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	idemixgen, err = gexec.Build("github.com/hyperledger/fabric/cmd/idemixgen")
+	idemixgen, err = gexec.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/idemixgen")
 	if err != nil {
 		return errors.WithStack(err)
 	}

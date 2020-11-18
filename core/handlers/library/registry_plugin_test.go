@@ -19,16 +19,16 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	endorsement "github.com/hyperledger/fabric/core/handlers/endorsement/api"
-	validation "github.com/hyperledger/fabric/core/handlers/validation/api"
+	endorsement "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/endorsement/api"
+	validation "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api"
 	"github.com/stretchr/testify/assert"
 )
 
 const (
-	authPluginPackage      = "github.com/hyperledger/fabric/core/handlers/auth/plugin"
-	decoratorPluginPackage = "github.com/hyperledger/fabric/core/handlers/decoration/plugin"
-	endorsementTestPlugin  = "github.com/hyperledger/fabric/core/handlers/endorsement/testdata/"
-	validationTestPlugin   = "github.com/hyperledger/fabric/core/handlers/validation/testdata/"
+	authPluginPackage      = "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/auth/plugin"
+	decoratorPluginPackage = "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/decoration/plugin"
+	endorsementTestPlugin  = "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/endorsement/testdata/"
+	validationTestPlugin   = "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/testdata/"
 )
 
 // raceEnabled is set to true when the race build tag is enabled.

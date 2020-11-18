@@ -5,7 +5,7 @@ import (
 	"sync"
 
 	"github.com/hyperledger/fabric-protos-go/orderer"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blockledger"
 )
 
 type BlockReader struct {

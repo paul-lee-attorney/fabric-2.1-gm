@@ -7,14 +7,14 @@ SPDX-License-Identifier: Apache-2.0
 package library
 
 import (
-	"github.com/hyperledger/fabric/core/handlers/auth"
-	"github.com/hyperledger/fabric/core/handlers/auth/filter"
-	"github.com/hyperledger/fabric/core/handlers/decoration"
-	"github.com/hyperledger/fabric/core/handlers/decoration/decorator"
-	endorsement "github.com/hyperledger/fabric/core/handlers/endorsement/api"
-	"github.com/hyperledger/fabric/core/handlers/endorsement/builtin"
-	validation "github.com/hyperledger/fabric/core/handlers/validation/api"
-	. "github.com/hyperledger/fabric/core/handlers/validation/builtin"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/auth"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/auth/filter"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/decoration"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/decoration/decorator"
+	endorsement "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/endorsement/api"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/endorsement/builtin"
+	validation "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api"
+	. "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/builtin"
 )
 
 // HandlerLibrary is used to assert

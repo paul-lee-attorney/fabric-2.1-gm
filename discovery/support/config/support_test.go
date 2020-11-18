@@ -19,14 +19,14 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/configtx"
-	"github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/discovery/support/config"
-	"github.com/hyperledger/fabric/discovery/support/mocks"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/hyperledger/fabric/protoutil"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx/test"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/config"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/mocks"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/onsi/gomega/gexec"
 	"github.com/stretchr/testify/assert"
 )
@@ -70,11 +70,11 @@ func TestMSPIDMapping(t *testing.T) {
 	os.Mkdir(dir, 0700)
 	defer os.RemoveAll(dir)
 
-	cryptogen, err := gexec.Build("github.com/hyperledger/fabric/cmd/cryptogen")
+	cryptogen, err := gexec.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
 	assert.NoError(t, err)
 	defer os.Remove(cryptogen)
 
-	idemixgen, err := gexec.Build("github.com/hyperledger/fabric/cmd/idemixgen")
+	idemixgen, err := gexec.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/idemixgen")
 	assert.NoError(t, err)
 	defer os.Remove(idemixgen)
 

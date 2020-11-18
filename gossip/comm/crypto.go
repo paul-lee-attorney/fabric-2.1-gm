@@ -9,7 +9,7 @@ package comm
 import (
 	"context"
 
-	"github.com/hyperledger/fabric/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/peer"
 )

@@ -11,15 +11,15 @@ import (
 	"github.com/hyperledger/fabric-protos-go/msp"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	lb "github.com/hyperledger/fabric-protos-go/peer/lifecycle"
-	"github.com/hyperledger/fabric/common/chaincode"
-	"github.com/hyperledger/fabric/common/policydsl"
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle"
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/chaincode"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policydsl"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle/mock"
 	"github.com/pkg/errors"
 
-	"github.com/hyperledger/fabric/protoutil"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 var _ = Describe("MetadataProvider", func() {

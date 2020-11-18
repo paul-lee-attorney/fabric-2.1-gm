@@ -13,11 +13,11 @@ import (
 	"github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/tools/protolator/protoext/commonext"
-	"github.com/hyperledger/fabric/common/tools/protolator/protoext/ledger/rwsetext"
-	"github.com/hyperledger/fabric/common/tools/protolator/protoext/mspext"
-	"github.com/hyperledger/fabric/common/tools/protolator/protoext/ordererext"
-	"github.com/hyperledger/fabric/common/tools/protolator/protoext/peerext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator/protoext/commonext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator/protoext/ledger/rwsetext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator/protoext/mspext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator/protoext/ordererext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator/protoext/peerext"
 )
 
 // Docorate will add additional capabilities to some protobuf messages that

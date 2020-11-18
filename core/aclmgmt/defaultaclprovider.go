@@ -11,11 +11,11 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/core/aclmgmt/resources"
-	"github.com/hyperledger/fabric/core/policy"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/aclmgmt/resources"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/policy"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 const (

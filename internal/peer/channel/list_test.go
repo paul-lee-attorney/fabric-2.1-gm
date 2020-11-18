@@ -12,7 +12,7 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/internal/peer/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/stretchr/testify/assert"
 )

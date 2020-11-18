@@ -8,7 +8,7 @@ package validation
 
 import (
 	"github.com/hyperledger/fabric-protos-go/msp"
-	validation "github.com/hyperledger/fabric/core/handlers/validation/api"
+	validation "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api"
 )
 
 // IdentityDeserializer converts serialized identities

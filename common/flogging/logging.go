@@ -12,7 +12,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/hyperledger/fabric/common/flogging/fabenc"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging/fabenc"
 	zaplogfmt "github.com/sykesm/zap-logfmt"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

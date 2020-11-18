@@ -9,13 +9,13 @@ package etcdraft_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/metrics/disabled"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
-	"github.com/hyperledger/fabric/orderer/common/cluster"
-	"github.com/hyperledger/fabric/orderer/common/localconfig"
-	"github.com/hyperledger/fabric/orderer/common/multichannel"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft/mocks"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/disabled"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/cluster"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/multichannel"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/etcdraft"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/etcdraft/mocks"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
 	"github.com/stretchr/testify/assert"
 )

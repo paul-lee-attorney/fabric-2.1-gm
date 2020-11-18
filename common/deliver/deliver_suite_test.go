@@ -9,9 +9,9 @@ package deliver_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/deliver"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/deliver"
 )
 
 //go:generate counterfeiter -o mock/filtered_response_sender.go -fake-name FilteredResponseSender . filteredResponseSender

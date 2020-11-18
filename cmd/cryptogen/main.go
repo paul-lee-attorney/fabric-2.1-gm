@@ -14,10 +14,10 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/hyperledger/fabric/internal/cryptogen/ca"
-	"github.com/hyperledger/fabric/internal/cryptogen/csp"
-	"github.com/hyperledger/fabric/internal/cryptogen/metadata"
-	"github.com/hyperledger/fabric/internal/cryptogen/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/ca"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/csp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/metadata"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/msp"
 
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 	yaml "gopkg.in/yaml.v2"

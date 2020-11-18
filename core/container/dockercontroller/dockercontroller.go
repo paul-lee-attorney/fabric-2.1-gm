@@ -23,11 +23,11 @@ import (
 
 	docker "github.com/fsouza/go-dockerclient"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/chaincode/persistence"
-	"github.com/hyperledger/fabric/core/container"
-	"github.com/hyperledger/fabric/core/container/ccintf"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/persistence"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container/ccintf"
 	"github.com/pkg/errors"
 )
 

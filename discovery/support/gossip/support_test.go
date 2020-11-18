@@ -10,11 +10,11 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/gossip"
-	gossipSupport "github.com/hyperledger/fabric/discovery/support/gossip"
-	"github.com/hyperledger/fabric/discovery/support/gossip/mocks"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/discovery"
-	"github.com/hyperledger/fabric/gossip/protoext"
+	gossipSupport "github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/gossip"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/gossip/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/discovery"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
 	"github.com/stretchr/testify/assert"
 )
 

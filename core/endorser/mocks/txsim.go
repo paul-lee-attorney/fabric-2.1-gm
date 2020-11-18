@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package mocks
 
 import (
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/core/ledger"
+	commonledger "github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 )
 
 type MockTxSim struct {

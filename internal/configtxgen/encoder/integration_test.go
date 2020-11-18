@@ -12,7 +12,7 @@ import (
 	. "github.com/onsi/gomega"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/core/config/configtest"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"

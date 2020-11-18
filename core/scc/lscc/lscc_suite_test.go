@@ -10,10 +10,10 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-chaincode-go/shim"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/common/sysccprovider"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/scc/lscc"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/sysccprovider"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/lscc"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

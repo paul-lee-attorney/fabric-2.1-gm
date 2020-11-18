@@ -9,10 +9,10 @@ package server
 import (
 	"io/ioutil"
 
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	"github.com/hyperledger/fabric/common/ledger/blockledger/fileledger"
-	"github.com/hyperledger/fabric/common/metrics"
-	config "github.com/hyperledger/fabric/orderer/common/localconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blockledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blockledger/fileledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
+	config "github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
 	"github.com/pkg/errors"
 )
 

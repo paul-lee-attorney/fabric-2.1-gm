@@ -10,8 +10,8 @@ import (
 	"bytes"
 	"sync"
 
-	"github.com/hyperledger/fabric/common/chaincode"
-	"github.com/hyperledger/fabric/core/ledger/cceventmgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/chaincode"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/cceventmgmt"
 )
 
 // Subscription channels information flow

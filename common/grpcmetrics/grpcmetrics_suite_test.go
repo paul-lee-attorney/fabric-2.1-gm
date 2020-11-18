@@ -9,9 +9,9 @@ package grpcmetrics_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/grpcmetrics/testpb"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/grpcmetrics/testpb"
 )
 
 //go:generate protoc --proto_path=testpb --go_out=plugins=grpc,paths=source_relative:testpb testpb/echo.proto

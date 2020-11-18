@@ -12,8 +12,8 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"google.golang.org/grpc"
 )
 

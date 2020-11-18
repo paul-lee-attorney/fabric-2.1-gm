@@ -13,7 +13,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/hyperledger/fabric/gossip/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/util"
 )
 
 // Gossip leader election module

@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/metrics/metricsfakes"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/testutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/metricsfakes"
 	"github.com/stretchr/testify/assert"
 )
 

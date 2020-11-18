@@ -13,14 +13,14 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/chaincode/extcc"
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/peer"
-	"github.com/hyperledger/fabric/core/scc"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/extcc"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container/ccintf"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/peer"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/scc"
 	"github.com/pkg/errors"
 )
 

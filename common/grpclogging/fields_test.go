@@ -10,10 +10,10 @@ import (
 	"encoding/json"
 
 	"github.com/golang/protobuf/jsonpb"
-	"github.com/hyperledger/fabric/common/grpclogging"
-	"github.com/hyperledger/fabric/common/grpclogging/testpb"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/grpclogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/grpclogging/testpb"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

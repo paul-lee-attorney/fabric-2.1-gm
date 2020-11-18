@@ -12,8 +12,8 @@ import (
 	"testing"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/internal/peer/common"
-	"github.com/hyperledger/fabric/internal/peer/lifecycle/chaincode"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	msptesttools "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt/testtools"

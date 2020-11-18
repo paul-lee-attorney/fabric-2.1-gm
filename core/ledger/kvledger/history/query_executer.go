@@ -9,11 +9,11 @@ package history
 import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/ledger/queryresult"
-	commonledger "github.com/hyperledger/fabric/common/ledger"
-	"github.com/hyperledger/fabric/common/ledger/blkstorage"
-	"github.com/hyperledger/fabric/common/ledger/util/leveldbhelper"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/rwsetutil"
-	protoutil "github.com/hyperledger/fabric/protoutil"
+	commonledger "github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blkstorage"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/util/leveldbhelper"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/rwsetutil"
+	protoutil "github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 	"github.com/syndtr/goleveldb/leveldb/iterator"
 )

@@ -3,7 +3,7 @@
 package mocks
 
 import (
-	policies "github.com/hyperledger/fabric/common/policies"
+	policies "github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
 	mock "github.com/stretchr/testify/mock"
 )
 

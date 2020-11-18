@@ -10,10 +10,10 @@ import (
 	"io/ioutil"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/chaincode/persistence"
-	"github.com/hyperledger/fabric/core/chaincode/persistence/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/persistence"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/persistence/mock"
 	"github.com/pkg/errors"
 	tm "github.com/stretchr/testify/mock"
 )

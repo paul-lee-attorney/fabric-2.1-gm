@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package statecouchdb
 
 import (
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/version"
 )
 
 type versions map[string]nsVersions

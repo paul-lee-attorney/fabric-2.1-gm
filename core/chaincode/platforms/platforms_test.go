@@ -14,12 +14,12 @@ import (
 	"io/ioutil"
 
 	docker "github.com/fsouza/go-dockerclient"
-	"github.com/hyperledger/fabric/common/metadata"
-	"github.com/hyperledger/fabric/core/chaincode/platforms"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/mock"
-	"github.com/hyperledger/fabric/core/chaincode/platforms/util"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metadata"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/platforms/util"
 )
 
 var _ = Describe("Platforms", func() {

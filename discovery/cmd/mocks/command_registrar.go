@@ -2,7 +2,7 @@
 
 package mocks
 
-import common "github.com/hyperledger/fabric/cmd/common"
+import common "github.com/paul-lee-attorney/fabric-2.1-gm/cmd/common"
 
 import kingpin "gopkg.in/alecthomas/kingpin.v2"
 import mock "github.com/stretchr/testify/mock"

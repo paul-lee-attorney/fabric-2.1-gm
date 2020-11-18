@@ -8,9 +8,9 @@ package cclifecycle
 
 import (
 	"github.com/golang/protobuf/proto"
-	"github.com/hyperledger/fabric/common/chaincode"
-	"github.com/hyperledger/fabric/core/common/ccprovider"
-	"github.com/hyperledger/fabric/core/common/privdata"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/chaincode"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/privdata"
 	"github.com/pkg/errors"
 )
 

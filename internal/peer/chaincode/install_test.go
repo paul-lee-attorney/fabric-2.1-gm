@@ -13,7 +13,7 @@ import (
 	"testing"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/internal/peer/common"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -62,7 +62,7 @@ func TestInstallBadVersion(t *testing.T) {
 	cmd, _ := initInstallTest(t, fsPath, nil, nil)
 	defer cleanupInstallTest(fsPath)
 
-	args := []string{"-n", "mychaincode", "-p", "github.com/hyperledger/fabric/internal/peer/chaincode/testdata/src/chaincodes/noop"}
+	args := []string{"-n", "mychaincode", "-p", “github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/chaincode/testdata/src/chaincodes/noop"}
 	cmd.SetArgs(args)
 
 	if err := cmd.Execute(); err == nil {
@@ -77,7 +77,7 @@ func TestInstallNonExistentCC(t *testing.T) {
 	cmd, _ := initInstallTest(t, fsPath, nil, nil)
 	defer cleanupInstallTest(fsPath)
 
-	args := []string{"-n", "badmychaincode", "-p", "github.com/hyperledger/fabric/internal/peer/chaincode/testdata/src/chaincodes/bad_mychaincode", "-v", "testversion"}
+	args := []string{"-n", "badmychaincode", "-p", “github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/chaincode/testdata/src/chaincodes/bad_mychaincode", "-v", "testversion"}
 	cmd.SetArgs(args)
 
 	if err := cmd.Execute(); err == nil {
@@ -150,7 +150,7 @@ func installCC(t *testing.T) error {
 	cmd, _ := initInstallTest(t, fsPath, nil, nil)
 	defer cleanupInstallTest(fsPath)
 
-	args := []string{"-n", "mychaincode", "-p", "github.com/hyperledger/fabric/internal/peer/chaincode/testdata/src/chaincodes/noop", "-v", "anotherversion"}
+	args := []string{"-n", "mychaincode", "-p", “github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/chaincode/testdata/src/chaincodes/noop", "-v", "anotherversion"}
 	cmd.SetArgs(args)
 
 	if err := cmd.Execute(); err != nil {

@@ -10,9 +10,9 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/graph"
-	"github.com/hyperledger/fabric/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/graph"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
 )
 
 var logger = flogging.MustGetLogger("policies.inquire")

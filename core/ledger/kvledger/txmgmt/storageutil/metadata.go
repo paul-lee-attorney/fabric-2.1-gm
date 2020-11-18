@@ -9,7 +9,7 @@ package storageutil
 import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
-	"github.com/hyperledger/fabric/core/ledger/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util"
 )
 
 // SerializeMetadata serializes metadata entries for storing in statedb

@@ -15,7 +15,7 @@ import (
 	"sync"
 	"syscall"
 
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 )
 
 type Session struct {

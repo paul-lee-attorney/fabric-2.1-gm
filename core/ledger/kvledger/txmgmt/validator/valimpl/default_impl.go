@@ -8,14 +8,14 @@ package valimpl
 
 import (
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/privacyenabledstate"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/txmgr"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validator"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validator/internal"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/validator/statebasedval"
-	"github.com/hyperledger/fabric/core/ledger/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/privacyenabledstate"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/txmgr"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/validator"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/validator/internal"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/validator/statebasedval"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util"
 )
 
 var logger = flogging.MustGetLogger("valimpl")

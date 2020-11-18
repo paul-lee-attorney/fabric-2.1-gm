@@ -9,7 +9,7 @@ package chaincode
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/internal/peer/common"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

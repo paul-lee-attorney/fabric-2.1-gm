@@ -18,10 +18,10 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/container/ccintf"
-	"github.com/hyperledger/fabric/core/container/externalbuilder"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container/ccintf"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/container/externalbuilder"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 )
 
 var _ = Describe("Instance", func() {

@@ -11,10 +11,10 @@ import (
 	"testing"
 
 	etcdraftproto "github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft"
-	"github.com/hyperledger/fabric/orderer/consensus/etcdraft/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/etcdraft"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/etcdraft/mocks"
 	"github.com/stretchr/testify/require"
 	"go.etcd.io/etcd/raft/raftpb"
 )

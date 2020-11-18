@@ -9,9 +9,9 @@ package blockcutter_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/orderer/common/blockcutter"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/blockcutter"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

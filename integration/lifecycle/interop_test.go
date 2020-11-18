@@ -15,10 +15,10 @@ import (
 
 	docker "github.com/fsouza/go-dockerclient"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/integration/nwo"
-	"github.com/hyperledger/fabric/integration/nwo/commands"
-	"github.com/hyperledger/fabric/internal/peer/common"
-	"github.com/hyperledger/fabric/protoutil"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
@@ -74,7 +74,7 @@ var _ = Describe("Release interoperability", func() {
 		chaincode := nwo.Chaincode{
 			Name:    "mycc",
 			Version: "0.0",
-			Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+			Path:    “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
 			Ctor:    `{"Args":["init","a","100","b","200"]}`,
 			Policy:  `AND ('Org1MSP.member','Org2MSP.member')`,
 		}
@@ -114,7 +114,7 @@ var _ = Describe("Release interoperability", func() {
 		chaincode = nwo.Chaincode{
 			Name:            "mycc",
 			Version:         "0.0",
-			Path:            components.Build("github.com/hyperledger/fabric/integration/chaincode/module"),
+			Path:            components.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/module"),
 			Lang:            "binary",
 			PackageFile:     filepath.Join(testDir, "modulecc.tar.gz"),
 			SignaturePolicy: `OR ('Org1MSP.member','Org2MSP.member')`,
@@ -164,7 +164,7 @@ var _ = Describe("Release interoperability", func() {
 			chaincode := nwo.Chaincode{
 				Name:    "mycc",
 				Version: "0.0",
-				Path:    "github.com/hyperledger/fabric/integration/chaincode/simple/cmd",
+				Path:    “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
 				Ctor:    `{"Args":["init","a","100","b","200"]}`,
 				Policy:  `OR ('Org1MSP.member','Org2MSP.member')`,
 			}
@@ -199,7 +199,7 @@ var _ = Describe("Release interoperability", func() {
 			chaincode = nwo.Chaincode{
 				Name:            "mycc",
 				Version:         "0.0",
-				Path:            components.Build("github.com/hyperledger/fabric/integration/chaincode/module"),
+				Path:            components.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/module"),
 				Lang:            "binary",
 				PackageFile:     filepath.Join(testDir, "modulecc.tar.gz"),
 				SignaturePolicy: `OR ('Org1MSP.member','Org2MSP.member')`,
@@ -225,7 +225,7 @@ var _ = Describe("Release interoperability", func() {
 			chaincode := nwo.Chaincode{
 				Name:            "mycc",
 				Version:         "0.0",
-				Path:            components.Build("github.com/hyperledger/fabric/integration/chaincode/module"),
+				Path:            components.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/module"),
 				Lang:            "binary",
 				PackageFile:     filepath.Join(testDir, "modulecc.tar.gz"),
 				SignaturePolicy: `AND ('Org1MSP.member','Org2MSP.member')`,
@@ -279,21 +279,21 @@ var _ = Describe("Release interoperability", func() {
 				callerDefOld = nwo.Chaincode{
 					Name:    "caller",
 					Version: "0.0",
-					Path:    "github.com/hyperledger/fabric/integration/lifecycle/chaincode/caller/cmd",
+					Path:    “github.com/paul-lee-attorney/fabric-2.1-gm/integration/lifecycle/chaincode/caller/cmd",
 					Ctor:    `{"Args":[""]}`,
 					Policy:  ccEP,
 				}
 				calleeDefOld = nwo.Chaincode{
 					Name:    "callee",
 					Version: "0.0",
-					Path:    "github.com/hyperledger/fabric/integration/lifecycle/chaincode/callee/cmd",
+					Path:    “github.com/paul-lee-attorney/fabric-2.1-gm/integration/lifecycle/chaincode/callee/cmd",
 					Ctor:    `{"Args":[""]}`,
 					Policy:  ccEP,
 				}
 				callerDefNew = nwo.Chaincode{
 					Name:            "caller",
 					Version:         "0.0",
-					Path:            components.Build("github.com/hyperledger/fabric/integration/lifecycle/chaincode/caller/cmd"),
+					Path:            components.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/integration/lifecycle/chaincode/caller/cmd"),
 					Lang:            "binary",
 					PackageFile:     filepath.Join(testDir, "caller.tar.gz"),
 					SignaturePolicy: ccEP,
@@ -305,7 +305,7 @@ var _ = Describe("Release interoperability", func() {
 				calleeDefNew = nwo.Chaincode{
 					Name:            "callee",
 					Version:         "0.0",
-					Path:            components.Build("github.com/hyperledger/fabric/integration/lifecycle/chaincode/callee/cmd"),
+					Path:            components.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/integration/lifecycle/chaincode/callee/cmd"),
 					Lang:            "binary",
 					PackageFile:     filepath.Join(testDir, "callee.tar.gz"),
 					SignaturePolicy: ccEP,

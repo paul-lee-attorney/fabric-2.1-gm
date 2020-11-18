@@ -12,14 +12,14 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	commonerrors "github.com/hyperledger/fabric/common/errors"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/core/common/validation/statebased"
-	vc "github.com/hyperledger/fabric/core/handlers/validation/api/capabilities"
-	vi "github.com/hyperledger/fabric/core/handlers/validation/api/identities"
-	vp "github.com/hyperledger/fabric/core/handlers/validation/api/policies"
-	vs "github.com/hyperledger/fabric/core/handlers/validation/api/state"
-	"github.com/hyperledger/fabric/protoutil"
+	commonerrors "github.com/paul-lee-attorney/fabric-2.1-gm/common/errors"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/validation/statebased"
+	vc "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api/capabilities"
+	vi "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api/identities"
+	vp "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api/policies"
+	vs "github.com/paul-lee-attorney/fabric-2.1-gm/core/handlers/validation/api/state"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 var logger = flogging.MustGetLogger("vscc")

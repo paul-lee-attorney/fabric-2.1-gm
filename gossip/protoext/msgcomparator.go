@@ -10,7 +10,7 @@ import (
 	"bytes"
 
 	"github.com/hyperledger/fabric-protos-go/gossip"
-	"github.com/hyperledger/fabric/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
 )
 
 // NewGossipMessageComparator creates a MessageReplacingPolicy given a maximum number of blocks to hold

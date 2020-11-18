@@ -12,11 +12,11 @@ import (
 	"net/http/httptest"
 	"strings"
 
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/common/flogging/httpadmin"
-	"github.com/hyperledger/fabric/common/flogging/httpadmin/fakes"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging/httpadmin"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging/httpadmin/fakes"
 )
 
 var _ = Describe("SpecHandler", func() {

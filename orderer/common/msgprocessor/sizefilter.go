@@ -10,7 +10,7 @@ import (
 	"fmt"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
 )
 
 // SizeFilterResources defines the subset of the channel resources required to create this filter

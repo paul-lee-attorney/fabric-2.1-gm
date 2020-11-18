@@ -3,7 +3,7 @@
 package mocks
 
 import common "github.com/hyperledger/fabric-protos-go/common"
-import errors "github.com/hyperledger/fabric/common/errors"
+import errors "github.com/paul-lee-attorney/fabric-2.1-gm/common/errors"
 import mock "github.com/stretchr/testify/mock"
 import peer "github.com/hyperledger/fabric-protos-go/peer"
 

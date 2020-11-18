@@ -10,9 +10,9 @@ import (
 	"bytes"
 	"encoding/gob"
 
-	"github.com/hyperledger/fabric/common/ledger/util/leveldbhelper"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/statedb"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/txmgmt/version"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/util/leveldbhelper"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/statedb"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/txmgmt/version"
 )
 
 var redologKeyPrefix = []byte{byte(0)}

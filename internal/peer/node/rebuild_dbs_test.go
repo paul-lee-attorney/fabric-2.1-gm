@@ -13,8 +13,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/core/config"
-	"github.com/hyperledger/fabric/core/ledger/kvledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )

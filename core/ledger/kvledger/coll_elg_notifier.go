@@ -9,7 +9,7 @@ package kvledger
 import (
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset/kvrwset"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 )
 
 // collElgNotifier listens for the chaincode events and determines whether the peer has become eligible for one or more existing

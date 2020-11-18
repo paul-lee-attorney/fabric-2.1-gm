@@ -12,10 +12,10 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	commonmetrics "github.com/hyperledger/fabric/common/metrics"
-	"github.com/hyperledger/fabric/common/metrics/prometheus"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	commonmetrics "github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/prometheus"
 	prom "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )

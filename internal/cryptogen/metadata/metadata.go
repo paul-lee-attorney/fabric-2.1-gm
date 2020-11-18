@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/hyperledger/fabric/common/metadata"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metadata"
 )
 
 const ProgramName = "cryptogen"

@@ -10,8 +10,8 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/deliver/mock"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/deliver/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blockledger"
 	"github.com/stretchr/testify/assert"
 )
 

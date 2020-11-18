@@ -12,8 +12,8 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/flogging"
-	"github.com/hyperledger/fabric/internal/peer/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

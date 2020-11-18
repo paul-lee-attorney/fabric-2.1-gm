@@ -18,15 +18,15 @@ import (
 	"github.com/hyperledger/fabric-protos-go/ledger/rwset"
 	mspproto "github.com/hyperledger/fabric-protos-go/msp"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/metrics/metricsfakes"
-	"github.com/hyperledger/fabric/core/chaincode/lifecycle"
-	"github.com/hyperledger/fabric/core/endorser"
-	"github.com/hyperledger/fabric/core/endorser/fake"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/metricsfakes"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/endorser"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/endorser/fake"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 
 	"github.com/golang/protobuf/proto"
-	ledgermock "github.com/hyperledger/fabric/core/ledger/mock"
+	ledgermock "github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/mock"
 )
 
 var _ = Describe("Endorser", func() {

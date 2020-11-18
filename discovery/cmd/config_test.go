@@ -13,9 +13,9 @@ import (
 
 	. "github.com/hyperledger/fabric-protos-go/discovery"
 	"github.com/hyperledger/fabric-protos-go/msp"
-	"github.com/hyperledger/fabric/cmd/common"
-	discovery "github.com/hyperledger/fabric/discovery/cmd"
-	"github.com/hyperledger/fabric/discovery/cmd/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/cmd/common"
+	discovery "github.com/paul-lee-attorney/fabric-2.1-gm/discovery/cmd"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/discovery/cmd/mocks"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"

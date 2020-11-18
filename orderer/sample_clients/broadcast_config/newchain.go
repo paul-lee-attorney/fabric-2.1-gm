@@ -5,9 +5,9 @@ package main
 
 import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 )
 
 func newChainRequest(

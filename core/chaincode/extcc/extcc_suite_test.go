@@ -9,9 +9,9 @@ package extcc_test
 import (
 	"testing"
 
-	"github.com/hyperledger/fabric/core/chaincode/extcc"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/extcc"
 )
 
 func TestExtcc(t *testing.T) {

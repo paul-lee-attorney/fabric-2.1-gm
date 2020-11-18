@@ -10,12 +10,12 @@ import (
 	"sync"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/channelconfig"
-	"github.com/hyperledger/fabric/common/ledger/blockledger"
-	"github.com/hyperledger/fabric/common/ledger/blockledger/fileledger"
-	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/transientstore"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blockledger"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blockledger/fileledger"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/transientstore"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 )

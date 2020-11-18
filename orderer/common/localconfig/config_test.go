@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/core/config/configtest"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/mitchellh/mapstructure"
 	"github.com/stretchr/testify/assert"
 )

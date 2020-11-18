@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/core/ledger/util/couchdb"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util/couchdb"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )

@@ -10,7 +10,7 @@ import (
 	"encoding/json"
 	"path/filepath"
 
-	"github.com/hyperledger/fabric/integration/nwo/commands"
+	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
 )

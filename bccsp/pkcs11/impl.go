@@ -11,10 +11,10 @@ import (
 	"crypto/x509"
 	"os"
 
-	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/miekg/pkcs11"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/pkg/errors"
 )
 

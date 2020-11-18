@@ -11,8 +11,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/core/ledger/kvledger/benchmark/chainmgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/benchmark/chainmgmt"
 )
 
 // BenchmarkInsertTxs starts fresh chains and inserts the Key-values by simulating writes-only transactions

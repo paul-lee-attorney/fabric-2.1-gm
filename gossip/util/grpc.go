@@ -14,10 +14,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/hyperledger/fabric/common/crypto/tlsgen"
-	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/internal/pkg/comm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )

@@ -7,9 +7,9 @@ SPDX-License-Identifier: Apache-2.0
 package comm
 
 import (
-	"github.com/hyperledger/fabric/gossip/common"
-	"github.com/hyperledger/fabric/gossip/protoext"
-	"github.com/hyperledger/fabric/gossip/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/util"
 )
 
 type sendFunc func(peer *RemotePeer, msg *protoext.SignedGossipMessage)

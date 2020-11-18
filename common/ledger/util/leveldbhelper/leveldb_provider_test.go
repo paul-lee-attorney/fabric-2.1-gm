@@ -11,9 +11,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/hyperledger/fabric/common/ledger/dataformat"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/dataformat"
 
-	"github.com/hyperledger/fabric/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/stretchr/testify/assert"
 )
 

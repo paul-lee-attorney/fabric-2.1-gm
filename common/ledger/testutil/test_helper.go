@@ -13,16 +13,16 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	"github.com/hyperledger/fabric/common/configtx/test"
-	"github.com/hyperledger/fabric/common/crypto"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx/test"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto"
 
-	"github.com/hyperledger/fabric/common/ledger/testutil/fakes"
-	lutils "github.com/hyperledger/fabric/core/ledger/util"
-	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/testutil/fakes"
+	lutils "github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/util"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	mspmgmt "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 	msptesttools "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt/testtools"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/stretchr/testify/assert"
 )
 

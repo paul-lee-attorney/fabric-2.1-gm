@@ -14,9 +14,9 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/hyperledger/fabric/common/ledger/testutil"
-	"github.com/hyperledger/fabric/core/ledger"
-	btltestutil "github.com/hyperledger/fabric/core/ledger/pvtdatapolicy/testutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/testutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	btltestutil "github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/pvtdatapolicy/testutil"
 	"github.com/stretchr/testify/assert"
 )
 

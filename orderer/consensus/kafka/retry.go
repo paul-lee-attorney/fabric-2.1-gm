@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"time"
 
-	localconfig "github.com/hyperledger/fabric/orderer/common/localconfig"
+	localconfig "github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
 )
 
 type retryProcess struct {
