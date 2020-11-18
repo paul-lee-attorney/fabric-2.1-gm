@@ -140,7 +140,7 @@ func TestLoadCertificateSM2(t *testing.T) {
 	assert.Equal(t, cert.Subject.CommonName, loadedCert.Subject.CommonName, "Should have same CN")
 }
 
-func TestLoadCertificateECDSA_wrongEncoding(t *testing.T) {
+func TestLoadCertificateSM2_wrongEncoding(t *testing.T) {
 	testDir, err := ioutil.TempDir("", "wrongEncoding")
 	require.NoError(t, err, "failed to create test directory")
 	defer os.RemoveAll(testDir)
@@ -154,7 +154,7 @@ func TestLoadCertificateECDSA_wrongEncoding(t *testing.T) {
 	assert.EqualError(t, err, filename+": wrong PEM encoding")
 }
 
-func TestLoadCertificateECDSA_empty_DER_cert(t *testing.T) {
+func TestLoadCertificateSM2_empty_DER_cert(t *testing.T) {
 	testDir, err := ioutil.TempDir("", "ca-test")
 	require.NoError(t, err, "failed to create test directory")
 	defer os.RemoveAll(testDir)
