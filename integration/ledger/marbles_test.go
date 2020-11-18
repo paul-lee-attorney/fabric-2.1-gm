@@ -13,12 +13,12 @@ import (
 	"path/filepath"
 	"syscall"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 	"github.com/tedsuo/ifrit"
 )
 
@@ -44,7 +44,7 @@ var _ bool = Describe("all shim APIs for non-private data", func() {
 		chaincode = nwo.Chaincode{
 			Name:            "marbles",
 			Version:         "0.0",
-			Path:            “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles/cmdwithindexspecs",
+			Path:            "github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles/cmdwithindexspecs",
 			Lang:            "golang",
 			PackageFile:     filepath.Join(setup.testDir, "marbles.tar.gz"),
 			Label:           "marbles",

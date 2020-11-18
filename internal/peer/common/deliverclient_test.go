@@ -14,11 +14,11 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common/mock"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 	msptesttools "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt/testtools"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )

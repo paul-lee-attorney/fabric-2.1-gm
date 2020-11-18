@@ -12,12 +12,12 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 	mspmgmt "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"google.golang.org/grpc"
 )
 

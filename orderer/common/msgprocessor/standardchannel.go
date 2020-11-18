@@ -9,13 +9,13 @@ package msgprocessor
 import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/orderer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
 	"github.com/pkg/errors"
 )
 

@@ -10,10 +10,10 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/cauthdsl"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/cauthdsl"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 )
 

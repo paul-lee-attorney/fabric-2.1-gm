@@ -8,9 +8,9 @@ package privdata
 
 import (
 	"github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 var logger = flogging.MustGetLogger("common.privdata")

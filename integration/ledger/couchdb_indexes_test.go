@@ -14,21 +14,21 @@ import (
 	"syscall"
 
 	docker "github.com/fsouza/go-dockerclient"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/fabricconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/fabricconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 	"github.com/tedsuo/ifrit"
 )
 
 const (
-	chaincodePathWithNoIndex = “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles/cmd"
-	chaincodePathWithIndex   = “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles/cmdwithindexspec"
-	chaincodePathWithIndexes = “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles/cmdwithindexspecs"
+	chaincodePathWithNoIndex = "github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles/cmd"
+	chaincodePathWithIndex   = "github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles/cmdwithindexspec"
+	chaincodePathWithIndexes = "github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles/cmdwithindexspecs"
 )
 
 var (

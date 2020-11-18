@@ -10,9 +10,9 @@ import (
 	"reflect"
 	"sync"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp/cache"
 	"github.com/pkg/errors"

@@ -10,9 +10,9 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/middleware"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/middleware"
 )
 
 var _ = Describe("Chain", func() {

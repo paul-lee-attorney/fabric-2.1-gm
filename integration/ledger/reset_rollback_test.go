@@ -21,10 +21,10 @@ import (
 
 	docker "github.com/fsouza/go-dockerclient"
 	"github.com/hyperledger/fabric-protos-go/common"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
 	"github.com/tedsuo/ifrit"
 	"gopkg.in/yaml.v2"
 )
@@ -57,7 +57,7 @@ var _ = Describe("rollback, reset, pause and resume peer node commands", func() 
 		chaincode := nwo.Chaincode{
 			Name:              "marblesp",
 			Version:           "1.0",
-			Path:              components.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles_private/cmd"),
+			Path:              components.Build("github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/marbles_private/cmd"),
 			Lang:              "binary",
 			PackageFile:       filepath.Join(setup.testDir, "marbles-pvtdata.tar.gz"),
 			Label:             "marbles-private-20",

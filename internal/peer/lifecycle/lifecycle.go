@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package lifecycle
 
 import (
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode"
 	"github.com/spf13/cobra"
 )
 

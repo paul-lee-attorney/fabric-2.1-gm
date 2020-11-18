@@ -11,8 +11,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 )
 
 type Components struct {
@@ -20,27 +20,27 @@ type Components struct {
 }
 
 func (c *Components) ConfigTxGen() string {
-	return c.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/configtxgen")
+	return c.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/configtxgen")
 }
 
 func (c *Components) Cryptogen() string {
-	return c.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
+	return c.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
 }
 
 func (c *Components) Discover() string {
-	return c.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/discover")
+	return c.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/discover")
 }
 
 func (c *Components) Idemixgen() string {
-	return c.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/idemixgen")
+	return c.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/idemixgen")
 }
 
 func (c *Components) Orderer() string {
-	return c.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/orderer")
+	return c.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/orderer")
 }
 
 func (c *Components) Peer() string {
-	return c.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/peer")
+	return c.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/peer")
 }
 
 func (c *Components) Cleanup() {}

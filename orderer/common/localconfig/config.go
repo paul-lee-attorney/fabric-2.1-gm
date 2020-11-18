@@ -12,10 +12,10 @@ import (
 	"time"
 
 	"github.com/Shopify/sarama"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/viperutil"
-	coreconfig “github.com/paul-lee-attorney/fabric-2.1-gm/core/config"
 	bccsp "github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/viperutil"
+	coreconfig "github.com/paul-lee-attorney/fabric-2.1-gm/core/config"
 	"github.com/spf13/viper"
 )
 

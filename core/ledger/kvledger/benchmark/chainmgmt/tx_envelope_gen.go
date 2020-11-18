@@ -11,9 +11,9 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/benchmark/mocks"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/kvledger/benchmark/mocks"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 const (

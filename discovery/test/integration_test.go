@@ -29,35 +29,35 @@ import (
 	"github.com/hyperledger/fabric-protos-go/gossip"
 	msprotos "github.com/hyperledger/fabric-protos-go/msp"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/cauthdsl"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policydsl"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/cclifecycle"
-	lifecyclemocks “github.com/paul-lee-attorney/fabric-2.1-gm/core/cclifecycle/mocks"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery"
-	disc “github.com/paul-lee-attorney/fabric-2.1-gm/discovery/client"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery/endorsement"
-	discsupport “github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support"
-	discacl “github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/acl"
-	ccsupport “github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/chaincode"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/config"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/mocks"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
-	gcommon “github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
-	gdisc “github.com/paul-lee-attorney/fabric-2.1-gm/gossip/discovery"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/onsi/gomega/gexec"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
 	bccsp "github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/utils"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/cauthdsl"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policydsl"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/cclifecycle"
+	lifecyclemocks "github.com/paul-lee-attorney/fabric-2.1-gm/core/cclifecycle/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/discovery"
+	disc "github.com/paul-lee-attorney/fabric-2.1-gm/discovery/client"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/discovery/endorsement"
+	discsupport "github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support"
+	discacl "github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/acl"
+	ccsupport "github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/chaincode"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/config"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/discovery/support/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
+	gcommon "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	gdisc "github.com/paul-lee-attorney/fabric-2.1-gm/gossip/discovery"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/protoext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
@@ -621,12 +621,12 @@ func createPolicyManagerGetter(t *testing.T, mspMgr msp.MSPManager) *mocks.Chann
 
 func buildBinaries() error {
 	var err error
-	cryptogen, err = gexec.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
+	cryptogen, err = gexec.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
 	if err != nil {
 		return errors.WithStack(err)
 	}
 
-	idemixgen, err = gexec.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/idemixgen")
+	idemixgen, err = gexec.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/idemixgen")
 	if err != nil {
 		return errors.WithStack(err)
 	}

@@ -16,14 +16,14 @@ import (
 	docker "github.com/fsouza/go-dockerclient"
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/common"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator/protoext/ordererext"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/fabricconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/tools/protolator/protoext/ordererext"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/fabricconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/runner"
 	"github.com/tedsuo/ifrit"
 
 	. "github.com/onsi/ginkgo"
@@ -123,7 +123,7 @@ var _ = Describe("Lifecycle", func() {
 		testPeers := network.PeersWithChannel("testchannel")
 		org1peer0 := network.Peer("Org1", "peer0")
 
-		chaincodePath := components.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/module")
+		chaincodePath := components.Build("github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/module")
 		chaincode := nwo.Chaincode{
 			Name:                "My_1st-Chaincode",
 			Version:             "Version-0.0",

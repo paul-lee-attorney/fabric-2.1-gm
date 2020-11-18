@@ -11,9 +11,9 @@ import (
 	"os"
 	"testing"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/stretchr/testify/assert"
 )

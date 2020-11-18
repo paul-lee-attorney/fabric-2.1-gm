@@ -13,9 +13,9 @@ import (
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	lb "github.com/hyperledger/fabric-protos-go/peer/lifecycle"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode/mock"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode/mock"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 

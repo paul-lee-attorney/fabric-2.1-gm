@@ -7,8 +7,8 @@ SPDX-License-Identifier: Apache-2.0
 package msptesttools
 
 import (
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 )

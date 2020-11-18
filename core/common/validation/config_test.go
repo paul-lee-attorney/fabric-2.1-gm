@@ -11,11 +11,11 @@ import (
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/stretchr/testify/assert"
 )
 

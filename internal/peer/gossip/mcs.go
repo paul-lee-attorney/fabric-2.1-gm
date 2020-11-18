@@ -12,16 +12,16 @@ import (
 	"time"
 
 	pcommon "github.com/hyperledger/fabric-protos-go/common"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/util"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 )
 

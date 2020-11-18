@@ -12,10 +12,10 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-protos-go/peer"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	mspmgmt "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 )
 

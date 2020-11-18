@@ -10,11 +10,11 @@ import (
 	"encoding/pem"
 
 	"github.com/hyperledger/fabric-protos-go/common"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/cluster"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/cluster"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus"
 	"github.com/pkg/errors"
 )
 

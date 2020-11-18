@@ -27,13 +27,13 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/hyperledger/fabric-lib-go/healthz"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/fabricconfig"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/fabricconfig"
 	"github.com/tedsuo/ifrit"
 	"github.com/tedsuo/ifrit/ginkgomon"
 )
@@ -58,7 +58,7 @@ var _ = Describe("EndToEnd", func() {
 		chaincode = nwo.Chaincode{
 			Name:            "mycc",
 			Version:         "0.0",
-			Path:            components.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/module"),
+			Path:            components.Build("github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/module"),
 			Lang:            "binary",
 			PackageFile:     filepath.Join(testDir, "modulecc.tar.gz"),
 			Ctor:            `{"Args":["init","a","100","b","200"]}`,
@@ -205,7 +205,7 @@ var _ = Describe("EndToEnd", func() {
 			gopathChaincode := nwo.Chaincode{
 				Name:            "mycc",
 				Version:         "0.0",
-				Path:            “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
+				Path:            "github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
 				Lang:            "golang",
 				PackageFile:     filepath.Join(testDir, "simplecc.tar.gz"),
 				Ctor:            `{"Args":["init","a","100","b","200"]}`,
@@ -492,7 +492,7 @@ var _ = Describe("EndToEnd", func() {
 			chaincode := nwo.Chaincode{
 				Name:            "mycc",
 				Version:         "0.0",
-				Path:            “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
+				Path:            "github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
 				Lang:            "golang",
 				PackageFile:     filepath.Join(testDir, "simplecc.tar.gz"),
 				Ctor:            `{"Args":["init","a","100","b","200"]}`,

@@ -12,10 +12,10 @@ import (
 	"testing"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/lifecycle/chaincode"
 	msptesttools "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt/testtools"
 )
 

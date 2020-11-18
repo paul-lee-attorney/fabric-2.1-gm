@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package peer
 
 import (
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
-	configtxtest “github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx/test"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	configtxtest "github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx/test"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 )
 
 func CreateMockChannel(p *Peer, cid string, resources channelconfig.Resources) error {

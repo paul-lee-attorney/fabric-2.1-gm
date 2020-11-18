@@ -12,9 +12,9 @@ import (
 	"net/url"
 	"testing"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/disabled"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/metricsfakes"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/disabled"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/metricsfakes"
 )
 
 func TestAPIProcessTimeMetric(t *testing.T) {

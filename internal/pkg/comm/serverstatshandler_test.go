@@ -12,11 +12,11 @@ import (
 	"testing"
 	"time"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/metricsfakes"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm/testpb"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/metricsfakes"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm/testpb"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/stats"
 )

@@ -12,10 +12,10 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	txpkg “github.com/paul-lee-attorney/fabric-2.1-gm/pkg/tx"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	txpkg "github.com/paul-lee-attorney/fabric-2.1-gm/pkg/tx"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 func randomLowerAlphaString(size int) string {

@@ -13,9 +13,9 @@ import (
 	"time"
 
 	mspproto "github.com/hyperledger/fabric-protos-go/msp"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/policies"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 type MockChannelPolicyManagerGetter struct {

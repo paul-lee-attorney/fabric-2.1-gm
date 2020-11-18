@@ -16,12 +16,12 @@ import (
 
 	"github.com/golang/protobuf/proto"
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/chaincode"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/privdata"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/chaincode"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/privdata"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
 	"github.com/pkg/errors"
 )
 

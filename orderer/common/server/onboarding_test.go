@@ -22,23 +22,23 @@ import (
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
-	deliver_mocks “github.com/paul-lee-attorney/fabric-2.1-gm/common/deliver/mock"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blockledger"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/cluster"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/cluster/mocks"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
-	server_mocks “github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/server/mocks"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
+	deliver_mocks "github.com/paul-lee-attorney/fabric-2.1-gm/common/deliver/mock"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/ledger/blockledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config/configtest"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/cluster"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/cluster/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
+	server_mocks "github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/server/mocks"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -52,11 +52,11 @@ var configtxgen, cryptogen, tempDir string
 
 func TestMain(m *testing.M) {
 	var err error
-	configtxgen, err = gexec.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/configtxgen")
+	configtxgen, err = gexec.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/configtxgen")
 	if err != nil {
 		os.Exit(-1)
 	}
-	cryptogen, err = gexec.Build(“github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
+	cryptogen, err = gexec.Build("github.com/paul-lee-attorney/fabric-2.1-gm/cmd/cryptogen")
 	if err != nil {
 		os.Exit(-1)
 	}

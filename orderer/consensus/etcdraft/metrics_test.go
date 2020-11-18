@@ -7,10 +7,10 @@ SPDX-License-Identifier: Apache-2.0
 package etcdraft_test
 
 import (
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/metricsfakes"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/etcdraft"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/metricsfakes"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/etcdraft"
 )
 
 var _ = Describe("Metrics", func() {

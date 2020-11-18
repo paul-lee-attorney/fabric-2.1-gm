@@ -11,12 +11,12 @@ import (
 
 	"github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
-	endorsertx “github.com/paul-lee-attorney/fabric-2.1-gm/core/tx/endorser"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/pkg/tx"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
+	endorsertx "github.com/paul-lee-attorney/fabric-2.1-gm/core/tx/endorser"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/pkg/tx"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 )
 
 var _ = Describe("Parser", func() {

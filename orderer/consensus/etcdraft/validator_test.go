@@ -13,13 +13,13 @@ import (
 	"github.com/golang/protobuf/proto"
 	etcdraftproto "github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	raftprotos "github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/etcdraft"
-	consensusmocks “github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/mocks"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/etcdraft"
+	consensusmocks "github.com/paul-lee-attorney/fabric-2.1-gm/orderer/consensus/mocks"
 )
 
 var _ = Describe("Metadata Validation", func() {

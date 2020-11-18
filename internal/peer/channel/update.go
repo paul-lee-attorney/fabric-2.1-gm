@@ -11,8 +11,9 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/docker/docker/daemon/logger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/spf13/cobra"
 )
 

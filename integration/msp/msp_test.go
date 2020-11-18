@@ -15,12 +15,12 @@ import (
 	"syscall"
 
 	docker "github.com/fsouza/go-dockerclient"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
 	"github.com/tedsuo/ifrit"
 )
 
@@ -84,7 +84,7 @@ var _ = Describe("MSP identity test on a network with mutual TLS required", func
 		chaincode := nwo.Chaincode{
 			Name:            "mycc",
 			Version:         "0.0",
-			Path:            “github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
+			Path:            "github.com/paul-lee-attorney/fabric-2.1-gm/integration/chaincode/simple/cmd",
 			Lang:            "golang",
 			PackageFile:     filepath.Join(tempDir, "simplecc.tar.gz"),
 			Ctor:            `{"Args":["init","a","100","b","200"]}`,

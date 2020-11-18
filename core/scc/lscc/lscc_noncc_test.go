@@ -10,13 +10,13 @@ import (
 	"errors"
 
 	"github.com/golang/protobuf/proto"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/lscc"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/lscc/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/lscc"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/lscc/mock"
 )
 
 var _ = Describe("LSCC", func() {

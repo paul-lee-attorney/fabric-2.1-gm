@@ -10,9 +10,9 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccpackage"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccpackage"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/spf13/cobra"
 )
 

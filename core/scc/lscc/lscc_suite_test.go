@@ -10,12 +10,12 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric-chaincode-go/shim"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/common/sysccprovider"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/lscc"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/ccprovider"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/common/sysccprovider"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/lscc"
 )
 
 //go:generate counterfeiter -o mock/chaincode_builder.go --fake-name ChaincodeBuilder . chaincodeBuilder

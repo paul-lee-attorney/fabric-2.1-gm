@@ -13,10 +13,10 @@ import (
 	cb "github.com/hyperledger/fabric-protos-go/common"
 	"github.com/hyperledger/fabric-protos-go/orderer"
 	protoetcdraft "github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 	"github.com/pkg/errors"
 )
 

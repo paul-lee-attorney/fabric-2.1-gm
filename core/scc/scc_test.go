@@ -9,10 +9,10 @@ package scc_test
 import (
 	"testing"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/scc"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/mock"
 	. "github.com/onsi/gomega"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/chaincode/lifecycle"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/scc"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/scc/mock"
 )
 
 //go:generate counterfeiter -o mock/chaincode_stream_handler.go --fake-name ChaincodeStreamHandler . chaincodeStreamHandler

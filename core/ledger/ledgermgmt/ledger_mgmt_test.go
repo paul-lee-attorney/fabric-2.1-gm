@@ -12,12 +12,12 @@ import (
 	"os"
 	"testing"
 
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx/test"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/disabled"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/cceventmgmt"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/mock"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/configtx/test"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/metrics/disabled"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/cceventmgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/core/ledger/mock"
 	"github.com/stretchr/testify/assert"
 )
 

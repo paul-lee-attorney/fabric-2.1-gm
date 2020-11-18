@@ -10,9 +10,9 @@ import (
 	"crypto/tls"
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
-	“github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/peer/common"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 )
