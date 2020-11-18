@@ -11,9 +11,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/hyperledger/fabric/internal/cryptogen/ca"
-	"github.com/hyperledger/fabric/internal/cryptogen/msp"
-	fabricmsp "github.com/hyperledger/fabric/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/ca"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/cryptogen/msp"
+	fabricmsp "github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v2"
 )
