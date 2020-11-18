@@ -12,9 +12,9 @@ import (
 
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/common/policies"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 )
 
 // PolicyChecker offers methods to check a signed proposal against a specific policy

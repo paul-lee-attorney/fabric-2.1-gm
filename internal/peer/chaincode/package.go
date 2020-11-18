@@ -15,10 +15,10 @@ import (
 	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/hyperledger/fabric/core/common/ccpackage"
 	"github.com/hyperledger/fabric/internal/pkg/identity"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/factory"
+	mspmgmt "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

@@ -13,7 +13,7 @@ import (
 	"github.com/hyperledger/fabric/discovery"
 	"github.com/hyperledger/fabric/discovery/support/acl"
 	"github.com/hyperledger/fabric/discovery/support/config"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 )
 
 //go:generate mockery -dir . -name GossipSupport -case underscore -output mocks/

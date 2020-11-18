@@ -12,11 +12,11 @@ import (
 	. "github.com/onsi/gomega"
 
 	cb "github.com/hyperledger/fabric-protos-go/common"
-	"github.com/hyperledger/fabric/common/channelconfig"
 	"github.com/hyperledger/fabric/core/config/configtest"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
 
 	"github.com/pkg/errors"
 )
@@ -55,7 +55,7 @@ var _ = Describe("Integration", func() {
 			group, err := encoder.NewChannelGroup(config)
 			Expect(err).NotTo(HaveOccurred())
 
-			cryptoProvider, err := sw.NewDefaultSecurityLevelWithKeystore(sw.NewDummyKeyStore())
+			cryptoProvider, err := gm.NewDefaultSecurityLevelWithKeystore(gm.NewDummyKeyStore())
 			Expect(err).NotTo(HaveOccurred())
 			_, err = channelconfig.NewBundle("test", &cb.Config{
 				ChannelGroup: group,

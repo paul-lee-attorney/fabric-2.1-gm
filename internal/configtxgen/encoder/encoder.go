@@ -16,11 +16,11 @@ import (
 	"github.com/hyperledger/fabric/common/policies"
 	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/hyperledger/fabric/internal/configtxlator/update"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
-	"github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxlator/update"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/pkg/errors"
 )
 

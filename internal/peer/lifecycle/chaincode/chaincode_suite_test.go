@@ -14,9 +14,9 @@ import (
 	pb "github.com/hyperledger/fabric-protos-go/peer"
 	"github.com/hyperledger/fabric/internal/peer/common"
 	"github.com/hyperledger/fabric/internal/peer/lifecycle/chaincode"
-	msptesttools "github.com/hyperledger/fabric/msp/mgmt/testtools"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	msptesttools "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt/testtools"
 )
 
 //go:generate counterfeiter -o mock/writer.go -fake-name Writer . writer

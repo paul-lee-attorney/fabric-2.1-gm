@@ -3,7 +3,7 @@
 package mocks
 
 import mock "github.com/stretchr/testify/mock"
-import msp "github.com/hyperledger/fabric/msp"
+import msp "github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 
 import protoutil "github.com/hyperledger/fabric/protoutil"
 

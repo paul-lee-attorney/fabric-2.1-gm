@@ -21,12 +21,12 @@ import (
 	"github.com/hyperledger/fabric/common/policydsl"
 	"github.com/hyperledger/fabric/integration/nwo"
 	"github.com/hyperledger/fabric/integration/nwo/commands"
-	"github.com/hyperledger/fabric/msp"
 	"github.com/hyperledger/fabric/protoutil"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/tedsuo/ifrit"
 )
 

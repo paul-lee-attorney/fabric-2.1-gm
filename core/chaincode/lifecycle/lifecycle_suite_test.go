@@ -19,7 +19,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/lifecycle"
 	validation "github.com/hyperledger/fabric/core/handlers/validation/api/state"
 	"github.com/hyperledger/fabric/core/ledger"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

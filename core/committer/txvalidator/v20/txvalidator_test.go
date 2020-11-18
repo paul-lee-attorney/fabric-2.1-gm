@@ -21,9 +21,9 @@ import (
 	"github.com/hyperledger/fabric/core/ledger/util"
 	ledgerUtil "github.com/hyperledger/fabric/core/ledger/util"
 	mocktxvalidator "github.com/hyperledger/fabric/core/mocks/txvalidator"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/sw"
+	mspmgmt "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 )

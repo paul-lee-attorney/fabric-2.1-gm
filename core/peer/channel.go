@@ -16,8 +16,8 @@ import (
 	"github.com/hyperledger/fabric/common/policies"
 	"github.com/hyperledger/fabric/core/ledger"
 	"github.com/hyperledger/fabric/core/transientstore"
-	"github.com/hyperledger/fabric/msp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 )
 
 // Channel manages objects and configuration associated with a Channel.

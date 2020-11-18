@@ -9,7 +9,7 @@ package gossip
 import (
 	"github.com/hyperledger/fabric/common/flogging"
 	"github.com/hyperledger/fabric/gossip/api"
-	"github.com/hyperledger/fabric/msp/mgmt"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 )
 
 var saLogger = flogging.MustGetLogger("peer.gossip.sa")

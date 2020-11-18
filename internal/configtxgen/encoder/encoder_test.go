@@ -17,11 +17,11 @@ import (
 	ab "github.com/hyperledger/fabric-protos-go/orderer"
 	"github.com/hyperledger/fabric-protos-go/orderer/etcdraft"
 	"github.com/hyperledger/fabric/common/util"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder"
-	"github.com/hyperledger/fabric/internal/configtxgen/encoder/fakes"
-	"github.com/hyperledger/fabric/internal/configtxgen/genesisconfig"
-	"github.com/hyperledger/fabric/internal/pkg/identity"
 	"github.com/hyperledger/fabric/protoutil"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/encoder/fakes"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/configtxgen/genesisconfig"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 )
 
 //go:generate counterfeiter -o fakes/signer_serializer.go --fake-name SignerSerializer . signerSerializer

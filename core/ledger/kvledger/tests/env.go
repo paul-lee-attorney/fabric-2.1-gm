@@ -25,11 +25,11 @@ import (
 	"github.com/hyperledger/fabric/core/ledger/ledgermgmt"
 	corepeer "github.com/hyperledger/fabric/core/peer"
 	"github.com/hyperledger/fabric/core/scc/lscc"
-	"github.com/hyperledger/fabric/msp"
-	"github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 	"github.com/stretchr/testify/assert"
 )
 

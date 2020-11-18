@@ -37,10 +37,10 @@ import (
 	gossipservice "github.com/hyperledger/fabric/gossip/service"
 	"github.com/hyperledger/fabric/internal/pkg/comm"
 	"github.com/hyperledger/fabric/internal/pkg/peer/orderers"
-	"github.com/hyperledger/fabric/msp"
-	mspmgmt "github.com/hyperledger/fabric/msp/mgmt"
 	"github.com/hyperledger/fabric/protoutil"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	mspmgmt "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt"
 	"github.com/pkg/errors"
 )
 

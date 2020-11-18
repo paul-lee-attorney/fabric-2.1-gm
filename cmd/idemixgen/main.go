@@ -22,7 +22,7 @@ import (
 	"github.com/hyperledger/fabric/common/tools/idemixgen/idemixca"
 	"github.com/hyperledger/fabric/common/tools/idemixgen/metadata"
 	"github.com/hyperledger/fabric/idemix"
-	"github.com/hyperledger/fabric/msp"
+	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
 	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/paul-lee-attorney/gm/sm2"
 	"github.com/pkg/errors"

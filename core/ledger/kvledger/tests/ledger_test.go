@@ -12,7 +12,7 @@ import (
 	"testing"
 
 	"github.com/hyperledger/fabric/common/flogging"
-	msptesttools "github.com/hyperledger/fabric/msp/mgmt/testtools"
+	msptesttools "github.com/paul-lee-attorney/fabric-2.1-gm/msp/mgmt/testtools"
 )
 
 func TestMain(m *testing.M) {
