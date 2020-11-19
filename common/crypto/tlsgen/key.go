@@ -88,33 +88,38 @@ func newCertKeyPair(isCA bool, isServer bool, host string, certSigner crypto.Sig
 		certSigner = privateKey
 	}
 
-	// rawBytes, err := x509.CreateCertificate(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
-	rawBytes, err := gmx509.CreateCertificateBytes(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
-	if err != nil {
-		return nil, err
-	}
-	// 在EPM块的Type字段，写入“SM2”标识
-	pubKey := encodePEM("SM2 CERTIFICATE", rawBytes)
+	switch pri := certSigner.(type) {
+	case *sm2.PrivateKey:
+		// rawBytes, err := x509.CreateCertificate(rand.Reader, &template, parent, &privateKey.PublicKey, certSigner)
+		rawBytes, err := gmx509.CreateCertificateBytes(&template, parent, &privateKey.PublicKey, pri)
+		if err != nil {
+			return nil, err
+		}
+		// 在EPM块的Type字段，写入“SM2”标识
+		pubKey := encodePEM("CERTIFICATE", rawBytes)
 
-	block, _ := pem.Decode(pubKey)
-	if block == nil { // Never comes unless x509 or pem has bug
-		return nil, errors.Errorf("%s: wrong PEM encoding", pubKey)
+		block, _ := pem.Decode(pubKey)
+		if block == nil { // Never comes unless x509 or pem has bug
+			return nil, errors.Errorf("%s: wrong PEM encoding", pubKey)
+		}
+
+		// cert, err := x509.ParseCertificate(block.Bytes)
+		cert, err := gmx509.ParseCertificate(block.Bytes)
+		if err != nil {
+			return nil, err
+		}
+
+		// 在PEM块Type，加注"SM2"标识
+		privKey := encodePEM("SM2 PRIVATE KEY", privBytes)
+		return &CertKeyPair{
+			Key:     privKey,    // PEM, DER, PKCS8格式私钥
+			Cert:    pubKey,     // PEM, DER, x509.Certificate格式证书
+			Signer:  privateKey, // *sm2.PrivateKey 格式私钥
+			TLSCert: cert,       // x509.Certificate格式证书
+		}, nil
 	}
 
-	// cert, err := x509.ParseCertificate(block.Bytes)
-	cert, err := gmx509.ParseCertificate(block.Bytes)
-	if err != nil {
-		return nil, err
-	}
-
-	// 在PEM块Type，加注"SM2"标识
-	privKey := encodePEM("SM2 PRIVATE KEY", privBytes)
-	return &CertKeyPair{
-		Key:     privKey,    // PEM, DER, PKCS8格式私钥
-		Cert:    pubKey,     // PEM, DER, x509.Certificate格式证书
-		Signer:  privateKey, // *sm2.PrivateKey 格式私钥
-		TLSCert: cert,       // x509.Certificate格式证书
-	}, nil
+	return nil, errors.Errorf("%s: wrong private key type", certSigner)
 }
 
 func encodePEM(keyType string, data []byte) []byte {

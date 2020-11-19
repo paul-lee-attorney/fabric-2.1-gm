@@ -23,11 +23,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/paul-lee-attorney/fabric-2.1-gm/bccsp/gm"
 	"github.com/paul-lee-attorney/gm/sm2"
 
 	"github.com/paul-lee-attorney/gm/gmx509"
-
 )
 
 //command line flags
@@ -135,7 +133,7 @@ func genCertificateSM2(name string, template, parent *x509.Certificate, pub *sm2
 	priv *sm2.PrivateKey) (*x509.Certificate, error) {
 
 	//create the x509 public cert
-	certBytes, err := gmx509.CreateCertificateBytes(rand.Reader, template, parent, pub, priv)
+	certBytes, err := gmx509.CreateCertificateBytes(template, parent, pub, priv)
 	if err != nil {
 		return nil, err
 	}
@@ -146,7 +144,7 @@ func genCertificateSM2(name string, template, parent *x509.Certificate, pub *sm2
 		return nil, err
 	}
 	//pem encode the cert
-	pem.Encode(certFile, &pem.Block{Type: "SM2 CERTIFICATE", Bytes: certBytes})
+	pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certBytes})
 	certFile.Close()
 
 	x509Cert, err := gmx509.ParseCertificate(certBytes)
@@ -416,13 +414,14 @@ func main() {
 	//generate orgs / CAs
 	for i := 1; i <= *numOrgs; i++ {
 		// signKey, signCert, err := genCertificateAuthorityECDSA(fmt.Sprintf(baseOrgName+"%d", i))
-		signKey, signCert, err := genCertificateAuthoritySM2(fmt.Sprintf(baseOrgName+"%d", i))		if err != nil {
+		signKey, signCert, err := genCertificateAuthoritySM2(fmt.Sprintf(baseOrgName+"%d", i))
+		if err != nil {
 			fmt.Printf("error generating CA %s%d : %s\n", baseOrgName, i, err.Error())
 		}
 		//generate server certificates for the org
 		for j := 1; j <= *numServerCerts; j++ {
 			// err := genServerCertificateECDSA(fmt.Sprintf(baseOrgName+"%d-server%d", i, j), signKey, signCert)
-			err := genServerCertificateSM2(fmt.Sprintf(baseOrgName+"%d-server%d", i, j), signKey, signCert)			
+			err := genServerCertificateSM2(fmt.Sprintf(baseOrgName+"%d-server%d", i, j), signKey, signCert)
 			if err != nil {
 				fmt.Printf("error generating server certificate for %s%d-server%d : %s\n",
 					baseOrgName, i, j, err.Error())
@@ -442,8 +441,8 @@ func main() {
 
 			// childSignKey, childSignCert, err := genIntermediateCertificateAuthorityECDSA(
 			// 	fmt.Sprintf(baseOrgName+"%d-child%d", i, m), signKey, signCert)
-				childSignKey, childSignCert, err := genIntermediateCertificateAuthoritySM2(fmt.Sprintf(baseOrgName+"%d-child%d", i, m), signKey, signCert)
-				if err != nil {
+			childSignKey, childSignCert, err := genIntermediateCertificateAuthoritySM2(fmt.Sprintf(baseOrgName+"%d-child%d", i, m), signKey, signCert)
+			if err != nil {
 				fmt.Printf("error generating CA %s%d-child%d : %s\n",
 					baseOrgName, i, m, err.Error())
 			}

@@ -315,7 +315,7 @@ func genCertificateSM2(
 			return nil, err
 		}
 		//pem encode the cert
-		err = pem.Encode(certFile, &pem.Block{Type: "SM2 CERTIFICATE", Bytes: certBytes})
+		err = pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certBytes})
 		certFile.Close()
 		if err != nil {
 			return nil, err
@@ -344,7 +344,7 @@ func genCertificateSM2(
 			return nil, err
 		}
 		//pem encode the cert
-		err = pem.Encode(certFile, &pem.Block{Type: "SM2 CERTIFICATE", Bytes: certBytes})
+		err = pem.Encode(certFile, &pem.Block{Type: "CERTIFICATE", Bytes: certBytes})
 		certFile.Close()
 		if err != nil {
 			return nil, err
@@ -411,8 +411,8 @@ func LoadCertificateSM2(certPath string) (*x509.Certificate, error) {
 				return err
 			}
 			block, _ := pem.Decode(rawCert)
-			if block == nil || block.Type != "SM2 CERTIFICATE" {
-				return errors.Errorf("%s: wrong DER encoding", path)
+			if block == nil || block.Type != "CERTIFICATE" {
+				return errors.Errorf("%s: wrong PEM encoding", path)
 			}
 			cert, err = gmx509.ParseCertificate(block.Bytes)
 			if err != nil {

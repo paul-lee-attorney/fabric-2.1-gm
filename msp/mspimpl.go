@@ -180,19 +180,19 @@ func (msp *bccspmsp) getCertFromPem(idBytes []byte) (*x509.Certificate, error) {
 	// get a cert
 	var cert *x509.Certificate
 
-	if pemCert.Type == "SM2 CERTIFICATE" {
-		cert, err := gmx509.ParseCertificate(pemCert.Bytes)
-		if err != nil {
-			return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 cert")
-		}
-		return cert, nil
-	}
-
-	cert, err := x509.ParseCertificate(pemCert.Bytes)
+	// if pemCert.Type == "CERTIFICATE" {
+	cert, err := gmx509.ParseCertificate(pemCert.Bytes)
 	if err != nil {
 		return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 cert")
 	}
 	return cert, nil
+	// }
+
+	// cert, err := x509.ParseCertificate(pemCert.Bytes)
+	// if err != nil {
+	// 	return nil, errors.Wrap(err, "getCertFromPem error: failed to parse x509 cert")
+	// }
+	// return cert, nil
 }
 
 func (msp *bccspmsp) getIdentityFromConf(idBytes []byte) (Identity, bccsp.Key, error) {
@@ -426,7 +426,7 @@ func (msp *bccspmsp) deserializeIdentityInternal(serializedIdentity []byte) (Ide
 	var cert *x509.Certificate
 	var err error
 
-	if bl.Type == "SM2 CERTIFICATE" {
+	if bl.Type == "CERTIFICATE" {
 		cert, err = gmx509.ParseCertificate(bl.Bytes)
 		if err != nil {
 			return nil, errors.Wrap(err, "parseCertificate failed")
@@ -866,11 +866,11 @@ func (msp *bccspmsp) IsWellFormed(identity *m.SerializedIdentity) error {
 	// 1) Must ensure PEM block is of type CERTIFICATE or is empty
 	// 2) Must not replace getCertFromPem with this method otherwise we will introduce
 	//    a change in validation logic which will result in a chain fork.
-	if bl.Type != "CERTIFICATE" && bl.Type != "SM2 CERTIFICATE" && bl.Type != "" {
-		return errors.Errorf("pem type is %s, should be 'SM2 CERTIFICATE' or missing", bl.Type)
+	if bl.Type != "CERTIFICATE" && bl.Type != "" {
+		return errors.Errorf("pem type is %s, should be 'CERTIFICATE' or missing", bl.Type)
 	}
 
-	if bl.Type == "SM2 CERTIFICATE" {
+	if bl.Type == "CERTIFICATE" {
 		_, err := gmx509.ParseCertificate(bl.Bytes)
 		return err
 	}

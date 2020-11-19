@@ -278,7 +278,7 @@ func x509Filename(name string) string {
 }
 
 func x509Export(path string, cert *x509.Certificate) error {
-	return pemExport(path, "SM2 CERTIFICATE", cert.Raw)
+	return pemExport(path, "CERTIFICATE", cert.Raw)
 }
 
 func keyExport(keystore, output string) error {

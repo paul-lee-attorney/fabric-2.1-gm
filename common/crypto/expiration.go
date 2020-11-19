@@ -35,7 +35,7 @@ func certExpirationTime(pemBytes []byte) time.Time {
 	}
 
 	// 根据block的Type信息，将SM2算法证书转向SM2证书解析函数
-	if bl.Type == "SM2 CERTIFICATE" {
+	if bl.Type == "CERTIFICATE" {
 		cert, err := gmx509.ParseCertificate(bl.Bytes)
 		if err != nil {
 			return time.Time{}
