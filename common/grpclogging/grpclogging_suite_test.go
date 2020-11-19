@@ -45,10 +45,10 @@ var _ = BeforeSuite(func() {
 	var err error
 	caCert, caKey := generateCA("test-ca", "127.0.0.1")
 	clientCert, clientKey := issueCertificate(caCert, caKey, "client", "127.0.0.1")
-	clientCertWithKey, err = tls.X509KeyPair(clientCert, clientKey)
+	clientCertWithKey, err = gmtls.X509KeyPair(clientCert, clientKey)
 	Expect(err).NotTo(HaveOccurred())
 	serverCert, serverKey := issueCertificate(caCert, caKey, "server", "127.0.0.1")
-	serverCertWithKey, err = tls.X509KeyPair(serverCert, serverKey)
+	serverCertWithKey, err = gmtls.X509KeyPair(serverCert, serverKey)
 	Expect(err).NotTo(HaveOccurred())
 
 	caCertPool = x509.NewCertPool()
@@ -57,7 +57,7 @@ var _ = BeforeSuite(func() {
 
 	serverTLSConfig = &tls.Config{
 		Certificates: []tls.Certificate{serverCertWithKey},
-		ClientAuth:   tls.VerifyClientCertIfGiven,
+		ClientAuth:   gmtls.VerifyClientCertIfGiven,
 		ClientCAs:    caCertPool,
 		RootCAs:      caCertPool,
 	}
@@ -66,7 +66,7 @@ var _ = BeforeSuite(func() {
 	clientTLSConfig = &tls.Config{
 		Certificates:       []tls.Certificate{clientCertWithKey},
 		RootCAs:            caCertPool,
-		ClientSessionCache: tls.NewLRUClientSessionCache(10),
+		ClientSessionCache: gmtls.NewLRUClientSessionCache(10),
 	}
 	clientTLSConfig.BuildNameToCertificate()
 })
@@ -136,7 +136,7 @@ func generateCA(subjectCN string, hosts ...string) (pemCert, pemKey []byte) {
 }
 
 func issueCertificate(caCert, caKey []byte, subjectCN string, hosts ...string) (pemCert, pemKey []byte) {
-	tlsCert, err := tls.X509KeyPair(caCert, caKey)
+	tlsCert, err := gmtls.X509KeyPair(caCert, caKey)
 	Expect(err).NotTo(HaveOccurred())
 
 	ca, err := x509.ParseCertificate(tlsCert.Certificate[0])

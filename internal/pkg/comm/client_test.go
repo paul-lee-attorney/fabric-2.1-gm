@@ -20,10 +20,12 @@ import (
 	"time"
 
 	"github.com/golang/protobuf/proto"
+
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm/testpb"
+	"github.com/paul-lee-attorney/gm/gmtls"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -551,11 +553,11 @@ func loadCerts(t *testing.T) testCerts {
 	if err != nil {
 		t.Fatalf("unexpected error reading key for test: %v", err)
 	}
-	certs.clientCert, err = tls.X509KeyPair(certs.certPEM, certs.keyPEM)
+	certs.clientCert, err = gmtls.X509KeyPair(certs.certPEM, certs.keyPEM)
 	if err != nil {
 		t.Fatalf("unexpected error loading certificate for test: %v", err)
 	}
-	certs.serverCert, err = tls.LoadX509KeyPair(
+	certs.serverCert, err = gmtls.LoadX509KeyPair(
 		filepath.Join("testdata", "certs", "Org1-server1-cert.pem"),
 		filepath.Join("testdata", "certs", "Org1-server1-key.pem"),
 	)

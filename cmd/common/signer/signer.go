@@ -94,7 +94,7 @@ func loadPrivateKey(file string) (*sm2.PrivateKey, error) {
 	return key, nil
 }
 
-// Based on crypto/tls/tls.go but modified for Fabric:
+// Based on crypto/tls/gmtls.go but modified for Fabric:
 func parsePrivateKey(der []byte) (*sm2.PrivateKey, error) {
 	// OpenSSL 1.0.0 generates PKCS#8 keys.
 	if key, err := gmx509.ParsePKCS8SM2PrivateKey(der); err == nil {

@@ -369,7 +369,7 @@ func createDiscoveryService(sup *mockSupport) discovery.DiscoveryServer {
 func TestClient(t *testing.T) {
 	clientCert := loadFileOrPanic(filepath.Join("testdata", "client", "cert.pem"))
 	clientKey := loadFileOrPanic(filepath.Join("testdata", "client", "key.pem"))
-	clientTLSCert, err := tls.X509KeyPair(clientCert, clientKey)
+	clientTLSCert, err := gmtls.X509KeyPair(clientCert, clientKey)
 	assert.NoError(t, err)
 	server := createGRPCServer(t)
 	sup := &mockSupport{}

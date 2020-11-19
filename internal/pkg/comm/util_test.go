@@ -21,6 +21,7 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm/testpb"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/paul-lee-attorney/gm/gmtls"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -125,7 +126,7 @@ func TestBindingInspector(t *testing.T) {
 	assert.Contains(t, err.Error(), "client didn't include its TLS cert hash")
 
 	// Scenario IV: Client sends its TLS cert hash as needed, but doesn't use mutual TLS
-	cert, _ := tls.X509KeyPair([]byte(selfSignedCertPEM), []byte(selfSignedKeyPEM))
+	cert, _ := gmtls.X509KeyPair([]byte(selfSignedCertPEM), []byte(selfSignedKeyPEM))
 	h := sha256.New()
 	h.Write([]byte(cert.Certificate[0]))
 	chanHdr.TlsCertHash = h.Sum(nil)
@@ -209,7 +210,7 @@ func (is *inspectingServer) newInspection(t *testing.T) *inspection {
 }
 
 func (ins *inspection) withMutualTLS() *inspection {
-	cert, err := tls.X509KeyPair([]byte(selfSignedCertPEM), []byte(selfSignedKeyPEM))
+	cert, err := gmtls.X509KeyPair([]byte(selfSignedCertPEM), []byte(selfSignedKeyPEM))
 	assert.NoError(ins.t, err)
 	ins.tlsConfig.Certificates = []tls.Certificate{cert}
 	ins.creds = credentials.NewTLS(ins.tlsConfig)

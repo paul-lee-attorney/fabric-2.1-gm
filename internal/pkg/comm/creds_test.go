@@ -18,6 +18,7 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging/floggingtest"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	"github.com/paul-lee-attorney/gm/gmtls"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -33,7 +34,7 @@ func TestCreds(t *testing.T) {
 	if !ok {
 		t.Fatalf("failed to create certPool")
 	}
-	cert, err := tls.LoadX509KeyPair(
+	cert, err := gmtls.LoadX509KeyPair(
 		filepath.Join("testdata", "certs", "Org1-server1-cert.pem"),
 		filepath.Join("testdata", "certs", "Org1-server1-key.pem"),
 	)

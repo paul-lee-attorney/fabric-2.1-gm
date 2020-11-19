@@ -24,6 +24,7 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm/testpb"
+	"github.com/paul-lee-attorney/gm/gmtls"
 	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
@@ -384,7 +385,7 @@ func loadTLSKeyPairFromFile(keyFile, certFile string) (tls.Certificate, error) {
 		return tls.Certificate{}, err
 	}
 
-	cert, err := tls.X509KeyPair(certPEMBlock, keyPEMBlock)
+	cert, err := gmtls.X509KeyPair(certPEMBlock, keyPEMBlock)
 	if err != nil {
 		return tls.Certificate{}, err
 	}
@@ -608,7 +609,7 @@ func TestNewSecureGRPCServer(t *testing.T) {
 	assert.Equal(t, srv.Address(), testAddress)
 	assert.Equal(t, srv.Listener().Addr().String(), testAddress)
 
-	cert, _ := tls.X509KeyPair([]byte(selfSignedCertPEM), []byte(selfSignedKeyPEM))
+	cert, _ := gmtls.X509KeyPair([]byte(selfSignedCertPEM), []byte(selfSignedKeyPEM))
 	assert.Equal(t, srv.ServerCertificate(), cert)
 
 	assert.Equal(t, srv.TLSEnabled(), true)
@@ -676,7 +677,7 @@ func TestVerifyCertificateCallback(t *testing.T) {
 	}
 
 	probeTLS := func(endpoint string, clientKeyPair *tlsgen.CertKeyPair) error {
-		cert, err := tls.X509KeyPair(clientKeyPair.Cert, clientKeyPair.Key)
+		cert, err := gmtls.X509KeyPair(clientKeyPair.Cert, clientKeyPair.Key)
 		if err != nil {
 			return err
 		}
@@ -1095,7 +1096,7 @@ func TestUpdateTLSCert(t *testing.T) {
 	// new TLS certificate has a SAN of "127.0.0.1" so it should succeed
 	certPath := filepath.Join("testdata", "dynamic_cert_update", "localhost", "server.crt")
 	keyPath := filepath.Join("testdata", "dynamic_cert_update", "localhost", "server.key")
-	tlsCert, err := tls.LoadX509KeyPair(certPath, keyPath)
+	tlsCert, err := gmtls.LoadX509KeyPair(certPath, keyPath)
 	assert.NoError(t, err)
 	srv.SetServerCertificate(tlsCert)
 	err = probeServer()
@@ -1104,7 +1105,7 @@ func TestUpdateTLSCert(t *testing.T) {
 	// revert back to the old certificate, should fail.
 	certPath = filepath.Join("testdata", "dynamic_cert_update", "notlocalhost", "server.crt")
 	keyPath = filepath.Join("testdata", "dynamic_cert_update", "notlocalhost", "server.key")
-	tlsCert, err = tls.LoadX509KeyPair(certPath, keyPath)
+	tlsCert, err = gmtls.LoadX509KeyPair(certPath, keyPath)
 	assert.NoError(t, err)
 	srv.SetServerCertificate(tlsCert)
 

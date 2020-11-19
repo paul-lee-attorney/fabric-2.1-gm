@@ -16,6 +16,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/core/operations"
+	"github.com/paul-lee-attorney/gm/gmtls"
 )
 
 var _ = Describe("TLS", func() {
@@ -45,7 +46,7 @@ var _ = Describe("TLS", func() {
 	})
 
 	It("creates a valid TLS configuration", func() {
-		cert, err := tls.LoadX509KeyPair(
+		cert, err := gmtls.LoadX509KeyPair(
 			filepath.Join(tempDir, "server-cert.pem"),
 			filepath.Join(tempDir, "server-key.pem"),
 		)

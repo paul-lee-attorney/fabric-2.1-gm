@@ -14,6 +14,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/paul-lee-attorney/gm/gmtls"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -22,7 +23,7 @@ import (
 func createTLSService(t *testing.T, ca CA, host string) *grpc.Server {
 	keyPair, err := ca.NewServerCertKeyPair(host)
 	assert.NoError(t, err)
-	cert, err := tls.X509KeyPair(keyPair.Cert, keyPair.Key)
+	cert, err := gmtls.X509KeyPair(keyPair.Cert, keyPair.Key)
 	assert.NoError(t, err)
 	tlsConf := &tls.Config{
 		Certificates: []tls.Certificate{cert},
@@ -49,7 +50,7 @@ func TestTLSCA(t *testing.T) {
 	defer listener.Close()
 
 	probeTLS := func(kp *CertKeyPair) error {
-		cert, err := tls.X509KeyPair(kp.Cert, kp.Key)
+		cert, err := gmtls.X509KeyPair(kp.Cert, kp.Key)
 		assert.NoError(t, err)
 		tlsCfg := &tls.Config{
 			RootCAs:      x509.NewCertPool(),

@@ -451,7 +451,7 @@ func GetClientCertificate() (tls.Certificate, error) {
 		return cert, errors.WithMessage(err,
 			"error loading client TLS certificate")
 	}
-	cert, err = tls.X509KeyPair(clientCert, clientKey)
+	cert, err = gmtls.X509KeyPair(clientCert, clientKey)
 	if err != nil {
 		return cert, errors.WithMessage(err,
 			"error parsing client TLS key pair")

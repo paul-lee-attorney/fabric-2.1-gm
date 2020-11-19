@@ -31,9 +31,11 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
+
 	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/commands"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/integration/nwo/fabricconfig"
+	"github.com/paul-lee-attorney/gm/gmtls"
 	"github.com/tedsuo/ifrit"
 	"github.com/tedsuo/ifrit/ginkgomon"
 )
@@ -686,7 +688,7 @@ func PeerOperationalClients(network *nwo.Network, peer *nwo.Peer) (authClient, u
 }
 
 func operationalClients(tlsDir string) (authClient, unauthClient *http.Client) {
-	clientCert, err := tls.LoadX509KeyPair(
+	clientCert, err := gmtls.LoadX509KeyPair(
 		filepath.Join(tlsDir, "server.crt"),
 		filepath.Join(tlsDir, "server.key"),
 	)

@@ -87,7 +87,7 @@ func (client *GRPCClient) parseSecureOptions(opts SecureOptions) error {
 		// make sure we have both Key and Certificate
 		if opts.Key != nil &&
 			opts.Certificate != nil {
-			cert, err := tls.X509KeyPair(opts.Certificate,
+			cert, err := gmtls.X509KeyPair(opts.Certificate,
 				opts.Key)
 			if err != nil {
 				return errors.WithMessage(err, "failed to "+

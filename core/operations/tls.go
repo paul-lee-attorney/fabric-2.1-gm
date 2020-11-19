@@ -12,6 +12,7 @@ import (
 	"io/ioutil"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	"github.com/paul-lee-attorney/gm/gmtls"
 )
 
 type TLS struct {
@@ -26,7 +27,7 @@ func (t TLS) Config() (*tls.Config, error) {
 	var tlsConfig *tls.Config
 
 	if t.Enabled {
-		cert, err := tls.LoadX509KeyPair(t.CertFile, t.KeyFile)
+		cert, err := gmtls.LoadX509KeyPair(t.CertFile, t.KeyFile)
 		if err != nil {
 			return nil, err
 		}

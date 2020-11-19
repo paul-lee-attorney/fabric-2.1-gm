@@ -195,7 +195,7 @@ func TestUpdateRootsFromConfigBlock(t *testing.T) {
 	require.NoError(t, err)
 
 	// use server cert as client cert
-	org1ClientCert, err := tls.X509KeyPair(org1Server1Cert, org1Server1Key)
+	org1ClientCert, err := gmtls.X509KeyPair(org1Server1Cert, org1Server1Key)
 	require.NoError(t, err)
 
 	org1Creds := credentials.NewTLS(&tls.Config{
@@ -203,21 +203,21 @@ func TestUpdateRootsFromConfigBlock(t *testing.T) {
 		RootCAs:      org1CertPool,
 	})
 
-	org2ClientCert, err := tls.X509KeyPair(org2Server1Cert, org2Server1Key)
+	org2ClientCert, err := gmtls.X509KeyPair(org2Server1Cert, org2Server1Key)
 	require.NoError(t, err)
 	org2Creds := credentials.NewTLS(&tls.Config{
 		Certificates: []tls.Certificate{org2ClientCert},
 		RootCAs:      org1CertPool,
 	})
 
-	org2IntermediateClientCert, err := tls.X509KeyPair(org2IntermediateServer1Cert, org2IntermediateServer1Key)
+	org2IntermediateClientCert, err := gmtls.X509KeyPair(org2IntermediateServer1Cert, org2IntermediateServer1Key)
 	require.NoError(t, err)
 	org2IntermediateCreds := credentials.NewTLS(&tls.Config{
 		Certificates: []tls.Certificate{org2IntermediateClientCert},
 		RootCAs:      org1CertPool,
 	})
 
-	ordererOrgClientCert, err := tls.X509KeyPair(ordererOrgServer1Cert, ordererOrgServer1Key)
+	ordererOrgClientCert, err := gmtls.X509KeyPair(ordererOrgServer1Cert, ordererOrgServer1Key)
 	require.NoError(t, err)
 
 	ordererOrgCreds := credentials.NewTLS(&tls.Config{

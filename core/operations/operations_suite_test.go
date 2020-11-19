@@ -18,6 +18,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/crypto/tlsgen"
+	"github.com/paul-lee-attorney/gm/gmtls"
 )
 
 func TestOperations(t *testing.T) {
@@ -59,7 +60,7 @@ func newHTTPClient(tlsDir string, withClientCert bool) *http.Client {
 		RootCAs: clientCertPool,
 	}
 	if withClientCert {
-		clientCert, err := tls.LoadX509KeyPair(
+		clientCert, err := gmtls.LoadX509KeyPair(
 			filepath.Join(tlsDir, "client-cert.pem"),
 			filepath.Join(tlsDir, "client-key.pem"),
 		)

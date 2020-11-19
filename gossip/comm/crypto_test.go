@@ -141,7 +141,7 @@ func GenerateCertificatesOrPanic() tls.Certificate {
 	}
 	encodedCert := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE", Bytes: rawBytes})
 	encodedKey := pem.EncodeToMemory(&pem.Block{Type: "EC PRIVATE KEY", Bytes: privBytes})
-	cert, err := tls.X509KeyPair(encodedCert, encodedKey)
+	cert, err := gmtls.X509KeyPair(encodedCert, encodedKey)
 	if err != nil {
 		panic(err)
 	}

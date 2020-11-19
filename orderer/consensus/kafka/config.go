@@ -42,7 +42,7 @@ func newBrokerConfig(
 	brokerConfig.Net.TLS.Enable = tlsConfig.Enabled
 	if brokerConfig.Net.TLS.Enable {
 		// create public/private key pair structure
-		keyPair, err := tls.X509KeyPair([]byte(tlsConfig.Certificate), []byte(tlsConfig.PrivateKey))
+		keyPair, err := gmtls.X509KeyPair([]byte(tlsConfig.Certificate), []byte(tlsConfig.PrivateKey))
 		if err != nil {
 			logger.Panic("Unable to decode public/private key pair:", err)
 		}

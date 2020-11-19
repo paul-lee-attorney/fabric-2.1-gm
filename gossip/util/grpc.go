@@ -46,11 +46,11 @@ func CreateGRPCLayer() (port int, gRPCServer *comm.GRPCServer, certs *common.TLS
 		panic(err)
 	}
 
-	tlsServerCert, err := tls.X509KeyPair(serverKeyPair.Cert, serverKeyPair.Key)
+	tlsServerCert, err := gmtls.X509KeyPair(serverKeyPair.Cert, serverKeyPair.Key)
 	if err != nil {
 		panic(err)
 	}
-	tlsClientCert, err := tls.X509KeyPair(clientKeyPair.Cert, clientKeyPair.Key)
+	tlsClientCert, err := gmtls.X509KeyPair(clientKeyPair.Cert, clientKeyPair.Key)
 	if err != nil {
 		panic(err)
 	}

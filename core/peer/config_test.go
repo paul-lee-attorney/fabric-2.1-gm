@@ -6,7 +6,6 @@ SPDX-License-Identifier: Apache-2.0
 package peer
 
 import (
-	"crypto/tls"
 	"fmt"
 	"net"
 	"os"
@@ -16,6 +15,7 @@ import (
 	"time"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	"github.com/paul-lee-attorney/gm/gmtls"
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
@@ -202,7 +202,7 @@ func TestGetClientCertificate(t *testing.T) {
 	assert.Error(t, err)
 
 	// client auth required and clientKey/clientCert set
-	expected, err := tls.LoadX509KeyPair(
+	expected, err := gmtls.LoadX509KeyPair(
 		filepath.Join("testdata", "Org2-server1-cert.pem"),
 		filepath.Join("testdata", "Org2-server1-key.pem"),
 	)
@@ -218,7 +218,7 @@ func TestGetClientCertificate(t *testing.T) {
 	// client cert to be the server cert
 	viper.Set("peer.tls.clientKey.file", "")
 	viper.Set("peer.tls.clientCert.file", "")
-	expected, err = tls.LoadX509KeyPair(
+	expected, err = gmtls.LoadX509KeyPair(
 		filepath.Join("testdata", "Org1-server1-cert.pem"),
 		filepath.Join("testdata", "Org1-server1-key.pem"),
 	)

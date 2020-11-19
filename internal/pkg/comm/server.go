@@ -74,7 +74,7 @@ func NewGRPCServerFromListener(listener net.Listener, serverConfig ServerConfig)
 		//both key and cert are required
 		if secureConfig.Key != nil && secureConfig.Certificate != nil {
 			//load server public and private keys
-			cert, err := tls.X509KeyPair(secureConfig.Certificate, secureConfig.Key)
+			cert, err := gmtls.X509KeyPair(secureConfig.Certificate, secureConfig.Key)
 			if err != nil {
 				return nil, err
 			}
