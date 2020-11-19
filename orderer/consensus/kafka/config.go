@@ -8,7 +8,6 @@ package kafka
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 
 	localconfig "github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
 
@@ -47,7 +46,7 @@ func newBrokerConfig(
 			logger.Panic("Unable to decode public/private key pair:", err)
 		}
 		// create root CA pool
-		rootCAs := x509.NewCertPool()
+		rootCAs := gmx509.NewCertPool()
 		for _, certificate := range tlsConfig.RootCAs {
 			if !rootCAs.AppendCertsFromPEM([]byte(certificate)) {
 				logger.Panic("Unable to parse the root certificate authority certificates (Kafka.Tls.RootCAs)")

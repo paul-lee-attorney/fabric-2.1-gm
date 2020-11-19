@@ -148,10 +148,10 @@ func (cs *ConnectionSource) Update(globalAddrs []string, orgs map[string]Orderer
 
 	cs.allEndpoints = nil
 
-	globalCertPool := x509.NewCertPool()
+	globalCertPool := gmx509.NewCertPool()
 
 	for orgName, org := range orgs {
-		certPool := x509.NewCertPool()
+		certPool := gmx509.NewCertPool()
 		for _, rootCert := range org.RootCerts {
 			if hasOrgEndpoints {
 				if err := comm.AddPemToCertPool(rootCert, certPool); err != nil {

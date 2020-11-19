@@ -80,17 +80,17 @@ var _ = Describe("Connection", func() {
 			RootCerts: [][]byte{cert3},
 		}
 
-		org1CertPool = x509.NewCertPool()
+		org1CertPool = gmx509.NewCertPool()
 		added := org1CertPool.AppendCertsFromPEM(cert1)
 		Expect(added).To(BeTrue())
 		added = org1CertPool.AppendCertsFromPEM(cert2)
 		Expect(added).To(BeTrue())
 
-		org2CertPool = x509.NewCertPool()
+		org2CertPool = gmx509.NewCertPool()
 		added = org2CertPool.AppendCertsFromPEM(cert3)
 		Expect(added).To(BeTrue())
 
-		overrideCertPool = x509.NewCertPool()
+		overrideCertPool = gmx509.NewCertPool()
 		added = overrideCertPool.AppendCertsFromPEM(cert2)
 		Expect(added).To(BeTrue())
 
@@ -168,7 +168,7 @@ var _ = Describe("Connection", func() {
 		})
 
 		It("creates a new set of orderer endpoints", func() {
-			newOrg1CertPool := x509.NewCertPool()
+			newOrg1CertPool := gmx509.NewCertPool()
 			added := newOrg1CertPool.AppendCertsFromPEM(cert1)
 			Expect(added).To(BeTrue())
 
@@ -361,7 +361,7 @@ var _ = Describe("Connection", func() {
 			org1.Addresses = nil
 			org2.Addresses = nil
 
-			globalCertPool = x509.NewCertPool()
+			globalCertPool = gmx509.NewCertPool()
 			added := globalCertPool.AppendCertsFromPEM(cert1)
 			Expect(added).To(BeTrue())
 			added = globalCertPool.AppendCertsFromPEM(cert2)

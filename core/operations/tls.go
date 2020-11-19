@@ -8,7 +8,6 @@ package operations
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"io/ioutil"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
@@ -31,7 +30,7 @@ func (t TLS) Config() (*tls.Config, error) {
 		if err != nil {
 			return nil, err
 		}
-		caCertPool := x509.NewCertPool()
+		caCertPool := gmx509.NewCertPool()
 		for _, caPath := range t.ClientCACertFiles {
 			caPem, err := ioutil.ReadFile(caPath)
 			if err != nil {

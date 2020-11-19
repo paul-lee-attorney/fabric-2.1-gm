@@ -9,7 +9,6 @@ package cluster
 import (
 	"bytes"
 	"crypto/tls"
-	"crypto/x509"
 	"encoding/hex"
 	"encoding/json"
 	"encoding/pem"
@@ -143,7 +142,7 @@ func (dialer *PredicateDialer) Dial(address string, verifyFunc RemoteVerifier) (
 		serverRootCAs := dialer.Config.Clone().SecOpts.ServerRootCAs
 		dialer.lock.RUnlock()
 
-		tlsConfig.RootCAs = x509.NewCertPool()
+		tlsConfig.RootCAs = gmx509.NewCertPool()
 		for _, pem := range serverRootCAs {
 			tlsConfig.RootCAs.AppendCertsFromPEM(pem)
 		}

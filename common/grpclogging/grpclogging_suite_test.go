@@ -51,7 +51,7 @@ var _ = BeforeSuite(func() {
 	serverCertWithKey, err = gmtls.X509KeyPair(serverCert, serverKey)
 	Expect(err).NotTo(HaveOccurred())
 
-	caCertPool = x509.NewCertPool()
+	caCertPool = gmx509.NewCertPool()
 	added := caCertPool.AppendCertsFromPEM(caCert)
 	Expect(added).To(BeTrue())
 

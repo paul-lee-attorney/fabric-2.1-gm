@@ -9,7 +9,6 @@ package accesscontrol
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"
 	"fmt"
 	"net"
 	"testing"
@@ -73,7 +72,7 @@ func createTLSService(t *testing.T, ca tlsgen.CA, host string) *grpc.Server {
 	tlsConf := &tls.Config{
 		Certificates: []tls.Certificate{cert},
 		ClientAuth:   tls.RequireAndVerifyClientCert,
-		ClientCAs:    x509.NewCertPool(),
+		ClientCAs:    gmx509.NewCertPool(),
 	}
 	tlsConf.ClientCAs.AppendCertsFromPEM(ca.CertBytes())
 	return grpc.NewServer(grpc.Creds(credentials.NewTLS(tlsConf)))
@@ -104,7 +103,7 @@ type ccClient struct {
 
 func newClient(t *testing.T, port int, cert *tls.Certificate, peerCACert []byte) (*ccClient, error) {
 	tlsCfg := &tls.Config{
-		RootCAs: x509.NewCertPool(),
+		RootCAs: gmx509.NewCertPool(),
 	}
 
 	tlsCfg.RootCAs.AppendCertsFromPEM(peerCACert)

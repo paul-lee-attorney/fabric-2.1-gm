@@ -228,7 +228,7 @@ type testOrg struct {
 
 // return *X509.CertPool for the rootCA of the org
 func (org *testOrg) rootCertPool() *x509.CertPool {
-	certPool := x509.NewCertPool()
+	certPool := gmx509.NewCertPool()
 	certPool.AppendCertsFromPEM(org.rootCA)
 	return certPool
 }
@@ -279,7 +279,7 @@ func (org *testOrg) trustedClients(serverRootCAs [][]byte) []*tls.Config {
 
 // createCertPool creates an x509.CertPool from an array of PEM-encoded certificates
 func createCertPool(rootCAs [][]byte) (*x509.CertPool, error) {
-	certPool := x509.NewCertPool()
+	certPool := gmx509.NewCertPool()
 	for _, rootCA := range rootCAs {
 		if !certPool.AppendCertsFromPEM(rootCA) {
 			return nil, errors.New("Failed to load root certificates")
@@ -626,7 +626,7 @@ func TestNewSecureGRPCServer(t *testing.T) {
 	time.Sleep(10 * time.Millisecond)
 
 	// create the client credentials
-	certPool := x509.NewCertPool()
+	certPool := gmx509.NewCertPool()
 	if !certPool.AppendCertsFromPEM([]byte(selfSignedCertPEM)) {
 		t.Fatal("Failed to append certificate to client credentials")
 	}
@@ -683,7 +683,7 @@ func TestVerifyCertificateCallback(t *testing.T) {
 		}
 		tlsCfg := &tls.Config{
 			Certificates: []tls.Certificate{cert},
-			RootCAs:      x509.NewCertPool(),
+			RootCAs:      gmx509.NewCertPool(),
 		}
 		tlsCfg.RootCAs.AppendCertsFromPEM(ca.CertBytes())
 
@@ -767,7 +767,7 @@ func TestWithSignedRootCertificates(t *testing.T) {
 	assert.NoError(t, err, "Expected client to connect with server cert only")
 
 	// now use the CA certificate
-	certPoolCA := x509.NewCertPool()
+	certPoolCA := gmx509.NewCertPool()
 	if !certPoolCA.AppendCertsFromPEM(caPEMBlock) {
 		t.Fatal("Failed to append certificate to client credentials")
 	}
@@ -1076,7 +1076,7 @@ func TestUpdateTLSCert(t *testing.T) {
 	go srv.Start()
 	defer srv.Stop()
 
-	certPool := x509.NewCertPool()
+	certPool := gmx509.NewCertPool()
 	certPool.AppendCertsFromPEM(caCert)
 
 	probeServer := func() error {

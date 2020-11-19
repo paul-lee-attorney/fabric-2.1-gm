@@ -46,7 +46,7 @@ func (tss *testServiceServer) EmptyCall(context.Context, *testpb.Empty) (*testpb
 
 // createCertPool creates an x509.CertPool from an array of PEM-encoded certificates
 func createCertPool(rootCAs [][]byte) (*x509.CertPool, error) {
-	certPool := x509.NewCertPool()
+	certPool := gmx509.NewCertPool()
 	for _, rootCA := range rootCAs {
 		if !certPool.AppendCertsFromPEM(rootCA) {
 			return nil, errors.New("Failed to load root certificates")

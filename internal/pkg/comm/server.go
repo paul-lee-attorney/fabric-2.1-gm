@@ -112,7 +112,7 @@ func NewGRPCServerFromListener(listener net.Listener, serverConfig ServerConfig)
 				if len(secureConfig.ClientRootCAs) > 0 {
 					grpcServer.clientRootCAs = make(map[string]*x509.Certificate)
 
-					grpcServer.tls.config.ClientCAs = x509.NewCertPool()
+					grpcServer.tls.config.ClientCAs = gmx509.NewCertPool()
 					for _, clientRootCA := range secureConfig.ClientRootCAs {
 						err = grpcServer.appendClientRootCA(clientRootCA)
 						if err != nil {
@@ -273,7 +273,7 @@ func (gServer *GRPCServer) SetClientRootCAs(clientRoots [][]byte) error {
 	}
 
 	//create a new CertPool and populate with the new clientRootCAs
-	certPool := x509.NewCertPool()
+	certPool := gmx509.NewCertPool()
 	for _, clientRoot := range clientRootCAs {
 		certPool.AddCert(clientRoot)
 	}

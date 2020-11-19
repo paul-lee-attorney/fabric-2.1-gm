@@ -9,7 +9,6 @@ package discovery
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"
 	"fmt"
 	"io/ioutil"
 	"net"
@@ -295,7 +294,7 @@ func createGRPCServer(t *testing.T) *comm.GRPCServer {
 func createConnector(t *testing.T, certificate tls.Certificate, targetPort int) func() (*grpc.ClientConn, error) {
 	caCert := loadFileOrPanic(filepath.Join("testdata", "server", "ca.pem"))
 	tlsConf := &tls.Config{
-		RootCAs:      x509.NewCertPool(),
+		RootCAs:      gmx509.NewCertPool(),
 		Certificates: []tls.Certificate{certificate},
 	}
 	tlsConf.RootCAs.AppendCertsFromPEM(caCert)

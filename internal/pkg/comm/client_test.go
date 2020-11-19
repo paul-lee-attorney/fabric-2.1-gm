@@ -154,7 +154,7 @@ func TestNewConnection(t *testing.T) {
 	badAddress := l.Addr().String()
 	defer l.Close()
 
-	certPool := x509.NewCertPool()
+	certPool := gmx509.NewCertPool()
 	ok := certPool.AppendCertsFromPEM(testCerts.caPEM)
 	if !ok {
 		t.Fatal("failed to create test root cert pool")
@@ -635,7 +635,7 @@ func TestDynamicClientTLSLoading(t *testing.T) {
 	dynamicRootCerts.Store(ca1.CertBytes())
 
 	conn, err := client.NewConnection(server.Address(), func(tlsConfig *tls.Config) {
-		tlsConfig.RootCAs = x509.NewCertPool()
+		tlsConfig.RootCAs = gmx509.NewCertPool()
 		tlsConfig.RootCAs.AppendCertsFromPEM(dynamicRootCerts.Load().([]byte))
 	})
 	assert.NoError(t, err)

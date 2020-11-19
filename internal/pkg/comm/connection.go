@@ -8,7 +8,6 @@ package comm
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"sync"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
@@ -62,7 +61,7 @@ func (cs *CredentialSupport) GetPeerCredentials() credentials.TransportCredentia
 		appRootCAs = append(appRootCAs, appRootCA...)
 	}
 
-	certPool := x509.NewCertPool()
+	certPool := gmx509.NewCertPool()
 	for _, appRootCA := range appRootCAs {
 		err := AddPemToCertPool(appRootCA, certPool)
 		if err != nil {

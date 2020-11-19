@@ -8,7 +8,6 @@ package operations_test
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"io/ioutil"
 	"net/http"
 	"path/filepath"
@@ -51,7 +50,7 @@ func generateCertificates(tempDir string) {
 }
 
 func newHTTPClient(tlsDir string, withClientCert bool) *http.Client {
-	clientCertPool := x509.NewCertPool()
+	clientCertPool := gmx509.NewCertPool()
 	caCert, err := ioutil.ReadFile(filepath.Join(tlsDir, "server-ca.pem"))
 	Expect(err).NotTo(HaveOccurred())
 	clientCertPool.AppendCertsFromPEM(caCert)

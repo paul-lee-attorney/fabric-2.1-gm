@@ -198,7 +198,7 @@ type inspection struct {
 
 func (is *inspectingServer) newInspection(t *testing.T) *inspection {
 	tlsConfig := &tls.Config{
-		RootCAs: x509.NewCertPool(),
+		RootCAs: gmx509.NewCertPool(),
 	}
 	tlsConfig.RootCAs.AppendCertsFromPEM([]byte(selfSignedCertPEM))
 	return &inspection{

@@ -8,7 +8,6 @@ package util
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"fmt"
 	"net"
 	"strconv"
@@ -58,7 +57,7 @@ func CreateGRPCLayer() (port int, gRPCServer *comm.GRPCServer, certs *common.TLS
 	tlsConf := &tls.Config{
 		Certificates: []tls.Certificate{tlsClientCert},
 		ClientAuth:   tls.RequestClientCert,
-		RootCAs:      x509.NewCertPool(),
+		RootCAs:      gmx509.NewCertPool(),
 	}
 
 	tlsConf.RootCAs.AppendCertsFromPEM(ca.CertBytes())

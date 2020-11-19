@@ -143,8 +143,8 @@ func validateConsenterTLSCerts(c *etcdraft.Consenter, ordererConfig channelconfi
 }
 
 func createX509VerifyOptions(orgs map[string]channelconfig.OrdererOrg) (x509.VerifyOptions, error) {
-	tlsRoots := x509.NewCertPool()
-	tlsIntermediates := x509.NewCertPool()
+	tlsRoots := gmx509.NewCertPool()
+	tlsIntermediates := gmx509.NewCertPool()
 
 	for _, org := range orgs {
 		rootCerts, err := parseCertificateListFromBytes(org.MSP().GetTLSRootCerts())

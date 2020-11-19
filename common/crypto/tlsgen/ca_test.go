@@ -9,7 +9,6 @@ package tlsgen
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"
 	"net"
 	"testing"
 	"time"
@@ -28,7 +27,7 @@ func createTLSService(t *testing.T, ca CA, host string) *grpc.Server {
 	tlsConf := &tls.Config{
 		Certificates: []tls.Certificate{cert},
 		ClientAuth:   tls.RequireAndVerifyClientCert,
-		ClientCAs:    x509.NewCertPool(),
+		ClientCAs:    gmx509.NewCertPool(),
 	}
 	tlsConf.ClientCAs.AppendCertsFromPEM(ca.CertBytes())
 	return grpc.NewServer(grpc.Creds(credentials.NewTLS(tlsConf)))
@@ -53,7 +52,7 @@ func TestTLSCA(t *testing.T) {
 		cert, err := gmtls.X509KeyPair(kp.Cert, kp.Key)
 		assert.NoError(t, err)
 		tlsCfg := &tls.Config{
-			RootCAs:      x509.NewCertPool(),
+			RootCAs:      gmx509.NewCertPool(),
 			Certificates: []tls.Certificate{cert},
 		}
 		tlsCfg.RootCAs.AppendCertsFromPEM(ca.CertBytes())

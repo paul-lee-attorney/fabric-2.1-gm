@@ -10,7 +10,6 @@ import (
 	"context"
 	"crypto/sha256"
 	"crypto/tls"
-	"crypto/x509"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -694,7 +693,7 @@ func operationalClients(tlsDir string) (authClient, unauthClient *http.Client) {
 	)
 	Expect(err).NotTo(HaveOccurred())
 
-	clientCertPool := x509.NewCertPool()
+	clientCertPool := gmx509.NewCertPool()
 	caCert, err := ioutil.ReadFile(filepath.Join(tlsDir, "ca.crt"))
 	Expect(err).NotTo(HaveOccurred())
 	clientCertPool.AppendCertsFromPEM(caCert)

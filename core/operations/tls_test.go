@@ -8,7 +8,6 @@ package operations_test
 
 import (
 	"crypto/tls"
-	"crypto/x509"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -55,7 +54,7 @@ var _ = Describe("TLS", func() {
 		pemBytes, err := ioutil.ReadFile(filepath.Join(tempDir, "client-ca.pem"))
 		Expect(err).NotTo(HaveOccurred())
 
-		clientCAPool := x509.NewCertPool()
+		clientCAPool := gmx509.NewCertPool()
 		clientCAPool.AppendCertsFromPEM(pemBytes)
 
 		tlsConfig, err := opsTLS.Config()
