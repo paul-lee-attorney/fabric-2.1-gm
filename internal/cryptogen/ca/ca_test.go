@@ -151,7 +151,7 @@ func TestLoadCertificateSM2_wrongEncoding(t *testing.T) {
 
 	_, err = ca.LoadCertificateSM2(testDir)
 	assert.NotNil(t, err)
-	assert.EqualError(t, err, filename+": wrong PEM encoding")
+	assert.EqualError(t, err, filename+": wrong DER encoding")
 }
 
 func TestLoadCertificateSM2_empty_DER_cert(t *testing.T) {

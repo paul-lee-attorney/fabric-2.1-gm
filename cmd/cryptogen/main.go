@@ -116,14 +116,14 @@ PeerOrgs:
     # Uncomment this section to enable the explicit definition of the CA for this
     # organization.  This entry is a Spec.  See "Specs" section below for details.
     # ---------------------------------------------------------------------------
-    # CA:
-    #    Hostname: ca # implicitly ca.org1.example.com
-    #    Country: US
-    #    Province: California
-    #    Locality: San Francisco
-    #    OrganizationalUnit: Hyperledger Fabric
-    #    StreetAddress: address for org # default nil
-    #    PostalCode: postalCode for org # default nil
+    CA:
+      Hostname: ca # implicitly ca.org1.example.com
+      Country: US
+      Province: California
+      Locality: San Francisco
+      OrganizationalUnit: Hyperledger Fabric
+      StreetAddress: address for org # default nil
+      PostalCode: postalCode for org # default nil
 
     # ---------------------------------------------------------------------------
     # "Specs"

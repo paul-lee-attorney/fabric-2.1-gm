@@ -40,7 +40,8 @@ func dirExists(path string) bool {
 func GetDevConfigDir() string {
 	gopath := os.Getenv("GOPATH")
 	for _, p := range filepath.SplitList(gopath) {
-		devPath := filepath.Join(p, "src/github.com/hyperledger/fabric/sampleconfig")
+		// 更换成内部目录地址
+		devPath := filepath.Join(p, "src/github.com/paul-lee-attorney/fabric-2.1-gm/sampleconfig")
 		if dirExists(devPath) {
 			return devPath
 		}
