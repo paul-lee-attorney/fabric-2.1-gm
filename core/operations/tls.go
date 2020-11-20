@@ -12,6 +12,7 @@ import (
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 	"github.com/paul-lee-attorney/gm/gmtls"
+	"github.com/paul-lee-attorney/gm/gmx509"
 )
 
 type TLS struct {
@@ -22,8 +23,8 @@ type TLS struct {
 	ClientCACertFiles  []string
 }
 
-func (t TLS) Config() (*tls.Config, error) {
-	var tlsConfig *tls.Config
+func (t TLS) Config() (*gmtls.Config, error) {
+	var tlsConfig *gmtls.Config
 
 	if t.Enabled {
 		cert, err := gmtls.LoadX509KeyPair(t.CertFile, t.KeyFile)
@@ -38,7 +39,7 @@ func (t TLS) Config() (*tls.Config, error) {
 			}
 			caCertPool.AppendCertsFromPEM(caPem)
 		}
-		tlsConfig = &tls.Config{
+		tlsConfig = &gmtls.Config{
 			Certificates: []tls.Certificate{cert},
 			CipherSuites: comm.DefaultTLSCipherSuites,
 			ClientCAs:    caCertPool,

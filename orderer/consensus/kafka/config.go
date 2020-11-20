@@ -12,6 +12,8 @@ import (
 	localconfig "github.com/paul-lee-attorney/fabric-2.1-gm/orderer/common/localconfig"
 
 	"github.com/Shopify/sarama"
+	"github.com/paul-lee-attorney/gm/gmtls"
+	"github.com/paul-lee-attorney/gm/gmx509"
 )
 
 func newBrokerConfig(
@@ -52,7 +54,7 @@ func newBrokerConfig(
 				logger.Panic("Unable to parse the root certificate authority certificates (Kafka.Tls.RootCAs)")
 			}
 		}
-		brokerConfig.Net.TLS.Config = &tls.Config{
+		brokerConfig.Net.TLS.Config = &gmtls.Config{
 			Certificates: []tls.Certificate{keyPair},
 			RootCAs:      rootCAs,
 			MinVersion:   tls.VersionTLS12,

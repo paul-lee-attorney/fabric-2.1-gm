@@ -23,7 +23,7 @@ import (
 )
 
 // AddPemToCertPool adds PEM-encoded certs to a cert pool
-func AddPemToCertPool(pemCerts []byte, pool *x509.CertPool) error {
+func AddPemToCertPool(pemCerts []byte, pool *gmx509.CertPool) error {
 	certs, _, err := pemToX509Certs(pemCerts)
 	if err != nil {
 		return err

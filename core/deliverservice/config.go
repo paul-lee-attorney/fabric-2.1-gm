@@ -13,6 +13,7 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/core/config"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/peer/orderers"
+	"github.com/paul-lee-attorney/gm/gmx509"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"

@@ -8,7 +8,6 @@ package blocksprovider
 
 import (
 	"context"
-	"crypto/x509"
 	"math"
 	"time"
 
@@ -20,6 +19,7 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/peer/orderers"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
+	"github.com/paul-lee-attorney/gm/gmx509"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/pkg/errors"
@@ -74,7 +74,7 @@ type OrdererConnectionSource interface {
 
 //go:generate counterfeiter -o fake/dialer.go --fake-name Dialer . Dialer
 type Dialer interface {
-	Dial(address string, certPool *x509.CertPool) (*grpc.ClientConn, error)
+	Dial(address string, certPool *gmx509.CertPool) (*grpc.ClientConn, error)
 }
 
 //go:generate counterfeiter -o fake/deliver_streamer.go --fake-name DeliverStreamer . DeliverStreamer

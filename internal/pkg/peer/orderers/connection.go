@@ -9,12 +9,12 @@ package orderers
 import (
 	"bytes"
 	"crypto/sha256"
-	"crypto/x509"
 	"math/rand"
 	"sync"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	"github.com/paul-lee-attorney/gm/gmx509"
 
 	"github.com/pkg/errors"
 )
@@ -29,7 +29,7 @@ type ConnectionSource struct {
 
 type Endpoint struct {
 	Address   string
-	CertPool  *x509.CertPool
+	CertPool  *gmx509.CertPool
 	Refreshed chan struct{}
 }
 

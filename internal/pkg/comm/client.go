@@ -9,9 +9,10 @@ package comm
 import (
 	"context"
 	"crypto/tls"
-	"crypto/x509"
 	"time"
 
+	"github.com/paul-lee-attorney/gm/gmtls"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/keepalive"
@@ -19,7 +20,7 @@ import (
 
 type GRPCClient struct {
 	// TLS configuration used by the grpc.ClientConn
-	tlsConfig *tls.Config
+	tlsConfig *gmtls.Config
 	// Options for setting up new connections
 	dialOpts []grpc.DialOption
 	// Duration for which to block while established a new connection
@@ -69,7 +70,7 @@ func (client *GRPCClient) parseSecureOptions(opts SecureOptions) error {
 		return nil
 	}
 
-	client.tlsConfig = &tls.Config{
+	client.tlsConfig = &gmtls.Config{
 		VerifyPeerCertificate: opts.VerifyCertificate,
 		MinVersion:            tls.VersionTLS12} // TLS 1.2 only
 	if len(opts.ServerRootCAs) > 0 {
@@ -160,16 +161,16 @@ func (client *GRPCClient) SetServerRootCAs(serverRoots [][]byte) error {
 	return nil
 }
 
-type TLSOption func(tlsConfig *tls.Config)
+type TLSOption func(tlsConfig *gmtls.Config)
 
 func ServerNameOverride(name string) TLSOption {
-	return func(tlsConfig *tls.Config) {
+	return func(tlsConfig *gmtls.Config) {
 		tlsConfig.ServerName = name
 	}
 }
 
-func CertPoolOverride(pool *x509.CertPool) TLSOption {
-	return func(tlsConfig *tls.Config) {
+func CertPoolOverride(pool *gmx509.CertPool) TLSOption {
+	return func(tlsConfig *gmtls.Config) {
 		tlsConfig.RootCAs = pool
 	}
 }

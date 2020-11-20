@@ -13,6 +13,8 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/channelconfig"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/msp"
+	"github.com/paul-lee-attorney/gm/gmtls"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"google.golang.org/grpc/credentials"
 )
 
@@ -69,7 +71,7 @@ func (cs *CredentialSupport) GetPeerCredentials() credentials.TransportCredentia
 		}
 	}
 
-	return credentials.NewTLS(&tls.Config{
+	return credentials.NewTLS(&gmtls.Config{
 		Certificates: []tls.Certificate{cs.clientCert},
 		RootCAs:      certPool,
 	})

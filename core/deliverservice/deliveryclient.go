@@ -8,7 +8,6 @@ package deliverservice
 
 import (
 	"context"
-	"crypto/x509"
 	"errors"
 	"fmt"
 	"sync"
@@ -21,6 +20,7 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/identity"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/peer/blocksprovider"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/peer/orderers"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"google.golang.org/grpc"
 )
 
@@ -91,7 +91,7 @@ type DialerAdapter struct {
 	Client *comm.GRPCClient
 }
 
-func (da DialerAdapter) Dial(address string, certPool *x509.CertPool) (*grpc.ClientConn, error) {
+func (da DialerAdapter) Dial(address string, certPool *gmx509.CertPool) (*grpc.ClientConn, error) {
 	return da.Client.NewConnection(address, comm.CertPoolOverride(certPool))
 }
 

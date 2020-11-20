@@ -15,6 +15,8 @@ import (
 	"sync"
 
 	"github.com/paul-lee-attorney/fabric-2.1-gm/common/flogging"
+	"github.com/paul-lee-attorney/gm/gmtls"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"google.golang.org/grpc/credentials"
 )
 
@@ -33,7 +35,7 @@ func NewServerTransportCredentials(
 	serverConfig *TLSConfig,
 	logger *flogging.FabricLogger) credentials.TransportCredentials {
 	// NOTE: unlike the default grpc/credentials implementation, we do not
-	// clone the tls.Config which allows us to update it dynamically
+	// clone the gmtls.Config which allows us to update it dynamically
 	serverConfig.config.NextProtos = alpnProtoStr
 	// override TLS version and ensure it is 1.2
 	serverConfig.config.MinVersion = tls.VersionTLS12
@@ -50,17 +52,17 @@ type serverCreds struct {
 }
 
 type TLSConfig struct {
-	config *tls.Config
+	config *gmtls.Config
 	lock   sync.RWMutex
 }
 
-func NewTLSConfig(config *tls.Config) *TLSConfig {
+func NewTLSConfig(config *gmtls.Config) *TLSConfig {
 	return &TLSConfig{
 		config: config,
 	}
 }
 
-func (t *TLSConfig) Config() tls.Config {
+func (t *TLSConfig) Config() gmtls.Config {
 	t.lock.RLock()
 	defer t.lock.RUnlock()
 
@@ -68,7 +70,7 @@ func (t *TLSConfig) Config() tls.Config {
 		return *t.config.Clone()
 	}
 
-	return tls.Config{}
+	return gmtls.Config{}
 }
 
 func (t *TLSConfig) AddClientRootCA(cert *x509.Certificate) {
@@ -78,7 +80,7 @@ func (t *TLSConfig) AddClientRootCA(cert *x509.Certificate) {
 	t.config.ClientCAs.AddCert(cert)
 }
 
-func (t *TLSConfig) SetClientCAs(certPool *x509.CertPool) {
+func (t *TLSConfig) SetClientCAs(certPool *gmx509.CertPool) {
 	t.lock.Lock()
 	defer t.lock.Unlock()
 
@@ -128,11 +130,11 @@ func (sc *serverCreds) OverrideServerName(string) error {
 }
 
 type DynamicClientCredentials struct {
-	TLSConfig  *tls.Config
+	TLSConfig  *gmtls.Config
 	TLSOptions []TLSOption
 }
 
-func (dtc *DynamicClientCredentials) latestConfig() *tls.Config {
+func (dtc *DynamicClientCredentials) latestConfig() *gmtls.Config {
 	tlsConfigCopy := dtc.TLSConfig.Clone()
 	for _, tlsOption := range dtc.TLSOptions {
 		tlsOption(tlsConfigCopy)

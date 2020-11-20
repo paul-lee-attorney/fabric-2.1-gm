@@ -15,6 +15,8 @@ import (
 	"time"
 
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+	"github.com/paul-lee-attorney/gm/gmtls"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"github.com/pkg/errors"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/health"
@@ -90,7 +92,7 @@ func NewGRPCServerFromListener(listener net.Listener, serverConfig ServerConfig)
 				return &cert, nil
 			}
 
-			grpcServer.tls = NewTLSConfig(&tls.Config{
+			grpcServer.tls = NewTLSConfig(&gmtls.Config{
 				VerifyPeerCertificate:  secureConfig.VerifyCertificate,
 				GetCertificate:         getCert,
 				SessionTicketsDisabled: true,
@@ -205,7 +207,7 @@ func (gServer *GRPCServer) TLSEnabled() bool {
 // are required for this GRPCServer instance
 func (gServer *GRPCServer) MutualTLSRequired() bool {
 	return gServer.TLSEnabled() &&
-		gServer.tls.Config().ClientAuth == tls.RequireAndVerifyClientCert
+		gServer.gmtls.Config().ClientAuth == tls.RequireAndVerifyClientCert
 }
 
 // Start starts the underlying grpc.Server

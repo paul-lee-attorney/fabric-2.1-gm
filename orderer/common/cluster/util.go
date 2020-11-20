@@ -8,7 +8,6 @@ package cluster
 
 import (
 	"bytes"
-	"crypto/tls"
 	"encoding/hex"
 	"encoding/json"
 	"encoding/pem"
@@ -28,6 +27,7 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/protoutil"
 
+	"github.com/paul-lee-attorney/gm/gmtls"
 	"github.com/paul-lee-attorney/gm/gmx509"
 
 	"github.com/pkg/errors"
@@ -135,7 +135,7 @@ func (dialer *PredicateDialer) Dial(address string, verifyFunc RemoteVerifier) (
 	if err != nil {
 		return nil, errors.WithStack(err)
 	}
-	return client.NewConnection(address, func(tlsConfig *tls.Config) {
+	return client.NewConnection(address, func(tlsConfig *gmtls.Config) {
 		// We need to dynamically overwrite the TLS root CAs,
 		// as they may be updated.
 		dialer.lock.RLock()

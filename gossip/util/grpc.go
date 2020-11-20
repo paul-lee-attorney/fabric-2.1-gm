@@ -17,6 +17,8 @@ import (
 	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/api"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/gossip/common"
 	"github.com/paul-lee-attorney/fabric-2.1-gm/internal/pkg/comm"
+	"github.com/paul-lee-attorney/gm/gmtls"
+	"github.com/paul-lee-attorney/gm/gmx509"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
@@ -54,7 +56,7 @@ func CreateGRPCLayer() (port int, gRPCServer *comm.GRPCServer, certs *common.TLS
 		panic(err)
 	}
 
-	tlsConf := &tls.Config{
+	tlsConf := &gmtls.Config{
 		Certificates: []tls.Certificate{tlsClientCert},
 		ClientAuth:   tls.RequestClientCert,
 		RootCAs:      gmx509.NewCertPool(),
